@@ -50,36 +50,42 @@
                   <div class="row">
                     <div class="input-field col s12">
                       <i class="material-icons prefix">work</i>
-                      <input id="first_name" type="text" class="validate">
-                      <label for="first_name">Nombre del negocio</label>
+                      <input id="business_name" type="text" class="validate" required>
+                      <label for="business_name">Nombre del negocio</label>
                     </div>
                   </div>
                   <div class="row">
                     <div class="input-field col s12">
                       <i class="material-icons prefix">phone</i>
-                      <input id="icon_telephone" type="tel" class="validate">
+                      <input id="icon_telephone" type="tel" class="validate" required>
                       <label for="icon_telephone">Teléfono</label>
                     </div>
                   </div>
                   <div class="row">
                     <div class="input-field col s12">
                       <i class="material-icons prefix">email</i>
-                      <input id="email" type="email" class="validate">
+                      <input id="email" type="email" class="validate" required>
                       <label for="email" data-error="wrong" data-success="right">Correo Electrónico</label>
                     </div>
                   </div>
                   <div class="row">
                     <div class="input-field col s12">
                       <i class="material-icons prefix">lock</i>
-                      <input id="password" type="password" class="validate">
+                      <input id="password" type="password" class="validate" required>
                       <label for="password">Contraseña</label>
                     </div>
                   </div>
                   <div class="row">
                     <div class="input-field col s12">
                       <i class="material-icons prefix">lock</i>
-                      <input id="verify_password" type="password" class="validate">
+                      <input id="verify_password" type="password" class="validate" required>
                       <label for="verify_password">Verificar Contraseña</label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col s12 center">
+                      <input type="checkbox" id="test5" required/>
+                      <label for="test5">Acepto la <a class="modal-trigger" href="#modal1">Política de privacidad</a> de ElCarro.do</label>
                     </div>
                   </div>
                   <div class="row">
@@ -109,6 +115,17 @@
           </div>
         </div>
       </div>
+    </div>
+  </div>
+
+  <!-- Modal Structure -->
+  <div id="modal1" class="modal modal-fixed-footer">
+    <div class="modal-content">
+      <h4>ElCarro.do - Política de Privacidad</h4>
+      <p>Pila de texto #TODO</p>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Aceptar</a>
     </div>
   </div>
 
