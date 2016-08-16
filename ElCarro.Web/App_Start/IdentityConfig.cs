@@ -1,25 +1,36 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using System.Web;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using ElCarro.Web.Models;
+using SendGrid;
+using System.Configuration;
+using SendGrid.Helpers.Mail;
 
 namespace ElCarro.Web
 {
     public class EmailService : IIdentityMessageService
     {
-        public Task SendAsync(IdentityMessage message)
+        public async Task SendAsync(IdentityMessage message)
         {
-            // Plug in your email service here to send an email.
-            return Task.FromResult(0);
+            await configSendGridasync(message);
+        }
+
+        // Use NuGet to install SendGrid (Basic C# client lib) 
+        private async Task configSendGridasync(IdentityMessage message)
+        {
+            string apiKey = ConfigurationManager.AppSettings["SENDGRID_APY_KEY"];
+            dynamic sg = new SendGridAPIClient(apiKey, "https://api.sendgrid.com");
+
+            Email from = new Email("test@example.com");
+            Email to = new Email(message.Destination);
+            Content content = new Content("text/plain", message.Body);
+            Mail mail = new Mail(from, message.Subject, to, content);
+            dynamic response = await sg.client.mail.send.post(requestBody: mail.Get());
         }
     }
 

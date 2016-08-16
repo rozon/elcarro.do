@@ -46,23 +46,23 @@ namespace ElCarro.Web
             app.UseTwoFactorRememberBrowserCookie(DefaultAuthenticationTypes.TwoFactorRememberBrowserCookie);
 
             // Uncomment the following lines to enable logging in with third party login providers
-            //app.UseMicrosoftAccountAuthentication(
-            //    clientId: "",
-            //    clientSecret: "");
+            app.UseMicrosoftAccountAuthentication(
+                clientId: "f080f716-c173-40ae-84f2-64698d15400c",
+                clientSecret: "ZtWbipUO7uhPJbgGutkgDeg");
 
             //app.UseTwitterAuthentication(
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseFacebookAuthentication(
+               appId: "263961727319650",
+               appSecret: "c883afba41a11a1df3d880cc4137b58b");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "912712930283-6kmmve5ruajo4lq6m34ts7a5t43p63kd.apps.googleusercontent.com",
+                ClientSecret = "Kkpdf8ZLjOpcZVnJRqNyx-TA"
+            });
         }
     }
 }
