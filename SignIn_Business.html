@@ -65,7 +65,7 @@
                     <div class="input-field col s12">
                       <i class="material-icons prefix">email</i>
                       <input id="email" type="email" class="validate" required>
-                      <label for="email" data-error="wrong" data-success="right">Correo Electrónico</label>
+                      <label for="email" data-error="correo invalido" data-success="correo valido">Correo Electrónico</label>
                     </div>
                   </div>
                   <div class="row">
@@ -85,7 +85,7 @@
                   <div class="row">
                     <div class="col s12 center">
                       <input type="checkbox" id="test5" required/>
-                      <label for="test5">Acepto la <a class="modal-trigger" href="#modal1">Política de privacidad</a> de ElCarro.do</label>
+                      <label for="test5">Acepto la <a class="modal-trigger" href="#privacy_policy">Política de privacidad</a> de ElCarro.do</label>
                     </div>
                   </div>
                   <div class="row">
@@ -119,9 +119,29 @@
   </div>
 
   <!-- Modal Structure -->
-  <div id="modal1" class="modal modal-fixed-footer">
+  <div id="privacy_policy" class="modal modal-fixed-footer">
     <div class="modal-content">
       <h4>ElCarro.do - Política de Privacidad</h4>
+      <p>Pila de texto #TODO</p>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Aceptar</a>
+    </div>
+  </div>
+
+  <div id="terms_conditions" class="modal modal-fixed-footer">
+    <div class="modal-content">
+      <h4>ElCarro.do - Términos y condiciones</h4>
+      <p>Pila de texto #TODO</p>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Aceptar</a>
+    </div>
+  </div>
+
+  <div id="rules" class="modal modal-fixed-footer">
+    <div class="modal-content">
+      <h4>ElCarro.do - Reglas</h4>
       <p>Pila de texto #TODO</p>
     </div>
     <div class="modal-footer">
@@ -141,9 +161,9 @@
           <h5 class="white-text">Settings</h5>
           <ul>
             <li><a class="white-text" href="#!">Ayuda</a></li>
-            <li><a class="white-text" href="#!">Reglas</a></li>
-            <li><a class="white-text" href="#!">Politica de privacidad</a></li>
-            <li><a class="white-text" href="#!">Términos y condiciones</a></li>
+            <li><a class="white-text modal-trigger" href="#rules">Reglas</a></li>
+            <li><a class="white-text modal-trigger" href="#privacy_policy">Politica de privacidad</a></li>
+            <li><a class="white-text modal-trigger" href="#terms_conditions">Términos y condiciones</a></li>
           </ul>
         </div>
         <div class="col l3 s12">
