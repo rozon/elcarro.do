@@ -166,13 +166,37 @@
     </div>
   </div>
 
-  <div id="bugs_report" class="modal modal-fixed-footer">
+  <div id="bugs_report" class="modal">
     <div class="modal-content">
-      <h4>ElCarro.do - Reglas</h4>
-      <p>Pila de texto #TODO</p>
-    </div>
-    <div class="modal-footer">
-      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Aceptar</a>
+      <h4>¿Error en la pagina? ¡Dejanos saber!</h4>
+      <form class="col s12">
+        <div class="row">
+          <div class="input-field col s12">
+            <i class="material-icons prefix">perm_identity</i>
+            <input id="first_name" type="text" class="validate" required>
+            <label for="first_name">Nombre</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <i class="material-icons prefix">email</i>
+            <input id="email" type="email" class="validate" required>
+            <label for="email" data-error="wrong" data-success="right">Correo Electrónico</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <i class="material-icons prefix">mode_edit</i>
+            <textarea id="textarea1" class="materialize-textarea"></textarea>
+            <label for="textarea1">Descripción del error</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12 center">
+            <button class="btn waves-effect waves-light" type="submit" name="action">Reportar</button>
+          </div>
+        </div>
+      </form>
     </div>
   </div>
 
