@@ -21,5 +21,12 @@
       placeholder: 'Añade más filtros',
     });
 
+    $('input.autocomplete').autocomplete({
+      data: {
+        "bumper": null,
+        "bumper delantero": null,
+        "bumper trasero": null,
+      }
+    });
   }); // end of document ready
 })(jQuery); // end of jQuery name space
