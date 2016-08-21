@@ -7,7 +7,6 @@
     $('.parallax').parallax();
     $('select').material_select();
     $('.modal-trigger').leanModal();
-    $(".button-collapse").sideNav();
 
     $('.chips-initial').material_chip({
       data: [{
