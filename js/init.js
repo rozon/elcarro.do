@@ -16,6 +16,8 @@
         tag: 'Honda',
       }, {
         tag: 'Civic',
+      }, {
+        tag: 'bumper delantero',
       }],
       placeholder: 'Añade más filtros',
     });
