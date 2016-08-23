@@ -292,6 +292,7 @@
     <Content Include="Views\Modals\Suggestions.cshtml" />
     <Content Include="Views\Modals\BugsReport.cshtml" />
     <Content Include="Views\Account\RegisterCompany.cshtml" />
+    <Content Include="Views\Home\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
