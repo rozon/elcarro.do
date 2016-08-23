@@ -201,12 +201,14 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\account_style.css" />
     <Content Include="Content\materialize.css" />
+    <Content Include="Content\materialize.min.css" />
     <Content Include="Content\Social\zocial.css" />
+    <Content Include="Content\style.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
     <Content Include="Images\background2.jpg" />
     <Content Include="Images\background3.jpg" />
     <Content Include="Images\background6.jpg" />

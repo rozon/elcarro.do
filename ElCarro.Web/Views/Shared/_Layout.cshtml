@@ -1,8 +1,8 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no" />
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <title>@ViewBag.Title - ElCarro.do</title>
     <!-- CSS  -->
@@ -11,33 +11,37 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <!-- Navbar  -->
     <div class="navbar-fixed">
         <nav class="white" role="navigation">
             <div class="nav-wrapper">
                 <div class="row">
                     <div class="col m4 center">
                         <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
-                        <a id="logo-container" href="/" class="brand-logo"><img class="responsive-img " src="~/Images/logo_elcarro_navbar_resized.png"></a>
+                        <a id="logo-container" href="#" class="brand-logo"><img class="responsive-img " src="@Url.Content("~/static/logo_elcarro_navbar_resized.png")"></a>
                     </div>
                     <div class="col m8">
                         <ul class="right hide-on-med-and-down">
-                            @Html.Partial("_LoginPartial")
+                            <li><a href="search.html"><i class="material-icons left">search</i>Buscar pieza</a></li>
+                            <li><a href="account.html"><i class="material-icons left">perm_identity</i>Mi Cuenta</a></li>
+                            <li><a href="stores.html"><i class="material-icons left">store</i>Repuestos</a></li>
+                            <li><a href="login.html" class="waves-effect waves-light btn">Login</a></li>
                         </ul>
                     </div>
                 </div>
                 <ul id="nav-mobile" class="side-nav">
-                    @Html.Partial("_LoginPartial")
+                    <li><a class="btn-flat" href="search.html"><i class="material-icons">search</i>Buscar pieza</a></li>
+                    <li><a class="btn-flat" href="account.html"><i class="material-icons">perm_identity</i>Mi Cuenta</a></li>
+                    <li><a class="btn-flat" href="stores.html"><i class="material-icons">store</i>Repuestos</a></li>
+                    <li><a href="login.html" class="waves-effect waves-light btn">Login</a></li>
                 </ul>
             </div>
         </nav>
     </div>
+    <br>
 
-    <div class="container">
-        <div class="section">
-            @RenderBody()
-        </div>
-    </div>
+          
+        @RenderBody()
+    
 
     <!-- Modal Structure -->
     @{ Html.RenderAction("PrivacyPolicy", "Modals"); }
@@ -56,24 +60,34 @@
             <div class="row">
                 <div class="col l6 s12">
                     <h5 class="white-text">¿Quienes somos?</h5>
-                    <p class="grey-text text-lighten-4">Somos un equipo de estudiantes universitarios enfocados en ayudar... #TO-DO</p>
+                    <p class="grey-text text-lighten-4">
+                        @* TODO: Footer text too long. Make it shorter *@
+                        Somos un equipo de desarrolladores de software
+                        del INTEC enfocados en optimizar la experiencia de búsqueda de piezas de
+                        vehículos en las tiendas de repuestos de la República Dominciana. Nuestra
+                        <b>misión</b> es promover la competitivad objetiva basada en
+                        las opiniones de los clientes sobre sus compras y las mejoras de los
+                        proveedores al esforzarce por mantener su reputación para lograr más ventas. Tenemos la <b>visión</b>
+                        de convertirnos en la referencia nacional cuando se hable de
+                        ubicación en línea de artículos automotrices en RD.
+                    </p>
                 </div>
                 <div class="col l3 s12">
                     <h5 class="white-text">Settings</h5>
                     <ul>
                         <li><a class="white-text" href="#!">Ayuda</a></li>
-                        <li><a class="white-text modal-trigger waves-effect waves-light" href="#rules">Reglas</a></li>
-                        <li><a class="white-text modal-trigger waves-effect waves-light" href="#privacy_policy">Politica de privacidad</a></li>
-                        <li><a class="white-text modal-trigger waves-effect waves-light" href="#terms_conditions">Términos y condiciones</a></li>
+                        <li><a class="white-text modal-trigger" href="#rules">Reglas</a></li>
+                        <li><a class="white-text modal-trigger" href="#privacy_policy">Politica de privacidad</a></li>
+                        <li><a class="white-text modal-trigger" href="#terms_conditions">Términos y condiciones</a></li>
                     </ul>
                 </div>
                 <div class="col l3 s12">
                     <h5 class="white-text">Connect</h5>
                     <ul>
-                        <li><a class="white-text modal-trigger waves-effect waves-light" href="#suggestions">Sugerencias</a></li>
-                        <li><a class="white-text modal-trigger waves-effect waves-light" href="#bugs_report">Reportar errores</a></li>
-                        <li><a class="white-text" href="#!">Link 3</a></li>
-                        <li><a class="white-text" href="#!">Link 4</a></li>
+                        <li><a class="white-text modal-trigger" href="#suggestions">Sugerencias</a></li>
+                        <li><a class="white-text modal-trigger" href="#bugs_report">Reportar errores</a></li>
+                        <li><a class="white-text" href="#!"></a></li>
+                        <li><a class="white-text" href="#!"></a></li>
                     </ul>
                 </div>
             </div>

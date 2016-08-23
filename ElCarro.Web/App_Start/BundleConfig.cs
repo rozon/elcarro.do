@@ -20,8 +20,7 @@ namespace ElCarro.Web
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/materialize.css",
-                "~/Content/Site.css",
-                "~/Content/Social/zocial.css"));
+                "~/Content/style.css"));
         }
     }
 }
