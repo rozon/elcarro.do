@@ -25,6 +25,11 @@ namespace ElCarro.Web.Controllers
             return View();
         }
 
+        public ActionResult Store()
+        {
+            return View();
+        }
+
         [Authorize]
         public ActionResult Contact()
         {

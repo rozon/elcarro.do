@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    @RenderSection("styles")
+    @RenderSection("styles", false)
 </head>
 <body>
 
@@ -19,22 +19,22 @@
                 <div class="row">
                     <div class="col m4 center">
                         <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
-                        <a id="logo-container" href="#" class="brand-logo"><img class="responsive-img " src="@Url.Content("~/static/logo_elcarro_navbar_resized.png")"></a>
+                        <a id="logo-container" href="@Url.Action("Index", "Home")" class="brand-logo"><img class="responsive-img " src="@Url.Content("~/static/logo_elcarro_navbar_resized.png")"></a>
                     </div>
                     <div class="col m8">
                         <ul class="right hide-on-med-and-down">
-                            <li><a href="@Url.Action("Search")"><i class="material-icons left">search</i>Buscar pieza</a></li>
+                            <li><a href="@Url.Action("Search", "Home")"><i class="material-icons left">search</i>Buscar pieza</a></li>
                             <li><a href="@Url.Action("Index", "Manage")"><i class="material-icons left">perm_identity</i>Mi Cuenta</a></li>
-                            <li><a href="stores.html"><i class="material-icons left">store</i>Repuestos</a></li>
-                            <li><a href="login.html" class="waves-effect waves-light btn">Login</a></li>
+                            <li><a href="@Url.Action("Store", "Home")"><i class="material-icons left">store</i>Repuestos</a></li>
+                            <li><a href="@Url.Action("Login","Account")" class="waves-effect waves-light btn">Login</a></li>
                         </ul>
                     </div>
                 </div>
                 <ul id="nav-mobile" class="side-nav">
-                    <li><a class="btn-flat" href="@Url.Action("Search")"><i class="material-icons">search</i>Buscar pieza</a></li>
+                    <li><a class="btn-flat" href="@Url.Action("Search","Home")"><i class="material-icons">search</i>Buscar pieza</a></li>
                     <li><a class="btn-flat" href="@Url.Action("Index", "Manage")"><i class="material-icons">perm_identity</i>Mi Cuenta</a></li>
-                    <li><a class="btn-flat" href="stores.html"><i class="material-icons">store</i>Repuestos</a></li>
-                    <li><a href="login.html" class="waves-effect waves-light btn">Login</a></li>
+                    <li><a class="btn-flat" href="@Url.Action("Store", "Home")"><i class="material-icons">store</i>Repuestos</a></li>
+                    <li><a href="@Url.Action("Login","Account")" class="waves-effect waves-light btn">Login</a></li>
                 </ul>
             </div>
         </nav>
