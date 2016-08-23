@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using ElCarro.Web.CustomAttribute;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace ElCarro.Web.Models
@@ -49,9 +50,8 @@ namespace ElCarro.Web.Models
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Email")]
-        [EmailAddress]
-        public string Email { get; set; }
+        [Display(Name = "UserName")]
+        public string UserName { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
@@ -70,6 +70,10 @@ namespace ElCarro.Web.Models
         public string Email { get; set; }
 
         [Required]
+        [Display(Name = "UserName")]
+        public string UserName { get; set; }
+
+        [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
@@ -79,6 +83,42 @@ namespace ElCarro.Web.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Display(Name = "Privacy Policy")]
+        [MustBeTrue(ErrorMessage = "The Policy Privacy should be accepted")]
+        public bool PrivacyPolicy { get; set; }
+    }
+
+    public class RegisterCompanyViewModel
+    {
+        [Required]
+        [Display(Name = "Company Name")]
+        public string CompanyName { get; set; }
+
+        [Required]
+        [Phone]
+        [Display(Name = "Phone Number")]
+        public string PhoneNumber { get; set; }
+
+        [Required]
+        [EmailAddress]
+        [Display(Name = "Email")]
+        public string Email { get; set; }
+
+        [Required]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [DataType(DataType.Password)]
+        [Display(Name = "Password")]
+        public string Password { get; set; }
+
+        [DataType(DataType.Password)]
+        [Display(Name = "Confirm password")]
+        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        public string ConfirmPassword { get; set; }
+
+        [Display(Name = "Privacy Policy")]
+        [MustBeTrue(ErrorMessage = "The Policy Privacy should be accepted")]
+        public bool PrivacyPolicy { get; set; }
     }
 
     public class ResetPasswordViewModel

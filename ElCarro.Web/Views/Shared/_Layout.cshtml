@@ -7,8 +7,6 @@
     <title>@ViewBag.Title - ElCarro.do</title>
     <!-- CSS  -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    @*<link href="~/Content/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
-        <link href="~/Content/style.css" type="text/css" rel="stylesheet" media="screen,projection" />*@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -16,31 +14,28 @@
     <!-- Navbar  -->
     <div class="navbar-fixed">
         <nav class="white" role="navigation">
-            <div class="nav-wrapper container">
-                <a id="logo-container" href="index.html" class="brand-logo">ElCarro.do</a>
-                <ul class="right hide-on-med-and-down">
-                    <li><a href="#"><i class="material-icons left">search</i>Buscar pieza</a></li>
-                    <li><a href="#"><i class="material-icons left">perm_identity</i>Mi Cuenta</a></li>
-                    <li><a href="#"><i class="material-icons left">help</i>Ayuda</a></li>
-                    <li><a class="waves-effect waves-light btn">Publicar</a></li>
-                </ul>
-
+            <div class="nav-wrapper">
+                <div class="row">
+                    <div class="col m4 center">
+                        <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+                        <a id="logo-container" href="/" class="brand-logo"><img class="responsive-img " src="~/Images/logo_elcarro_navbar_resized.png"></a>
+                    </div>
+                    <div class="col m8">
+                        <ul class="right hide-on-med-and-down">
+                            @Html.Partial("_LoginPartial")
+                        </ul>
+                    </div>
+                </div>
                 <ul id="nav-mobile" class="side-nav">
-                    <li><a class="center" href="#">Buscar pieza</a></li>
-                    <li><a class="center" href="#">Mi Cuenta</a></li>
-                    <li><a class="center" href="#">Ayuda</a></li>
-                    <li><a class="waves-effect waves-light btn">Publicar</a></li>
+                    @Html.Partial("_LoginPartial")
                 </ul>
-                <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
             </div>
         </nav>
     </div>
 
     <div class="container">
         <div class="section">
-            <div class="row">
-                @RenderBody()
-            </div>
+            @RenderBody()
         </div>
     </div>
 
@@ -85,7 +80,7 @@
         </div>
         <div class="footer-copyright">
             <div class="container">
-                Made by <a class="brown-text text-lighten-3" href="https://github.com/rozon">rozon</a><img src="~/Images/GitHub-Mark-32px.png">
+                © 2016 ElCarro.do, Todos los derechos reservados.
             </div>
         </div>
     </footer>
