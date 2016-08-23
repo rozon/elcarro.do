@@ -10,6 +10,7 @@ using ElCarro.Web.Models;
 using SendGrid;
 using System.Configuration;
 using SendGrid.Helpers.Mail;
+using System.Linq;
 
 namespace ElCarro.Web
 {
@@ -23,14 +24,40 @@ namespace ElCarro.Web
         // Use NuGet to install SendGrid (Basic C# client lib) 
         private async Task configSendGridasync(IdentityMessage message)
         {
-            string apiKey = ConfigurationManager.AppSettings["SENDGRID_APY_KEY"];
-            dynamic sg = new SendGridAPIClient(apiKey, "https://api.sendgrid.com");
+            ApplicationDbContext context = new ApplicationDbContext();
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+            var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
 
-            Email from = new Email("test@example.com");
-            Email to = new Email(message.Destination);
-            Content content = new Content("text/plain", message.Body);
-            Mail mail = new Mail(from, message.Subject, to, content);
-            dynamic response = await sg.client.mail.send.post(requestBody: mail.Get());
+            var user = await UserManager.FindByEmailAsync(message.Destination);
+            var roleCompany = await roleManager.FindByNameAsync("Company");
+
+            if(user.Roles.FirstOrDefault(r => r.RoleId.Equals(roleCompany.Id)) == null)
+            {
+                string apiKey = ConfigurationManager.AppSettings["SENDGRID_APY_KEY"];
+                dynamic sg = new SendGridAPIClient(apiKey, "https://api.sendgrid.com");
+
+                Email from = new Email("elcarro.do@gmail.com");
+                Email to = new Email(message.Destination);
+                Content content = new Content("text/plain", message.Body);
+                Mail mail = new Mail(from, message.Subject, to, content);
+                dynamic response = await sg.client.mail.send.post(requestBody: mail.Get());
+            }
+            else
+            {
+                string apiKey = ConfigurationManager.AppSettings["SENDGRID_APY_KEY"];
+                dynamic sg = new SendGridAPIClient(apiKey, "https://api.sendgrid.com");
+
+                string subject = "Confirm Company Data";
+
+                message.Body += "\t\r\t\r\t\r" + "Company Name: " + user.UserName + "\t\r\t\r" +
+                    "Phone Numbre: " + user.PhoneNumber;
+
+                Email from = new Email(message.Destination);
+                Email to = new Email("eliancruz29@gmail.com");
+                Content content = new Content("text/plain", message.Body);
+                Mail mail = new Mail(from, subject, to, content);
+                dynamic response = await sg.client.mail.send.post(requestBody: mail.Get());
+            }
         }
     }
 

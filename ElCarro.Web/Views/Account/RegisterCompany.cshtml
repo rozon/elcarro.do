@@ -1,23 +1,31 @@
-﻿@model ElCarro.Web.Models.RegisterViewModel
+﻿@model ElCarro.Web.Models.RegisterCompanyViewModel
+
 @{
-    ViewBag.Title = "Register";
+    ViewBag.Title = "RegisterCompany";
 }
 
 <div class="row">
     <div class="col s12 m6">
         <div class="card blue-grey darken-1">
             <div class="card-content white-text">
-                <span class="card-title">Crea una cuenta</span>
+                <span class="card-title">Registra tu negocio</span>
                 <div class="row">
-                    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal col s12", role = "form" }))
+                    @using (Html.BeginForm("RegisterCompany", "Account", FormMethod.Post, new { @class = "form-horizontal col s12", role = "form" }))
                     {
                         @Html.AntiForgeryToken()
                         @Html.ValidationSummary("", new { @class = "text-danger" })
                         <div class="row">
                             <div class="input-field col s12">
-                                <i class="material-icons prefix">perm_identity</i>
-                                @Html.TextBoxFor(m => m.UserName, new { @class = "validate", @required = true })
-                                @Html.LabelFor(m => m.UserName, "Nombre")
+                                <i class="material-icons prefix">work</i>
+                                @Html.TextBoxFor(m => m.CompanyName, new { @class = "validate", @required = true })
+                                @Html.LabelFor(m => m.CompanyName, "Nombre del negocio")
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <i class="material-icons prefix">phone</i>
+                                @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "validate", @required = true })
+                                @Html.LabelFor(m => m.PhoneNumber, "Teléfono")
                             </div>
                         </div>
                         <div class="row">
@@ -59,7 +67,7 @@
     <div class="col s12 m6">
         <div class="card blue-grey darken-1">
             <div class="card-content white-text">
-                <span class="card-title">¿Ya tienes una cuenta?</span>
+                <span class="card-title">¿Ya tienes tu negocio registrado?</span>
             </div>
             <div class="card-action">
                 <div class="row">

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Globalization;
-using System.Linq;
-using System.Security.Claims;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -75,7 +72,7 @@ namespace ElCarro.Web.Controllers
 
             // Require the user to have a confirmed email before they can log on.
             // var user = await UserManager.FindByNameAsync(model.Email);
-            var user = UserManager.Find(model.Email, model.Password);
+            var user = UserManager.Find(model.UserName, model.Password);
             if (user != null)
             {
                 if (!await UserManager.IsEmailConfirmedAsync(user.Id))
@@ -89,7 +86,7 @@ namespace ElCarro.Web.Controllers
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            var result = await SignInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -165,10 +162,16 @@ namespace ElCarro.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser
+                {
+                    UserName = model.UserName,
+                    Email = model.Email
+                };
+
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    await UserManager.AddToRoleAsync(user.Id, "User");
                     // Comment the following line to prevent log in until the user is confirmed.
                     //await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
 
@@ -181,10 +184,60 @@ namespace ElCarro.Web.Controllers
                         "Please confirm your account by clicking this link: <a href=\""
                         + callbackUrl + "\">link</a>");
 
-                    // Uncomment to debug locally 
-                    // TempData["ViewBagLink"] = callbackUrl;
-
                     ViewBag.Message = "Check your email and confirm your account, you must be confirmed "
+                                    + "before you can log in.";
+
+                    return View("Info");
+                    //return RedirectToAction("Index", "Home");
+                }
+                AddErrors(result);
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+
+        //
+        // GET: /Account/RegisterCompany
+        [AllowAnonymous]
+        public ActionResult RegisterCompany()
+        {
+            return View();
+        }
+
+        // POST: /Account/Register
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> RegisterCompany(RegisterCompanyViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new ApplicationUser
+                {
+                    UserName = model.CompanyName,
+                    Email = model.Email,
+                    PhoneNumber = model.PhoneNumber,
+                    PhoneNumberConfirmed = true
+                };
+                var result = await UserManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    await UserManager.AddToRoleAsync(user.Id, "Company");
+                    // Comment the following line to prevent log in until the user is confirmed.
+                    //await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+
+                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
+                    // Send an email with this link
+                    string callbackUrl = await SendEmailConfirmationTokenAsync(user.Id, "Confirm your account");
+
+                    await UserManager.SendEmailAsync(user.Id,
+                        "Confirm your account",
+                        "Please confirm your account by clicking this link: <a href=\""
+                        + callbackUrl + "\">link</a>");
+
+                    ViewBag.Message = "We will contact you to validate some data, After that "+
+                        "check your email and confirm your account, you must be confirmed "
                                     + "before you can log in.";
 
                     return View("Info");

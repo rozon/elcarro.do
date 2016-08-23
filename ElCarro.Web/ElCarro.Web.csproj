@@ -184,6 +184,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ModalsController.cs" />
+    <Compile Include="CustomAttribute\MustBeTrueAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -200,11 +201,8 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\materialize.css" />
     <Content Include="Content\Social\zocial.css" />
-    <Content Include="Content\style.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -214,8 +212,7 @@
     <Content Include="Images\background6.jpg" />
     <Content Include="Images\GitHub-Mark-32px.png" />
     <Content Include="Images\Logo-elcarro-original_.png" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Images\logo_elcarro_navbar_resized.png" />
     <Content Include="fonts\roboto\Roboto-Bold.eot" />
     <Content Include="fonts\roboto\Roboto-Bold.ttf" />
     <Content Include="fonts\roboto\Roboto-Bold.woff" />
@@ -292,6 +289,7 @@
     <Content Include="Views\Modals\Rules.cshtml" />
     <Content Include="Views\Modals\Suggestions.cshtml" />
     <Content Include="Views\Modals\BugsReport.cshtml" />
+    <Content Include="Views\Account\RegisterCompany.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
