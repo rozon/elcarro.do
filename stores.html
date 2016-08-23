@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+  <title>ElCarro.do</title>
+
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+</head>
+<body>
+
+  <!-- Navbar  -->
+  <div class="navbar-fixed">
+    <nav class="white" role="navigation">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col m4 center">
+            <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+            <a id="logo-container" href="index.html" class="brand-logo"><img class="responsive-img " src="static/logo_elcarro_navbar_resized.png"></a>
+          </div>
+          <div class="col m8">
+            <ul class="right hide-on-med-and-down">
+              <li><a href="search.html"><i class="material-icons left">search</i>Buscar pieza</a></li>
+              <li><a href="account.html"><i class="material-icons left">perm_identity</i>Mi Cuenta</a></li>
+              <li class="active"><a href="stores.html"><i class="material-icons left">store</i>Repuestos</a></li>
+              <li><a href="login.html" class="waves-effect waves-light btn">Login</a></li>
+            </ul>
+          </div>
+        </div>
+        <ul id="nav-mobile" class="side-nav">
+          <li><a class="btn-flat" href="search.html"><i class="material-icons">search</i>Buscar pieza</a></li>
+          <li><a class="btn-flat" href="account.html"><i class="material-icons">perm_identity</i>Mi Cuenta</a></li>
+          <li class="active"><a class="btn-flat" href="stores.html"><i class="material-icons">store</i>Repuestos</a></li>
+          <li><a href="login.html" class="waves-effect waves-light btn">Login</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+    <br>
+  <div class="container">
+    <div class="row">
+      <form class="col s12">
+        <div class="row">
+          <div class="input-field col s12 m6">
+            <input id="search" type="search" required>
+            <label for="search"><i class="material-icons">search</i>¿Que pieza necesitas?</label>
+            <i class="material-icons">close</i>
+          </div>
+          <div class="input-field col s12 m2">
+            <select>
+              <option value="" disabled selected>Año</option>
+              <option value="1">2016</option>
+              <option value="2">2015</option>
+              <option value="3">2014</option>
+            </select>
+          </div>
+          <div class="input-field col s12 m2">
+            <select>
+              <option value="" disabled selected>Marca</option>
+              <option value="1">Honda</option>
+              <option value="2">Toyota</option>
+              <option value="3">Hyundai</option>
+            </select>
+          </div>
+          <div class="input-field col s12 m2">
+            <select>
+              <option value="" disabled selected>Modelo</option>
+              <option value="1">Fit</option>
+              <option value="2">Civic</option>
+              <option value="3">Accord</option>
+            </select>
+          </div>
+          <div class="col s12 m12 center">
+            <button class="btn waves-effect waves-light" type="submit" name="action">Buscar
+              <i class="material-icons right">send</i>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <br>
+  <div class="row">
+    <div class="col s12 m9 l10">
+      <table class="highlight responsive-table">
+        <tbody>
+        <tr>
+          <td>Alvin</td>
+          <td>Eclair</td>
+          <td>$0.87</td>
+        </tr>
+        <tr>
+          <td>Alan</td>
+          <td>Jellybean</td>
+          <td>$3.76</td>
+        </tr>
+        <tr>
+          <td>Jonathan</td>
+          <td>Lollipop</td>
+          <td>$7.00</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col card-panel hide-on-small-only m3 l2">
+      <ul class="section table-of-contents">
+        <li><a href="#">Filter_1</a></li>
+        <li><a href="#">Filter_2</a></li>
+        <li><a href="#">Filter_3</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <ul class="pagination center">
+    <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+    <li class="active"><a href="#!">1</a></li>
+    <li class="waves-effect"><a href="#!">2</a></li>
+    <li class="waves-effect"><a href="#!">3</a></li>
+    <li class="waves-effect"><a href="#!">4</a></li>
+    <li class="waves-effect"><a href="#!">5</a></li>
+    <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+  </ul>
+
+  <!-- Modal Structure -->
+  <div id="privacy_policy" class="modal modal-fixed-footer">
+      <div class="modal-content">
+          <h4>ElCarro.do - Política de Privacidad</h4>
+          <p>Pila de texto #TODO</p>
+      </div>
+      <div class="modal-footer">
+          <a class="modal-action modal-close waves-effect waves-green btn-flat ">Aceptar</a>
+      </div>
+  </div>
+
+  <div id="terms_conditions" class="modal modal-fixed-footer">
+      <div class="modal-content">
+          <h4>ElCarro.do - Términos y condiciones</h4>
+          <p>Pila de texto #TODO</p>
+      </div>
+      <div class="modal-footer">
+          <a class="modal-action modal-close waves-effect waves-green btn-flat ">Aceptar</a>
+      </div>
+  </div>
+
+  <div id="rules" class="modal modal-fixed-footer">
+      <div class="modal-content">
+          <h4>ElCarro.do - Reglas</h4>
+          <p>Pila de texto #TODO</p>
+      </div>
+      <div class="modal-footer">
+          <a class="modal-action modal-close waves-effect waves-green btn-flat ">Aceptar</a>
+      </div>
+  </div>
+
+  <div id="suggestions" class="modal">
+    <div class="modal-content">
+      <h4>¡Envianos tus sugerencias!</h4>
+      <form class="col s12">
+        <div class="row">
+          <div class="input-field col s12">
+            <i class="material-icons prefix">perm_identity</i>
+            <input id="suggestion_name" type="text" class="validate" required>
+            <label for="suggestion_name">Nombre</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <i class="material-icons prefix">email</i>
+            <input id="suggestion_email" type="email" class="validate" required>
+            <label for="suggestion_email" data-error="wrong" data-success="right">Correo Electrónico</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <i class="material-icons prefix">mode_edit</i>
+            <textarea id="suggestion_msj" class="materialize-textarea"></textarea>
+            <label for="suggestion_msj">Sugerencias</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12 center">
+            <button class="btn waves-effect waves-light" type="submit" name="action">Enviar</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="bugs_report" class="modal">
+    <div class="modal-content">
+      <h4>¿Error en la pagina? ¡Dejanos saber!</h4>
+      <form class="col s12">
+        <div class="row">
+          <div class="input-field col s12">
+            <i class="material-icons prefix">perm_identity</i>
+            <input id="bugs_name" type="text" class="validate" required>
+            <label for="bugs_name">Nombre</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <i class="material-icons prefix">email</i>
+            <input id="bugs_email" type="email" class="validate" required>
+            <label for="bugs_email" data-error="wrong" data-success="right">Correo Electrónico</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <i class="material-icons prefix">report_problem</i>
+            <textarea id="bugs_text" class="materialize-textarea"></textarea>
+            <label for="bugs_text">Descripción del error</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12 center">
+            <button class="btn waves-effect waves-light" type="submit" name="action">Reportar</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  
+  <!-- Footer  -->
+  <footer class="page-footer teal">
+    <div class="container">
+      <div class="row">
+        <div class="col l6 s12">
+          <h5 class="white-text">¿Quienes somos?</h5>
+          <p class="grey-text text-lighten-4">Somos un equipo de estudiantes universitarios enfocados en ayudar... #TO-DO</p>
+        </div>
+        <div class="col l3 s12">
+          <h5 class="white-text">Settings</h5>
+          <ul>
+            <li><a class="white-text" href="#!">Ayuda</a></li>
+              <li><a class="white-text modal-trigger" href="#rules">Reglas</a></li>
+              <li><a class="white-text modal-trigger" href="#privacy_policy">Politica de privacidad</a></li>
+              <li><a class="white-text modal-trigger" href="#terms_conditions">Términos y condiciones</a></li>
+          </ul>
+        </div>
+        <div class="col l3 s12">
+          <h5 class="white-text">Connect</h5>
+          <ul>
+            <li><a class="white-text modal-trigger" href="#suggestions">Sugerencias</a></li>
+            <li><a class="white-text modal-trigger" href="#bugs_report">Reportar errores</a></li>
+            <li><a class="white-text" href="#!">Link 3</a></li>
+            <li><a class="white-text" href="#!">Link 4</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+        © 2016 ElCarro.do, Todos los derechos reservados.
+      </div>
+    </div>
+  </footer>
+
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="js/materialize.js"></script>
+  <script src="js/init.js"></script>
+
+  </body>
+</html>
