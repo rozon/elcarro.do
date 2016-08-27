@@ -20,7 +20,7 @@
                                     <div class="row">
                                         <div class="input-field col s12">
                                             <i class="material-icons prefix">perm_identity</i>
-                                            @Html.TextBoxFor(m => m.UserName, new { @class = "validate" })
+                                            @Html.TextBoxFor(m => m.UserName)
                                             @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
                                             @Html.LabelFor(m => m.UserName, "Nombre de usuario o compañia")
                                         </div>
@@ -28,7 +28,7 @@
                                     <div class="row">
                                         <div class="input-field col s12">
                                             <i class="material-icons prefix">lock</i>
-                                            @Html.PasswordFor(m => m.Password, new { @class = "validate" })
+                                            @Html.PasswordFor(m => m.Password)
                                             @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
                                             @Html.LabelFor(m => m.Password, "Contraseña")
                                         </div>
