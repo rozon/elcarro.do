@@ -235,6 +235,7 @@
     <Content Include="fonts\roboto\Roboto-Thin.ttf" />
     <Content Include="fonts\roboto\Roboto-Thin.woff" />
     <Content Include="fonts\roboto\Roboto-Thin.woff2" />
+    <None Include="Properties\PublishProfiles\elcarro.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="parts\Bumper_delantero_Civic_98.png" />
     <Content Include="Scripts\init.js" />
