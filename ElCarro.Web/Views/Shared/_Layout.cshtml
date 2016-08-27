@@ -23,18 +23,12 @@
                     </div>
                     <div class="col m8">
                         <ul class="right hide-on-med-and-down">
-                            <li><a href="@Url.Action("Search", "Home")"><i class="material-icons left">search</i>Buscar pieza</a></li>
-                            <li><a href="@Url.Action("Index", "Manage")"><i class="material-icons left">perm_identity</i>Mi Cuenta</a></li>
-                            <li><a href="@Url.Action("Store", "Home")"><i class="material-icons left">store</i>Repuestos</a></li>
-                            <li><a href="@Url.Action("Login","Account")" class="waves-effect waves-light btn">Login</a></li>
+                            @Html.Partial("_LoginPartial", "")
                         </ul>
                     </div>
                 </div>
                 <ul id="nav-mobile" class="side-nav">
-                    <li><a class="btn-flat" href="@Url.Action("Search","Home")"><i class="material-icons">search</i>Buscar pieza</a></li>
-                    <li><a class="btn-flat" href="@Url.Action("Index", "Manage")"><i class="material-icons">perm_identity</i>Mi Cuenta</a></li>
-                    <li><a class="btn-flat" href="@Url.Action("Store", "Home")"><i class="material-icons">store</i>Repuestos</a></li>
-                    <li><a href="@Url.Action("Login","Account")" class="waves-effect waves-light btn">Login</a></li>
+                    @Html.Partial("_LoginPartial", "side_nav")
                 </ul>
             </div>
         </nav>

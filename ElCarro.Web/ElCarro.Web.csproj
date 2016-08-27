@@ -236,6 +236,7 @@
     <Content Include="fonts\roboto\Roboto-Thin.woff" />
     <Content Include="fonts\roboto\Roboto-Thin.woff2" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="parts\Bumper_delantero_Civic_98.png" />
     <Content Include="Scripts\init.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -249,6 +250,13 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="static\background1.jpg" />
+    <Content Include="static\background2.jpg" />
+    <Content Include="static\logo_elcarro.png" />
+    <Content Include="static\logo_elcarro_navbar.png" />
+    <Content Include="static\logo_elcarro_navbar_resized.png" />
+    <Content Include="static\office.jpg" />
+    <Content Include="static\user.png" />
     <Content Include="Views\Modals\PrivacyPolicy.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
