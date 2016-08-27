@@ -1,31 +1,136 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Inicio";
 }
-
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+<br>
+<div class="container">
+    <div class="row">
+        <form class="col s12">
+            <div class="row">
+                <div class="input-field col s12 m6">
+                    <i class="material-icons prefix">search</i>
+                    <input type="text" id="autocomplete-input" class="autocomplete">
+                    <label for="autocomplete-input">¿Que pieza necesitas?</label>
+                </div>
+                <div class="input-field col s12 m2">
+                    <select>
+                        <option value="" disabled selected>Año</option>
+                        <option value="1">2016</option>
+                        <option value="2">2015</option>
+                        <option value="3">2014</option>
+                        <option value="4">2007</option>
+                        <option value="5">1998</option>
+                    </select>
+                </div>
+                <div class="input-field col s12 m2">
+                    <select>
+                        <option value="" disabled selected>Marca</option>
+                        <option value="1">Honda</option>
+                        <option value="2">Toyota</option>
+                        <option value="3">Hyundai</option>
+                        <option value="4">Fiat</option>
+                    </select>
+                </div>
+                <div class="input-field col s12 m2">
+                    <select>
+                        <option value="" disabled selected>Modelo</option>
+                        <option value="1">Fit</option>
+                        <option value="2">Civic</option>
+                        <option value="3">Accord</option>
+                        <option value="4">Punto</option>
+                    </select>
+                </div>
+                <div class="col s12 m12 center">
+                    <button class="btn waves-effect waves-light" type="submit" name="action">
+                        Buscar
+                        <i class="material-icons right">send</i>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
 </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+<div class="container">
+    <div class="section">
+
+        <!--   Icon Section   -->
+        <div class="row">
+            <div class="col s12 m4">
+                <div class="icon-block">
+                    <h2 class="center brown-text"><i class="material-icons">flash_on</i></h2>
+                    <h5 class="center">Búsqueda Turbo</h5>
+
+                    <p class="light">
+                        Hemos puesto a su alcance el sistema
+                        de <i>Búsqueda Turbo</i>. La nueva forma fácil y
+                        rápida de encontrar las tiendas de repuestos
+                        que cuentan con el artículo deseado a nivel local. Su sistema de
+                        autocompletado facilita la experienca al usuario y le ayuda a recordar
+                        cualquier detalle que se le pueda escapar para arrancar a buscar su pieza.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col s12 m4">
+                <div class="icon-block">
+                    <h2 class="center brown-text"><i class="material-icons">group</i></h2>
+                    <h5 class="center">Calidad Comunitaria</h5>
+
+                    <p class="light">
+                        Gracias a nuestro sistema de evaluación
+                        de compra, la comunidad de clientes de
+                        repuestos automotrices tiene el poder de calificar las piezas
+                        adquiridas por el servicio recibido en cada
+                        tienda. Esto significa
+                        <i>Calidad Comunitaria</i>, donde el mercado local de
+                        las partes de vehículos evoluciona de forma inteligente
+                        a partir de las opiniones de sus clientes.
+                    </p>
+
+                </div>
+            </div>
+
+            <div class="col s12 m4">
+                <div class="icon-block">
+                    <h2 class="center brown-text"><i class="material-icons">settings</i></h2>
+                    <h5 class="center">Fácil, fácil, fácil</h5>
+
+                    <p class="light">
+                        Hemos creado el concepto de las tres <i>F</i>.
+                        Nuestra plataforma online fue diseñada teniendo presente
+                        <i>lo´ fácil</i> en todo momento. Por lo tanto, la documentación detallada,
+                        las reglas claras, la ayuda precisa y la apertura a mejoras
+                        caracterizan lo FFF que es suscribirse, navegar y encontrar esa
+                        pieza en elcarro.do <b><i>¿aún estás afuera?</i></b>
+                    </p>
+
+                </div>
+            </div>
+        </div>
+
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+</div>
+
+
+<div class="parallax-container valign-wrapper">
+    <div class="parallax"><img src="@Url.Content("~/static/background1.jpg")"></div>
+</div>
+
+<div class="container">
+    <div class="section">
+        <div class="row">
+            <div class="col s12 center">
+                <h3><i class="mdi-content-send brown-text"></i></h3>
+                <h4>Contáctanos</h4>
+                <p class="left-align light">
+                    Números disponibles: <b>+1(809)815-4378</b> |
+                    <b>+1(809)462-5387 | 809-567-9271</b>
+                </p>
+            </div>
+        </div>
     </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
+</div>
+
+<div class="parallax-container valign-wrapper">
+    <div class="parallax"><img src="@Url.Content("~/static/background2.jpg")"></div>
 </div>

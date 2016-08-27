@@ -3,10 +3,38 @@
     ViewBag.Title = "Manage";
 }
 
-<h2>@ViewBag.Title.</h2>
+@section styles{
+    @Styles.Render("~/Content/account")
+}
 
-<p class="text-success">@ViewBag.StatusMessage</p>
-<div>
+
+<main>
+    <ul id="slide-out" class="side-nav fixed">
+        <li>
+            <div class="userView">
+                <img class="background" src="static/office.jpg">
+                <a href="#!user"><img class="circle" src="static/user.png"></a>
+                <a href="#!name"><span class="white-text name">Anthony Rozón</span></a>
+                <a href="#!email"><span class="white-text email">arozonm@gmail.com</span></a>
+            </div>
+        </li>
+        <li><a href="#!"><i class="material-icons">cloud</i>Datos Personales</a></li>
+        <li><a href="#!">Mensajes</a></li>
+        <li><a class="subheader">Subheader</a></li>
+        <li><a class="waves-effect" href="#!">Favoritos</a></li>
+        <ul class="hide-on-large-only">
+            <li><div class="divider"></div></li>
+            <li><a class="btn-flat" href="search.html"><i class="material-icons">search</i>Buscar pieza</a></li>
+            <li class="active"><a class="btn-flat" href="account.html"><i class="material-icons">perm_identity</i>Mi Cuenta</a></li>
+            <li><a class="btn-flat" href="stores.html"><i class="material-icons">store</i>Repuestos</a></li>
+            <li><a href="login.html" class="waves-effect waves-light btn">Cerrar Sesión</a></li>
+        </ul>
+    </ul>
+</main>
+
+<div class="container">
+    <p class="text-success">@ViewBag.StatusMessage</p>
+
     <h4>Change your account settings</h4>
     <hr />
     <dl class="dl-horizontal">
@@ -30,13 +58,13 @@
         </dd>
         @*
             Phone Numbers can used as a second factor of verification in a two-factor authentication system.
-             
+
              See <a href="http://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
                 for details on setting up this ASP.NET application to support two-factor authentication using SMS.
-             
+
              Uncomment the following block after you have set up two-factor authentication
         *@
-        @*  
+        @*
             <dt>Phone Number:</dt>
             <dd>
                 @(Model.PhoneNumber ?? "None")
