@@ -14,10 +14,10 @@
     {
         @Html.AntiForgeryToken()
 
-        <li><a href="@Url.Action("Search", "Home")"><i class="material-icons left">search</i>Buscar pieza</a></li>
-        <li><a href="@Url.Action("Index", "Manage")" title="Manage"><i class="material-icons left">perm_identity</i>Mi Cuenta</a></li>
-        <li><a href="@Url.Action("Store", "Home")"><i class="material-icons left">store</i>Repuestos</a></li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()" class="waves-effect waves-light btn">Log off</a></li>
+        <li><a class="@_class" href="@Url.Action("Search", "Home")"><i class="material-icons left">search</i>Buscar pieza</a></li>
+        <li><a class="@_class" href="@Url.Action("Index", "Manage")" title="Manage"><i class="material-icons left">perm_identity</i>Mi Cuenta</a></li>
+        <li><a class="@_class" href="@Url.Action("Store", "Home")"><i class="material-icons left">store</i>Repuestos</a></li>
+        <li><a class="waves-effect waves-light btn" href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
     }
 }
 else
