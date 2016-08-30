@@ -17,6 +17,10 @@
         <li><a class="@_class" href="@Url.Action("Search", "Home")"><i class="material-icons left">search</i>Buscar pieza</a></li>
         <li><a class="@_class" href="@Url.Action("Index", "Manage")" title="Manage"><i class="material-icons left">perm_identity</i>Mi Cuenta</a></li>
         <li><a class="@_class" href="@Url.Action("Store", "Home")"><i class="material-icons left">store</i>Repuestos</a></li>
+        if (User.IsInRole(Constants.CompanyRole))
+        {
+            <li><a class="@_class" href="@Url.Action("Index", "VehicleParts")"><i class="material-icons left">store</i>Piezas</a></li>
+        }
         <li><a class="waves-effect waves-light btn" href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
     }
 }

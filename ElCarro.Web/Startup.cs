@@ -48,17 +48,15 @@ namespace ElCarro.Web
                 if (chkUser.Succeeded)
                 {
                     var result1 = UserManager.AddToRole(user.Id, "Admin");
-
                 }
             }
 
             // creating Creating Manager role    
-            if (!roleManager.RoleExists("Company"))
+            if (!roleManager.RoleExists(Constants.CompanyRole))
             {
                 var role = new IdentityRole();
-                role.Name = "Company";
+                role.Name = Constants.CompanyRole;
                 roleManager.Create(role);
-
             }
 
             // creating Creating Employee role    
