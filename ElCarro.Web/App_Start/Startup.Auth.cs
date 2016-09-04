@@ -60,8 +60,8 @@ namespace ElCarro.Web
 
             app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             {
-                ClientId = "912712930283-6kmmve5ruajo4lq6m34ts7a5t43p63kd.apps.googleusercontent.com",
-                ClientSecret = "Kkpdf8ZLjOpcZVnJRqNyx-TA"
+                ClientId = "912712930283-1sbkpthrt7cnod415l92chegvrv2ndjc.apps.googleusercontent.com",
+                ClientSecret = "hFch4J5we-W1c9-lsuDU5Paq"
             });
         }
     }
