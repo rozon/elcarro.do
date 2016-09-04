@@ -55,8 +55,8 @@ namespace ElCarro.Web
             //   consumerSecret: "");
 
             app.UseFacebookAuthentication(
-               appId: "263961727319650",
-               appSecret: "c883afba41a11a1df3d880cc4137b58b");
+               appId: "284591295256133",
+               appSecret: "51b17d0f3c22367ec6f3020538a3f333");
 
             app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             {
