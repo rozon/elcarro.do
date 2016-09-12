@@ -1,6 +1,5 @@
 (function($){
   $(function(){
-
     $('.scrollspy').scrollSpy();
     $('select').material_select('destroy');
     $('.button-collapse').sideNav();
