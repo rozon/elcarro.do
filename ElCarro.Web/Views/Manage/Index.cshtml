@@ -1,4 +1,4 @@
-﻿@model ElCarro.Web.Models.IndexViewModel
+﻿@model ElCarro.Web.Models.UserDetailsViewModel
 @{
     Layout = "~/Views/Shared/_AccountLayout.cshtml";
     ViewBag.Title = "Manage";
@@ -6,7 +6,7 @@
 
 <div class="row">
     <h3 class="center">
-        Mi Cuenta <a href="account_edit.html" class="tooltipped" data-position="right"
+        Mi Cuenta <a href="@Url.Action("Edit", "Manage")" class="tooltipped" data-position="right"
                      data-delay="50" data-tooltip="Editar Informacion"><i class="material-icons">edit</i></a>
     </h3>
     <hr>
@@ -23,14 +23,14 @@
         <div class="row">
             <div class="input-field col s10">
                 <i class="material-icons prefix">account_circle</i>
-                <input disabled value="Anthony Rozon" type="text" class="validate">
+                <input disabled value="@Model.Name" type="text" class="validate">
                 <label>Nombre</label>
             </div>
         </div>
         <div class="row">
             <div class="input-field col s10">
                 <i class="material-icons prefix">email</i>
-                <input disabled value="arozonm@gmail.com" type="email" class="validate">
+                <input disabled value="@Model.Email" type="email" class="validate">
                 <label>Correo Electrónico</label>
             </div>
         </div>
