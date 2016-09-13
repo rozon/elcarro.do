@@ -526,6 +526,7 @@
     <Content Include="www\fonts\roboto\Roboto-Thin.woff" />
     <Content Include="www\fonts\roboto\Roboto-Thin.woff2" />
     <Content Include="www\LICENSE" />
+    <Content Include="Views\Shared\_AccountLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
