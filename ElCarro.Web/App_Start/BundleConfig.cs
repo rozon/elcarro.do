@@ -18,6 +18,10 @@ namespace ElCarro.Web
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                 "~/Scripts/modernizr-*"));
 
+            bundles.Add(new ScriptBundle("~/bundles/site").Include(
+                "~/Scripts/materialize.js",
+                "~/Scripts/init.js"));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/materialize.css",
                 "~/Content/style.css",
