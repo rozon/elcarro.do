@@ -1,0 +1,42 @@
+﻿@model ElCarro.Web.Models.VehiclePart
+
+@{
+    ViewBag.Title = "Detalles";
+}
+<div class="container">
+    <div class="row">
+        <div class="col s12">
+            <h4 class="center">Pieza de Vehículo</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12 center">
+            @Html.DisplayNameFor(model => model.Description)
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col s12 center">
+            @Html.DisplayFor(model => model.Description)
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col s12 center">
+            @Html.DisplayNameFor(model => model.Photo)
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col s12 center">
+            <img class="materialboxed" width="250" height="250" src="@Url.Content(@Model.Photo)">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col s12 center">
+            @Html.ActionLink("Editar", "Edit", new { id = Model.Id }, new { @class = "btn waves-effect" })
+            @Html.ActionLink("Volver al Listado de Partes", "Index", null, new { @class = "btn waves-effect" })
+        </div>
+    </div>
+</div>

@@ -181,10 +181,13 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Models\CreateVehiclePart.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ModalsController.cs" />
+    <Compile Include="Controllers\VehiclePartsController.cs" />
     <Compile Include="CustomAttribute\MustBeTrueAttribute.cs" />
+    <Compile Include="Constants.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -192,11 +195,17 @@
     <Compile Include="Migrations\201608120317132_0.Designer.cs">
       <DependentUpon>201608120317132_0.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201608301405258_CompanyAndVehiclePartsAdded.cs" />
+    <Compile Include="Migrations\201608301405258_CompanyAndVehiclePartsAdded.Designer.cs">
+      <DependentUpon>201608301405258_CompanyAndVehiclePartsAdded.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
+    <Compile Include="Models\Company.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\VehiclePart.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -303,9 +312,15 @@
     <Content Include="Views\Account\RegisterCompany.cshtml" />
     <Content Include="Views\Home\Search.cshtml" />
     <Content Include="Views\Home\Store.cshtml" />
+    <Content Include="Views\VehicleParts\Create.cshtml" />
+    <Content Include="Views\VehicleParts\Delete.cshtml" />
+    <Content Include="Views\VehicleParts\Details.cshtml" />
+    <Content Include="Views\VehicleParts\Edit.cshtml" />
+    <Content Include="Views\VehicleParts\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Uploads\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -318,6 +333,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201608120317132_0.resx">
       <DependentUpon>201608120317132_0.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608301405258_CompanyAndVehiclePartsAdded.resx">
+      <DependentUpon>201608301405258_CompanyAndVehiclePartsAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

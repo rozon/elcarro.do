@@ -19,7 +19,7 @@ namespace ElCarro.Web.Controllers
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -31,9 +31,9 @@ namespace ElCarro.Web.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -131,7 +131,7 @@ namespace ElCarro.Web.Controllers
             // If a user enters incorrect codes for a specified amount of time then the user account 
             // will be locked out for a specified amount of time. 
             // You can configure the account lockout settings in IdentityConfig
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
+            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -211,42 +211,46 @@ namespace ElCarro.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> RegisterCompany(RegisterCompanyViewModel model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
+                return View(model);
+
+            var user = new ApplicationUser
             {
-                var user = new ApplicationUser
+                UserName = model.Email,
+                Email = model.Email,
+                PhoneNumber = model.PhoneNumber,
+                PhoneNumberConfirmed = true
+            };
+
+            var result = await UserManager.CreateAsync(user, model.Password);
+
+            if (result.Succeeded)
+            {
+                var dbContext = HttpContext.GetOwinContext().Get<ApplicationDbContext>();
+                var company = new Company
                 {
-                    UserName = model.CompanyName,
-                    Email = model.Email,
-                    PhoneNumber = model.PhoneNumber,
-                    PhoneNumberConfirmed = true
+                    Name = model.CompanyName,
+                    Admin = user,
                 };
-                var result = await UserManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
-                {
-                    await UserManager.AddToRoleAsync(user.Id, "Company");
-                    // Comment the following line to prevent log in until the user is confirmed.
-                    //await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+                dbContext.Company.Add(company);
+                dbContext.SaveChanges();
 
-                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    string callbackUrl = await SendEmailConfirmationTokenAsync(user.Id, "Confirm your account");
+                await UserManager.AddToRoleAsync(user.Id, "Company");
+                string callbackUrl = await SendEmailConfirmationTokenAsync(user.Id, "Confirm your account");
 
-                    await UserManager.SendEmailAsync(user.Id,
-                        "Confirm your account",
-                        "Please confirm your account by clicking this link: <a href=\""
-                        + callbackUrl + "\">link</a>");
+                await UserManager.SendEmailAsync(user.Id,
+                    "Confirm your account",
+                    "Please confirm your account by clicking this link: <a href=\""
+                    + callbackUrl + "\">link</a>");
 
-                    ViewBag.Message = "We will contact you to validate some data, After that "+
-                        "check your email and confirm your account, you must be confirmed "
-                                    + "before you can log in.";
+                ViewBag.Message = "We will contact you to validate some data, After that " +
+                    "check your email and confirm your account, you must be confirmed "
+                                + "before you can log in.";
 
-                    return View("Info");
-                    //return RedirectToAction("Index", "Home");
-                }
-                AddErrors(result);
+                return View("Info");
             }
 
-            // If we got this far, something failed, redisplay form
+            AddErrors(result);
             return View(model);
         }
 

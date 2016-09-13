@@ -1,4 +1,5 @@
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.Data.Entity;
 
 namespace ElCarro.Web.Models
 {
@@ -8,6 +9,9 @@ namespace ElCarro.Web.Models
             : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
+
+        public DbSet<VehiclePart> VehiclePart { get; set; }
+        public DbSet<Company> Company { get; set; }
 
         public static ApplicationDbContext Create()
         {

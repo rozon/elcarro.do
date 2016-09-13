@@ -1,0 +1,41 @@
+﻿@model IEnumerable<ElCarro.Web.Models.VehiclePart>
+
+@{
+    ViewBag.Title = "Index";
+}
+<div class="container" style="min-height: 300px;">
+    <p>
+        @Html.ActionLink("Añadir", "Create", null, new { @class = "btn waves-effect" })
+    </p>
+    <table class="bordered striped">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Photo)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Photo)
+                    </td>
+                    <td>
+                        <a href="@Url.Action("Edit","VehicleParts", new { id = item.Id })"><i class="small material-icons">mode_edit</i></a>
+                        <a href="@Url.Action("Details","VehicleParts", new { id = item.Id })"><i class="small material-icons">details</i></a>
+                        <a href="@Url.Action("Delete","VehicleParts", new { id = item.Id })"><i class="small material-icons">delete</i></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,51 @@
+﻿@model ElCarro.Web.Models.VehiclePart
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<div class="container">
+    <h3 class="pink-text text-lighten-3 center">¿Esta seguro que desea borrar esta pieza?</h3>
+    <div class="row">
+        <div class="col s12">
+            <h4 class="center">Pieza de Vehículo</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12 center">
+            @Html.DisplayNameFor(model => model.Description)
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col s12 center">
+            @Html.DisplayFor(model => model.Description)
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col s12 center">
+            @Html.DisplayNameFor(model => model.Photo)
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col s12 center">
+            <img class="materialboxed" width="250" height="250" src="@Url.Content(@Model.Photo)">
+        </div>
+    </div>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="row">
+            <div class="col s12 center">
+                <input type="submit" value="Borrar" class="btn waves-effect pink lighten-3" /> 
+                <a class="btn waves-effect" href="@Url.Action("Index", "VehicleParts")">Cancelar</a>
+            </div>
+
+        </div>
+    }
+
+</div>
