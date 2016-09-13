@@ -36,15 +36,29 @@
 </header>
 <main>
   <ul id="slide-out" class="side-nav fixed">
-    <li><div class="userView">
+    <li>
+      <div class="userView">
       <img class="background" src="static/office.jpg">
       <img class="circle" src="static/user.png">
       <span class="white-text name">Repuestos Los Peña</span>
       <span class="white-text email">lospena@gmail.com</span>
-    </div></li>
+      </div>
+    </li>
     <li class="active"><a class="waves-effect" href="#"><i class="material-icons">perm_identity</i>Cuenta</a></li>
-    <li><a class="waves-effect" href="account_msjs.html"><i class="material-icons">textsms</i>Mensajes</a></li>
-    <li><a class="waves-effect" href="account_fav.html"><i class="material-icons">store</i>Sucursales</a></li>
+    <li><a class="waves-effect" href="#"><i class="material-icons">textsms</i>Mensajes</a></li>
+    <ul class="collapsible collapsible-accordion">
+      <li>
+        <a class="collapsible-header"><i class="material-icons left">store</i>Sucursales</a>
+        <div class="collapsible-body">
+          <ul>
+            <li><a href="account_business_store_1.html">Sucursal Herrera</a></li>
+            <li><a href="#">Sucursal Alcarrizos</a></li>
+            <li><a href="#">Sucursal Villa Agricola</a></li>
+            <li><a class="waves-effect waves-teal btn-flat"><i class="material-icons left">library_add</i>Agregar Sucursal</a></li>
+          </ul>
+        </div>
+      </li>
+    </ul>
     <ul class="hide-on-large-only">
       <li><div class="divider"></div></li>
       <li><a class="btn-flat" href="search.html"><i class="material-icons">search</i>Buscar pieza</a></li>
@@ -63,7 +77,7 @@
     <div class="col s4">
       <div class="row">
         <div class="col s12">
-          <img class="materialboxed" data-caption="Logo de la empresa" width="250" src="static/user.png">
+          <img class="materialboxed" data-caption="Logo de la empresa" width="200" src="static/user.png">
         </div>
       </div>
     </div>
@@ -87,6 +101,13 @@
           <i class="material-icons prefix">email</i>
           <input disabled value="lospena@gmail.com" type="email" class="validate">
           <label>Correo Electrónico</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s2">
+          <i class="material-icons prefix">store</i>
+          <input disabled value="3" type="number" class="validate">
+          <label>Sucursales</label>
         </div>
       </div>
     </div>
