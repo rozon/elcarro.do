@@ -1,0 +1,48 @@
+﻿@model ElCarro.Web.Models.CreateVehiclePart
+
+@{
+    ViewBag.Title = "Añadir Parte de Vehículo";
+}
+
+<div class="container">
+    <div class="row">
+        @using (Html.BeginForm("Create", "VehicleParts", null, FormMethod.Post, new { @class = "col s12", enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="row">
+                <div class="input-field col s4">
+                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "validate" } })
+                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                    @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "" })
+                </div>
+            </div>
+
+            <div class="row center">
+                <div class="file-field input-field col s4">
+                    <div class="btn">
+                        <span>@Html.DisplayNameFor(model => model.Photo)</span>
+                        @Html.TextBoxFor(model => model.Photo, new { type = "file" })
+                        @Html.ValidationMessageFor(model => model.Photo, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="file-path-wrapper">
+                        <input class="file-path validate" type="text" placeholder="Eliga la foto del artículo">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s12">
+                    <button class="btn waves-effect waves-light" type="submit">Añadir</button>
+                    <a class="btn waves-effect pink lighten-3" href="@Url.Action("Index", "VehicleParts")">Cancelar</a>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

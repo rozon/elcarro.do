@@ -53,7 +53,7 @@ namespace ElCarro.Web
                     "Phone Numbre: " + user.PhoneNumber;
 
                 Email from = new Email(message.Destination);
-                Email to = new Email("eliancruz29@gmail.com");
+                Email to = new Email("elcarro.do@gmail.com");
                 Content content = new Content("text/plain", message.Body);
                 Mail mail = new Mail(from, subject, to, content);
                 dynamic response = await sg.client.mail.send.post(requestBody: mail.Get());
