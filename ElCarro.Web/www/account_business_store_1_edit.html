@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+  <title>ElCarro.do</title>
+
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="css/account_style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+</head>
+<body>
+<header>
+  <!-- Navbar  -->
+  <div class="navbar-fixed">
+    <nav class="white" role="navigation">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col m3 l3">
+            <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
+            <a id="logo-container" href="index.html" class="brand-logo"><img class="responsive-img " src="static/logo_elcarro_navbar_resized.png"></a>
+          </div>
+          <div class="col">
+            <ul class="right hide-on-med-and-down">
+              <li><a href="search.html"><i class="material-icons left">search</i>Buscar pieza</a></li>
+              <li class="active"><a href="account.html"><i class="material-icons left">perm_identity</i>Mi Cuenta</a></li>
+              <li><a href="stores.html"><i class="material-icons left">store</i>Repuestos</a></li>
+              <li><a href="login.html" class="waves-effect waves-light btn">Cerrar Sesión</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </div>
+</header>
+<main>
+  <ul id="slide-out" class="side-nav fixed">
+    <li>
+      <div class="userView">
+      <img class="background" src="static/office.jpg">
+      <img class="circle" src="static/user.png">
+      <span class="white-text name">Repuestos Los Peña</span>
+      <span class="white-text email">lospena@gmail.com</span>
+      </div>
+    </li>
+    <li><a class="waves-effect" href="#"><i class="material-icons">perm_identity</i>Cuenta</a></li>
+    <li><a class="waves-effect" href="#"><i class="material-icons">textsms</i>Mensajes</a></li>
+    <ul class="collapsible collapsible-accordion">
+      <li>
+        <a class="collapsible-header"><i class="material-icons left">store</i>Sucursales</a>
+        <div class="collapsible-body">
+          <ul>
+            <li><a href="account_business_store_1.html">Sucursal Herrera</a></li>
+            <li><a href="#">Sucursal Alcarrizos</a></li>
+            <li><a href="#">Sucursal Villa Agricola</a></li>
+            <li><a class="waves-effect waves-teal btn-flat"><i class="material-icons left">library_add</i>Agregar Sucursal</a></li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+    <ul class="hide-on-large-only">
+      <li><div class="divider"></div></li>
+      <li><a class="btn-flat" href="search.html"><i class="material-icons">search</i>Buscar pieza</a></li>
+      <li class="active"><a class="btn-flat" href="account.html"><i class="material-icons">perm_identity</i>Mi Cuenta</a></li>
+      <li><a class="btn-flat" href="stores.html"><i class="material-icons">store</i>Repuestos</a></li>
+      <li><a href="login.html" class="waves-effect waves-light btn">Cerrar Sesión</a></li>
+    </ul>
+  </ul>
+
+  <div class="row">
+    <h3 class="center">Actualizar informacion de sucursal</h3>
+    <hr>
+  </div>
+  <div class="row container">
+    <div class="col s12">
+      <div class="row">
+        <div class="input-field col s10">
+          <i class="material-icons prefix">work</i>
+          <input value="Herrera" type="text" class="validate">
+          <label>Nombre sucursal</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s10">
+          <i class="material-icons prefix">phone</i>
+          <input value="809-957-0763" type="text" class="validate">
+          <label>Teléfono sucursal</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s10">
+          <i class="material-icons prefix">email</i>
+          <input value="lospena@gmail.com" type="email" class="validate">
+          <label>Correo Electrónico</label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row container">
+    <div class="input-field col s6">
+      <i class="material-icons prefix">business</i>
+      <input value="Las Palmas" id="street" type="text" class="validate">
+      <label for="street">Calle</label>
+    </div>
+    <div class="input-field col s2">
+      <input value="#15" id="number" type="text" class="validate">
+      <label for="number">No.</label>
+    </div>
+    <div class="input-field col s4">
+      <input value="Gringo" id="sector" type="text" class="validate">
+      <label for="city">Sector</label>
+    </div>
+  </div>
+  <div class="row container">
+    <div class="input-field col s6">
+      <input value="Santo Domingo" id="state" type="text" class="validate">
+      <label for="number">Provincia</label>
+    </div>
+    <div class="input-field col s6">
+      <input value="Herrera" id="city" type="text" class="validate">
+      <label for="city">Ciudad</label>
+    </div>
+  </div>
+  <div class="row container">
+    <div class="input-field col s12">
+      <i class="material-icons prefix">schedule</i>
+      <label>Horario</label>
+    </div>
+  </div>
+  <br>
+  <div class="row container">
+    <div class="input-field col s6">
+      <input value="Santo Domingo" id="state" type="text" class="validate">
+      <label for="number">Provincia</label>
+    </div>
+    <div class="input-field col s6">
+      <input value="Herrera" id="city" type="text" class="validate">
+      <label for="city">Ciudad</label>
+    </div>
+  </div>
+
+</main>
+
+  <!-- Footer  -->
+  <footer class="page-footer teal">
+    <div class="footer-copyright">
+      <div class="container">
+        © 2016 ElCarro.do, Todos los derechos reservados.
+      </div>
+    </div>
+  </footer>
+
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="js/materialize.js"></script>
+  <script src="js/init.js"></script>
+
+  </body>
+</html>
