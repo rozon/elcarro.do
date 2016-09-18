@@ -72,74 +72,224 @@
     <h3 class="center">Actualizar informacion de sucursal</h3>
     <hr>
   </div>
-  <div class="row container">
-    <div class="col s12">
-      <div class="row">
-        <div class="input-field col s10">
-          <i class="material-icons prefix">work</i>
-          <input value="Herrera" type="text" class="validate">
-          <label>Nombre sucursal</label>
+  <form action="">
+    <div class="row container">
+      <div class="col s12">
+        <div class="row">
+          <div class="input-field col s10">
+            <i class="material-icons prefix">work</i>
+            <input value="Herrera" type="text" class="validate">
+            <label>Nombre sucursal</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s10">
+            <i class="material-icons prefix">phone</i>
+            <input value="809-957-0763" type="text" class="validate">
+            <label>Teléfono sucursal</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s10">
+            <i class="material-icons prefix">email</i>
+            <input value="lospena@gmail.com" type="email" class="validate">
+            <label>Correo Electrónico</label>
+          </div>
         </div>
       </div>
-      <div class="row">
-        <div class="input-field col s10">
-          <i class="material-icons prefix">phone</i>
-          <input value="809-957-0763" type="text" class="validate">
-          <label>Teléfono sucursal</label>
-        </div>
+    </div>
+    <div class="row container">
+      <div class="input-field col s6">
+        <i class="material-icons prefix">business</i>
+        <input value="Las Palmas" id="street" type="text" class="validate">
+        <label for="street">Calle</label>
       </div>
-      <div class="row">
-        <div class="input-field col s10">
-          <i class="material-icons prefix">email</i>
-          <input value="lospena@gmail.com" type="email" class="validate">
-          <label>Correo Electrónico</label>
-        </div>
+      <div class="input-field col s2">
+        <input value="#15" id="number" type="text" class="validate">
+        <label for="number">No.</label>
+      </div>
+      <div class="input-field col s4">
+        <input value="Gringo" id="sector" type="text" class="validate">
+        <label for="city">Sector</label>
       </div>
     </div>
-  </div>
-  <div class="row container">
-    <div class="input-field col s6">
-      <i class="material-icons prefix">business</i>
-      <input value="Las Palmas" id="street" type="text" class="validate">
-      <label for="street">Calle</label>
+    <div class="row container">
+      <div class="input-field col s6">
+        <input value="Santo Domingo" id="state" type="text" class="validate">
+        <label for="number">Provincia</label>
+      </div>
+      <div class="input-field col s6">
+        <input value="Herrera" id="city" type="text" class="validate">
+        <label for="city">Ciudad</label>
+      </div>
     </div>
-    <div class="input-field col s2">
-      <input value="#15" id="number" type="text" class="validate">
-      <label for="number">No.</label>
+    <div class="row container">
+      <div class="input-field col s12">
+        <i class="material-icons prefix">schedule</i>
+        <label>Horario</label>
+      </div>
     </div>
-    <div class="input-field col s4">
-      <input value="Gringo" id="sector" type="text" class="validate">
-      <label for="city">Sector</label>
+    <br>
+    <div class="row container">
+      <div class="input-field col s4">
+        <input type="checkbox" id="monday" />
+        <label for="monday">Lunes</label>
+      </div>
+      <div class="col s4">
+        <select>
+          <option value="" disabled selected>Desde las</option>
+          <option value="1">8:00am</option>
+          <option value="2">9:00am</option>
+          <option value="3">10:00am</option>
+        </select>
+      </div>
+      <div class="col s4">
+        <select>
+          <option value="" disabled selected>hasta las</option>
+          <option value="1">12:00pm</option>
+          <option value="2">4:00pm</option>
+          <option value="3">5:00pm</option>
+        </select>
+      </div>
     </div>
-  </div>
-  <div class="row container">
-    <div class="input-field col s6">
-      <input value="Santo Domingo" id="state" type="text" class="validate">
-      <label for="number">Provincia</label>
+    <div class="row container">
+      <div class="input-field col s4">
+        <input type="checkbox" id="tuesday" />
+        <label for="tuesday">Martes</label>
+      </div>
+      <div class="col s4">
+        <select>
+          <option value="" disabled selected>Desde las</option>
+          <option value="1">8:00am</option>
+          <option value="2">9:00am</option>
+          <option value="3">10:00am</option>
+        </select>
+      </div>
+      <div class="col s4">
+        <select>
+          <option value="" disabled selected>hasta las</option>
+          <option value="1">12:00pm</option>
+          <option value="2">4:00pm</option>
+          <option value="3">5:00pm</option>
+        </select>
+      </div>
     </div>
-    <div class="input-field col s6">
-      <input value="Herrera" id="city" type="text" class="validate">
-      <label for="city">Ciudad</label>
+    <div class="row container">
+      <div class="input-field col s4">
+        <input type="checkbox" id="wednesday" />
+        <label for="wednesday">Miercoles</label>
+      </div>
+      <div class="col s4">
+        <select>
+          <option value="" disabled selected>Desde las</option>
+          <option value="1">8:00am</option>
+          <option value="2">9:00am</option>
+          <option value="3">10:00am</option>
+        </select>
+      </div>
+      <div class="col s4">
+        <select>
+          <option value="" disabled selected>hasta las</option>
+          <option value="1">12:00pm</option>
+          <option value="2">4:00pm</option>
+          <option value="3">5:00pm</option>
+        </select>
+      </div>
     </div>
-  </div>
-  <div class="row container">
-    <div class="input-field col s12">
-      <i class="material-icons prefix">schedule</i>
-      <label>Horario</label>
+    <div class="row container">
+      <div class="input-field col s4">
+        <input type="checkbox" id="thursday" />
+        <label for="thursday">Jueves</label>
+      </div>
+      <div class="col s4">
+        <select>
+          <option value="" disabled selected>Desde las</option>
+          <option value="1">8:00am</option>
+          <option value="2">9:00am</option>
+          <option value="3">10:00am</option>
+        </select>
+      </div>
+      <div class="col s4">
+        <select>
+          <option value="" disabled selected>hasta las</option>
+          <option value="1">12:00pm</option>
+          <option value="2">4:00pm</option>
+          <option value="3">5:00pm</option>
+        </select>
+      </div>
     </div>
-  </div>
-  <br>
-  <div class="row container">
-    <div class="input-field col s6">
-      <input value="Santo Domingo" id="state" type="text" class="validate">
-      <label for="number">Provincia</label>
+    <div class="row container">
+      <div class="input-field col s4">
+        <input type="checkbox" id="friday" />
+        <label for="friday">Viernes</label>
+      </div>
+      <div class="col s4">
+        <select>
+          <option value="" disabled selected>Desde las</option>
+          <option value="1">8:00am</option>
+          <option value="2">9:00am</option>
+          <option value="3">10:00am</option>
+        </select>
+      </div>
+      <div class="col s4">
+        <select>
+          <option value="" disabled selected>hasta las</option>
+          <option value="1">12:00pm</option>
+          <option value="2">4:00pm</option>
+          <option value="3">5:00pm</option>
+        </select>
+      </div>
     </div>
-    <div class="input-field col s6">
-      <input value="Herrera" id="city" type="text" class="validate">
-      <label for="city">Ciudad</label>
+    <div class="row container">
+      <div class="input-field col s4">
+        <input type="checkbox" id="saturday" />
+        <label for="saturday">Sábado</label>
+      </div>
+      <div class="col s4">
+        <select>
+          <option value="" disabled selected>Desde las</option>
+          <option value="1">8:00am</option>
+          <option value="2">9:00am</option>
+          <option value="3">10:00am</option>
+        </select>
+      </div>
+      <div class="col s4">
+        <select>
+          <option value="" disabled selected>hasta las</option>
+          <option value="1">12:00pm</option>
+          <option value="2">4:00pm</option>
+          <option value="3">5:00pm</option>
+        </select>
+      </div>
     </div>
-  </div>
-
+    <div class="row container">
+      <div class="input-field col s4">
+        <input type="checkbox" id="sunday" />
+        <label for="sunday">Domingo</label>
+      </div>
+      <div class="col s4">
+        <select>
+          <option value="" disabled selected>Desde las</option>
+          <option value="1">8:00am</option>
+          <option value="2">9:00am</option>
+          <option value="3">10:00am</option>
+        </select>
+      </div>
+      <div class="col s4">
+        <select>
+          <option value="" disabled selected>hasta las</option>
+          <option value="1">12:00pm</option>
+          <option value="2">4:00pm</option>
+          <option value="3">5:00pm</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s12 center">
+        <button class="btn waves-effect waves-light" type="submit" name="action">Actualizar</button>
+      </div>
+    </div>
+  </form>
 </main>
 
   <!-- Footer  -->
