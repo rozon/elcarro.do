@@ -18,20 +18,47 @@ namespace ElCarro.Web
     {
         public async Task SendAsync(IdentityMessage message)
         {
-            await configSendGridasync(message);
+            if (message.Body.Contains("ConfirmEmail"))
+            {
+                await configSendGridAsync(message);
+            }
+            if (message.Subject.Contains("Report Error"))
+            {
+                await sendErrorMessage(message);
+            }
+        }
+
+        private async Task sendErrorMessage(IdentityMessage message)
+        {
+            ApplicationDbContext context = new ApplicationDbContext();
+            var role = context.Roles.SingleOrDefault(m => m.Name.Equals(Constants.AdminRole));
+            var users = context.Users.Where(m => m.Roles.Any(r => r.RoleId == role.Id));
+
+            string apiKey = ConfigurationManager.AppSettings["SENDGRID_APY_KEY"];
+            dynamic sg = new SendGridAPIClient(apiKey, "https://api.sendgrid.com");
+
+            Email from = new Email(message.Destination);
+            Content content = new Content("text/plain", message.Body);
+
+            Parallel.ForEach(users, (user) =>
+            {
+                Email to = new Email(user.Email);
+                Mail mail = new Mail(from, message.Subject, to, content);
+                dynamic response = sg.client.mail.send.post(requestBody: mail.Get());
+            });
         }
 
         // Use NuGet to install SendGrid (Basic C# client lib) 
-        private async Task configSendGridasync(IdentityMessage message)
+        private async Task configSendGridAsync(IdentityMessage message)
         {
             ApplicationDbContext context = new ApplicationDbContext();
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
             var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
 
             var user = await UserManager.FindByEmailAsync(message.Destination);
-            var roleCompany = await roleManager.FindByNameAsync("Company");
+            var roleCompany = await roleManager.FindByNameAsync(Constants.CompanyRole);
 
-            if(user.Roles.FirstOrDefault(r => r.RoleId.Equals(roleCompany.Id)) == null)
+            if (user.Roles.FirstOrDefault(r => r.RoleId.Equals(roleCompany.Id)) == null)
             {
                 string apiKey = ConfigurationManager.AppSettings["SENDGRID_APY_KEY"];
                 dynamic sg = new SendGridAPIClient(apiKey, "https://api.sendgrid.com");
@@ -78,7 +105,7 @@ namespace ElCarro.Web
         {
         }
 
-        public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context) 
+        public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)
         {
             var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context.Get<ApplicationDbContext>()));
             // Configure validation logic for usernames
@@ -119,7 +146,7 @@ namespace ElCarro.Web
             var dataProtectionProvider = options.DataProtectionProvider;
             if (dataProtectionProvider != null)
             {
-                manager.UserTokenProvider = 
+                manager.UserTokenProvider =
                     new DataProtectorTokenProvider<ApplicationUser>(dataProtectionProvider.Create("ASP.NET Identity"));
             }
             return manager;
