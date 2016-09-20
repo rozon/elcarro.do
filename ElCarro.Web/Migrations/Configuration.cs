@@ -1,7 +1,9 @@
 namespace ElCarro.Web.Migrations
 {
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
+    using Models;
     using System;
-    using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
 
@@ -14,18 +16,61 @@ namespace ElCarro.Web.Migrations
 
         protected override void Seed(ElCarro.Web.Models.ApplicationDbContext context)
         {
-            //  This method will be called after migrating to the latest version.
+            using (var trans = context.Database.BeginTransaction())
+            {
+                var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+                var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+                try
+                {
+                    AddRoles(roleManager, Web.Constants.UserRole, Web.Constants.AdminRole);
+                    AddUser("ElCarro", "elcarro.do@gmail.com", "_Welc0me1_", "Admin", userManager);
+                }
+                catch (Exception)
+                {
+                    trans.Rollback();
+                    throw;
+                }
+                trans.Commit();
+            }
+        }
 
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data. E.g.
-            //
-            //    context.People.AddOrUpdate(
-            //      p => p.FullName,
-            //      new Person { FullName = "Andrew Peters" },
-            //      new Person { FullName = "Brice Lambson" },
-            //      new Person { FullName = "Rowan Miller" }
-            //    );
-            //
+        private void AddUser(string username, string email, string password, string role, UserManager<ApplicationUser> userManager)
+        {
+            var user = new ApplicationUser
+            {
+                UserName = username,
+                Email = email,
+                EmailConfirmed = true
+            };
+            var chkUser = userManager.Create(user, password);
+
+            if (!chkUser.Succeeded)
+                throw new Exception($"Error adding user: {username} in the seed. \n" + chkUser.Errors.ToString());
+
+            var roleResult = userManager.AddToRole(user.Id, role);
+
+            if (!roleResult.Succeeded)
+                throw new Exception($"Error adding role {role} to user: {username} in the seed. \n" + roleResult.Errors.ToString());
+        }
+
+        private void AddRoles(RoleManager<IdentityRole> roleManager, params string[] rolesNames)
+        {
+            if (rolesNames == null || rolesNames.Count() == 0)
+                return;
+            rolesNames.ToList().ForEach(roleName =>
+            {
+                AddRole(roleManager, roleName);
+            });
+        }
+
+        private void AddRole(RoleManager<IdentityRole> roleManager, string roleName)
+        {
+            if (roleManager.RoleExists(roleName))
+                return;
+            roleManager.Create(new IdentityRole()
+            {
+                Name = roleName
+            });
         }
     }
 }
