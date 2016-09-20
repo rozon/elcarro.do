@@ -1,5 +1,5 @@
 ﻿$(function () {
-    $('#BugReportForm').submit(function (e) {
+    $('#SuggestionForm').submit(function (e) {
         e.preventDefault(); //prevent the default action
 
         //grab the form and wrap it with jQuery

@@ -21,7 +21,8 @@ namespace ElCarro.Web
             bundles.Add(new ScriptBundle("~/bundles/site").Include(
                 "~/Scripts/materialize.js",
                 "~/Scripts/init.js",
-                "~/Scripts/BugReport/SumitForms.js"));
+                "~/Scripts/BugReport/SumitForms.js",
+                "~/Scripts/Suggestion/SumitForms.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/materialize.css",

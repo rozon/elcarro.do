@@ -22,13 +22,14 @@ namespace ElCarro.Web
             {
                 await configSendGridAsync(message);
             }
-            if (message.Subject.Contains("Report Error"))
+            if (message.Subject.Contains("Report Error") ||
+                message.Subject.Contains("Suggestion"))
             {
-                await sendErrorMessage(message);
+                await sendMessageToAdmins(message);
             }
         }
 
-        private async Task sendErrorMessage(IdentityMessage message)
+        private async Task sendMessageToAdmins(IdentityMessage message)
         {
             ApplicationDbContext context = new ApplicationDbContext();
             var role = context.Roles.SingleOrDefault(m => m.Name.Equals(Constants.AdminRole));
