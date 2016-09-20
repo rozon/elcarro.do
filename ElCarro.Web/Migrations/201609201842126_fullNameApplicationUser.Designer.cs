@@ -7,13 +7,13 @@ namespace ElCarro.Web.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class addedFullNameField : IMigrationMetadata
+    public sealed partial class fullNameApplicationUser : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(addedFullNameField));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(fullNameApplicationUser));
         
         string IMigrationMetadata.Id
         {
-            get { return "201609131938080_addedFullNameField"; }
+            get { return "201609201842126_fullNameApplicationUser"; }
         }
         
         string IMigrationMetadata.Source
