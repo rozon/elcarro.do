@@ -184,6 +184,7 @@
     <Compile Include="Migrations\201609131938080_addedFullNameField.cs" />
     <Compile Include="Migrations\201609131938080_addedFullNameField.Designer.cs">
       <DependentUpon>201609131938080_addedFullNameField.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\BugReportController.cs" />
     <Compile Include="Migrations\201609190248394_BugReport_Added.cs" />
     <Compile Include="Migrations\201609190248394_BugReport_Added.Designer.cs">
@@ -563,6 +564,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201609131938080_addedFullNameField.resx">
       <DependentUpon>201609131938080_addedFullNameField.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201609190248394_BugReport_Added.resx">
       <DependentUpon>201609190248394_BugReport_Added.cs</DependentUpon>
     </EmbeddedResource>
