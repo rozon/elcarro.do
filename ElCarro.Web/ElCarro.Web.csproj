@@ -190,6 +190,10 @@
     <Compile Include="Migrations\201609200743456_BugReport_Modification.Designer.cs">
       <DependentUpon>201609200743456_BugReport_Modification.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201609201842126_fullNameApplicationUser.cs" />
+    <Compile Include="Migrations\201609201842126_fullNameApplicationUser.Designer.cs">
+      <DependentUpon>201609201842126_fullNameApplicationUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\BugReport.cs" />
     <Compile Include="Models\CreateVehiclePart.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -537,6 +541,8 @@
     <Content Include="www\fonts\roboto\Roboto-Thin.woff" />
     <Content Include="www\fonts\roboto\Roboto-Thin.woff2" />
     <Content Include="www\LICENSE" />
+    <Content Include="Views\Shared\_AccountLayout.cshtml" />
+    <Content Include="Views\Manage\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -561,6 +567,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201609200743456_BugReport_Modification.resx">
       <DependentUpon>201609200743456_BugReport_Modification.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609201842126_fullNameApplicationUser.resx">
+      <DependentUpon>201609201842126_fullNameApplicationUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

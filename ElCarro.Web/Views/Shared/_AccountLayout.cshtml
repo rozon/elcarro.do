@@ -1,0 +1,91 @@
+﻿@model ElCarro.Web.Models.UserDetailsViewModel
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no" />
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <title>@ViewBag.Title - ElCarro.do</title>
+    <!-- CSS  -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    @Styles.Render("~/Content/account")
+    @Scripts.Render("~/bundles/modernizr")
+    @RenderSection("styles", false)
+</head>
+<body>
+    <header>
+        <!-- Navbar  -->
+        <div class="navbar-fixed">
+            <nav class="white" role="navigation">
+                <div class="nav-wrapper">
+                    <div class="row">
+                        <div class="col m3 l3">
+                            <a href="#" data-activates="nav-mobile" class="button-collapse">
+                                <i class="material-icons">menu</i>
+                            </a>
+                            <a id="logo-container" href="@Url.Action("Index", "Home")" class="brand-logo">
+                                <img class="responsive-img" src="@Url.Content("~/static/logo_elcarro_navbar_resized.png")">
+                            </a>
+                        </div>
+                        <div class="col">
+                            <ul class="right hide-on-med-and-down">
+                                @Html.Partial("_LoginPartial", "")
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <ul id="slide-out" class="side-nav fixed">
+            <li>
+                <div class="userView">
+                    <img class="background" src="@Url.Content("~/static/office.jpg")">
+                    <img class="circle" src="@Url.Content("~/static/user.png")">
+                    <span class="white-text name">@Model.Name</span>
+                    <span class="white-text email">
+                        @Model.Email
+                </span>
+            </div>
+        </li>
+        <li class="active"><a class="waves-effect" href="#"><i class="material-icons">perm_identity</i>Perfil</a></li>
+        <li><a class="waves-effect" href="account_msjs.html"><i class="material-icons">textsms</i>Mensajes</a></li>
+        <li><a class="waves-effect" href="account_fav.html"><i class="material-icons">grade</i>Favoritos</a></li>
+        <ul class="hide-on-large-only">
+            @Html.Partial("_LoginPartial", "")
+        </ul>
+    </ul>
+
+        @RenderBody()
+    </main>
+
+
+    <!-- Modal Structure -->
+    @{ Html.RenderAction("PrivacyPolicy", "Modals"); }
+
+    @{ Html.RenderAction("TermsConditions", "Modals"); }
+
+    @{ Html.RenderAction("Rules", "Modals"); }
+
+    @{ Html.RenderAction("Suggestions", "Modals"); }
+
+    @{ Html.RenderAction("BugsReport", "Modals"); }
+
+    <!-- Footer  -->
+    <footer class="page-footer teal">
+        <div class="footer-copyright">
+            <div class="container">
+                © 2016 ElCarro.do, Todos los derechos reservados.
+            </div>
+        </div>
+    </footer>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/site")
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>
