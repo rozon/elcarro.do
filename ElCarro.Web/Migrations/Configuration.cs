@@ -22,7 +22,7 @@ namespace ElCarro.Web.Migrations
                 var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
                 try
                 {
-                    AddRoles(roleManager, Web.Constants.UserRole, Web.Constants.AdminRole);
+                    AddRoles(roleManager, Web.Constants.CompanyRole, Web.Constants.UserRole, Web.Constants.AdminRole);
                     AddUser("ElCarro", "elcarro.do@gmail.com", "_Welc0me1_", Web.Constants.AdminRole, userManager);
                 }
                 catch (Exception)
@@ -36,6 +36,9 @@ namespace ElCarro.Web.Migrations
 
         private void AddUser(string username, string email, string password, string role, UserManager<ApplicationUser> userManager)
         {
+            if (userManager.FindByEmail(email) != null)
+                return;
+
             var user = new ApplicationUser
             {
                 UserName = username,
