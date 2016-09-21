@@ -5,6 +5,12 @@ using Microsoft.Owin.Security;
 
 namespace ElCarro.Web.Models
 {
+    public class UserDetailsViewModel
+    {
+        public string Name { get; set; }
+        public string Email { get; set; }
+    }
+
     public class IndexViewModel
     {
         public bool HasPassword { get; set; }

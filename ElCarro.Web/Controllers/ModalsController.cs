@@ -24,10 +24,5 @@ namespace ElCarro.Web.Controllers
         {
             return PartialView("Suggestions");
         }
-
-        public PartialViewResult BugsReport()
-        {
-            return PartialView("BugsReport");
-        }
     }
 }

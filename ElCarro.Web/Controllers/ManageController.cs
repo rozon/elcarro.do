@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using ElCarro.Web.Models;
+using System.Web.Security;
 
 namespace ElCarro.Web.Controllers
 {
@@ -32,9 +33,9 @@ namespace ElCarro.Web.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -52,30 +53,49 @@ namespace ElCarro.Web.Controllers
 
         //
         // GET: /Manage/Index
-        public async Task<ActionResult> Index(ManageMessageId? message)
-        {
-            ViewBag.StatusMessage =
-                message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
-                : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
-                : message == ManageMessageId.SetTwoFactorSuccess ? "Your two-factor authentication provider has been set."
-                : message == ManageMessageId.Error ? "An error has occurred."
-                : message == ManageMessageId.AddPhoneSuccess ? "Your phone number was added."
-                : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
-                : "";
+        //public async Task<ActionResult> Index(ManageMessageId? message)
+        //{
+        //    ViewBag.StatusMessage =
+        //        message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
+        //        : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
+        //        : message == ManageMessageId.SetTwoFactorSuccess ? "Your two-factor authentication provider has been set."
+        //        : message == ManageMessageId.Error ? "An error has occurred."
+        //        : message == ManageMessageId.AddPhoneSuccess ? "Your phone number was added."
+        //        : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
+        //        : "";
 
-            var userId = User.Identity.GetUserId();
-            var model = new IndexViewModel
-            {
-                HasPassword = HasPassword(),
-                PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
-                TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
-                Logins = await UserManager.GetLoginsAsync(userId),
-                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
-            };
-            return View(model);
-        }
+        //    var userId = User.Identity.GetUserId();
+        //    var model = new IndexViewModel
+        //    {
+        //        HasPassword = HasPassword(),
+        //        PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
+        //        TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
+        //        Logins = await UserManager.GetLoginsAsync(userId),
+        //        BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
+        //    };
+        //    return View(model);
+        //}
 
         //
+
+        public ActionResult Index() =>
+            View(new UserDetailsViewModel
+            {
+                Name = UserManager.FindByEmail(User.Identity.Name).FullName,
+                Email = User.Identity.Name
+            });
+
+        public ActionResult Edit() =>
+             View(new UserDetailsViewModel
+             {
+                 Name = UserManager.FindByEmail(User.Identity.Name).FullName,
+                 Email = User.Identity.Name
+             });
+
+        [HttpPost]
+        public ActionResult Edit(UserDetailsViewModel model) =>
+             View(model);
+
         // POST: /Manage/RemoveLogin
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -213,15 +233,9 @@ namespace ElCarro.Web.Controllers
             return RedirectToAction("Index", new { Message = ManageMessageId.RemovePhoneSuccess });
         }
 
-        //
-        // GET: /Manage/ChangePassword
-        public ActionResult ChangePassword()
-        {
-            return View();
-        }
+        [ChildActionOnly]
+        public PartialViewResult ChangePassword() => PartialView();
 
-        //
-        // POST: /Manage/ChangePassword
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ChangePassword(ChangePasswordViewModel model)
@@ -333,7 +347,7 @@ namespace ElCarro.Web.Controllers
             base.Dispose(disposing);
         }
 
-#region Helpers
+        #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 
@@ -384,6 +398,6 @@ namespace ElCarro.Web.Controllers
             Error
         }
 
-#endregion
+        #endregion
     }
 }
