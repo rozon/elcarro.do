@@ -23,7 +23,7 @@ namespace ElCarro.Web.Migrations
                 try
                 {
                     AddRoles(roleManager, Web.Constants.UserRole, Web.Constants.AdminRole);
-                    AddUser("ElCarro", "elcarro.do@gmail.com", "_Welc0me1_", "Admin", userManager);
+                    AddUser("ElCarro", "elcarro.do@gmail.com", "_Welc0me1_", Web.Constants.AdminRole, userManager);
                 }
                 catch (Exception)
                 {
@@ -45,12 +45,12 @@ namespace ElCarro.Web.Migrations
             var chkUser = userManager.Create(user, password);
 
             if (!chkUser.Succeeded)
-                throw new Exception($"Error adding user: {username} in the seed. \n" + chkUser.Errors.ToString());
+                throw new Exception($"Error adding user: {username} in the seed. \n" + string.Join(", ", chkUser.Errors));
 
             var roleResult = userManager.AddToRole(user.Id, role);
 
             if (!roleResult.Succeeded)
-                throw new Exception($"Error adding role {role} to user: {username} in the seed. \n" + roleResult.Errors.ToString());
+                throw new Exception($"Error adding role {role} to user: {username} in the seed. \n" + string.Join(", ", roleResult.Errors));
         }
 
         private void AddRoles(RoleManager<IdentityRole> roleManager, params string[] rolesNames)
