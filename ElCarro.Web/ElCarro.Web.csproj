@@ -202,10 +202,10 @@
     <Compile Include="Migrations\201609202045010_Suggestion_Updated_2.cs" />
     <Compile Include="Migrations\201609202045010_Suggestion_Updated_2.Designer.cs">
       <DependentUpon>201609202045010_Suggestion_Updated_2.cs</DependentUpon>
-	</Compile>
-    <Compile Include="Migrations\201609201842126_fullNameApplicationUser.cs" />
-    <Compile Include="Migrations\201609201842126_fullNameApplicationUser.Designer.cs">
-      <DependentUpon>201609201842126_fullNameApplicationUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609210117128_fullNameApplicationUserAdded.cs" />
+    <Compile Include="Migrations\201609210117128_fullNameApplicationUserAdded.Designer.cs">
+      <DependentUpon>201609210117128_fullNameApplicationUserAdded.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\BugReport.cs" />
     <Compile Include="Models\CreateVehiclePart.cs" />
@@ -591,9 +591,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201609202045010_Suggestion_Updated_2.resx">
       <DependentUpon>201609202045010_Suggestion_Updated_2.cs</DependentUpon>
-	</EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201609201842126_fullNameApplicationUser.resx">
-      <DependentUpon>201609201842126_fullNameApplicationUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609210117128_fullNameApplicationUserAdded.resx">
+      <DependentUpon>201609210117128_fullNameApplicationUserAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
