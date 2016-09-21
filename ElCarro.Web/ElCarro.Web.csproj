@@ -181,6 +181,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\SuggestionController.cs" />
     <Compile Include="Controllers\BugReportController.cs" />
     <Compile Include="Migrations\201609190248394_BugReport_Added.cs" />
     <Compile Include="Migrations\201609190248394_BugReport_Added.Designer.cs">
@@ -190,6 +191,18 @@
     <Compile Include="Migrations\201609200743456_BugReport_Modification.Designer.cs">
       <DependentUpon>201609200743456_BugReport_Modification.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201609202033242_Suggestion_Added.cs" />
+    <Compile Include="Migrations\201609202033242_Suggestion_Added.Designer.cs">
+      <DependentUpon>201609202033242_Suggestion_Added.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609202041214_Suggestion_Updated.cs" />
+    <Compile Include="Migrations\201609202041214_Suggestion_Updated.Designer.cs">
+      <DependentUpon>201609202041214_Suggestion_Updated.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609202045010_Suggestion_Updated_2.cs" />
+    <Compile Include="Migrations\201609202045010_Suggestion_Updated_2.Designer.cs">
+      <DependentUpon>201609202045010_Suggestion_Updated_2.cs</DependentUpon>
+	</Compile>
     <Compile Include="Migrations\201609201842126_fullNameApplicationUser.cs" />
     <Compile Include="Migrations\201609201842126_fullNameApplicationUser.Designer.cs">
       <DependentUpon>201609201842126_fullNameApplicationUser.cs</DependentUpon>
@@ -219,6 +232,7 @@
     <Compile Include="Models\Company.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Suggestion.cs" />
     <Compile Include="Models\VehiclePart.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -268,6 +282,7 @@
     <Content Include="Scripts\materialize.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\BugReport\SumitForms.js" />
+    <Content Include="Scripts\Suggestion\SumitForms.js" />
     <Content Include="www\account.html" />
     <Content Include="www\account_business.html" />
     <Content Include="www\account_business_edit.html" />
@@ -510,7 +525,6 @@
     <Content Include="Views\Shared\Info.cshtml" />
     <Content Include="Views\Modals\TermsConditions.cshtml" />
     <Content Include="Views\Modals\Rules.cshtml" />
-    <Content Include="Views\Modals\Suggestions.cshtml" />
     <Content Include="Views\BugReport\BugsReport.cshtml" />
     <Content Include="Views\Account\RegisterCompany.cshtml" />
     <Content Include="Views\Home\Search.cshtml" />
@@ -541,6 +555,7 @@
     <Content Include="www\fonts\roboto\Roboto-Thin.woff" />
     <Content Include="www\fonts\roboto\Roboto-Thin.woff2" />
     <Content Include="www\LICENSE" />
+    <Content Include="Views\Suggestion\Suggestion.cshtml" />
     <Content Include="Views\Shared\_AccountLayout.cshtml" />
     <Content Include="Views\Manage\Edit.cshtml" />
   </ItemGroup>
@@ -568,6 +583,15 @@
     <EmbeddedResource Include="Migrations\201609200743456_BugReport_Modification.resx">
       <DependentUpon>201609200743456_BugReport_Modification.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609202033242_Suggestion_Added.resx">
+      <DependentUpon>201609202033242_Suggestion_Added.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609202041214_Suggestion_Updated.resx">
+      <DependentUpon>201609202041214_Suggestion_Updated.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609202045010_Suggestion_Updated_2.resx">
+      <DependentUpon>201609202045010_Suggestion_Updated_2.cs</DependentUpon>
+	</EmbeddedResource>
     <EmbeddedResource Include="Migrations\201609201842126_fullNameApplicationUser.resx">
       <DependentUpon>201609201842126_fullNameApplicationUser.cs</DependentUpon>
     </EmbeddedResource>

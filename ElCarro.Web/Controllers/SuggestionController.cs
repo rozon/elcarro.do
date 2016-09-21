@@ -1,7 +1,6 @@
 ﻿using ElCarro.Web.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,16 +10,16 @@ using System.Web.Mvc;
 namespace ElCarro.Web.Controllers
 {
     [Authorize]
-    public class BugReportController : Controller
+    public class SuggestionController : Controller
     {
         private ApplicationUserManager _userManager;
         private ApplicationDbContext context = new ApplicationDbContext();
 
-        public BugReportController()
+        public SuggestionController()
         {
         }
 
-        public BugReportController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        public SuggestionController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
         }
@@ -38,25 +37,25 @@ namespace ElCarro.Web.Controllers
         }
 
         [AllowAnonymous]
-        public PartialViewResult BugReport()
+        public PartialViewResult Suggestion()
         {
-            return PartialView("BugsReport");
+            return PartialView("Suggestion");
         }
 
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> SendBugReport(BugReport model)
+        public async Task<ActionResult> SendSuggestion(Suggestion model)
         {
             if (!ModelState.IsValid)
             {
-                List<BugReportErrorView> listError = new List<BugReportErrorView>();
+                List<SuggestionErrorView> listError = new List<SuggestionErrorView>();
 
                 for (int c = 0; c < ModelState.Count; c++)
                 {
                     if (ModelState.Values.ElementAt(c).Errors.FirstOrDefault() != null)
                     {
-                        listError.Add(new BugReportErrorView(ModelState.Keys.ElementAt(c),
+                        listError.Add(new SuggestionErrorView(ModelState.Keys.ElementAt(c),
                             ModelState.Values.ElementAt(c).Errors.FirstOrDefault().ErrorMessage));
                     }
                 }
@@ -67,20 +66,20 @@ namespace ElCarro.Web.Controllers
             Parallel.Invoke(
                 () => 
                 {
-                    context.BugReports.Add(model);
+                    context.Suggestions.Add(model);
                     context.SaveChangesAsync();
                 },
                 () => 
                 {
                     UserManager.EmailService.SendAsync(new IdentityMessage()
                     {
-                        Body = model.Description,
+                        Body = model.SuggestionMsj,
                         Destination = model.Email,
-                        Subject = "Report Error"
+                        Subject = "Suggestion"
                     });
                 });
 
-            return Json(new { status = "success", message = "Thanks for the help!!" });
+            return Json(new { status = "success", message = "Thanks for the Suggestion!!" });
         }
     }
 }

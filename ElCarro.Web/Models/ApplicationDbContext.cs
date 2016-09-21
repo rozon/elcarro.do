@@ -13,6 +13,7 @@ namespace ElCarro.Web.Models
         public DbSet<VehiclePart> VehiclePart { get; set; }
         public DbSet<Company> Company { get; set; }
         public DbSet<BugReport> BugReports { get; set; }
+        public DbSet<Suggestion> Suggestions { get; set; }
 
         public static ApplicationDbContext Create()
         {
