@@ -3,7 +3,7 @@ namespace ElCarro.Web.Migrations
     using System;
     using System.Data.Entity.Migrations;
 
-    public partial class fullNameApplicationUser : DbMigration
+    public partial class fullNameApplicationUserAdded : DbMigration
     {
         public override void Up()
         {
