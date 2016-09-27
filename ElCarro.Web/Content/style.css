@@ -3,6 +3,10 @@ nav .brand-logo {
     color: #444;
 }
 
+.fixed-nav {
+    height: 64px !important;
+}
+
 p {
     line-height: 2rem;
 }

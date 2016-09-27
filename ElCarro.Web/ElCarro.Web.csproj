@@ -181,6 +181,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\PartialViewController.cs" />
     <Compile Include="Controllers\SuggestionController.cs" />
     <Compile Include="Controllers\BugReportController.cs" />
     <Compile Include="Migrations\201609190248394_BugReport_Added.cs" />
@@ -206,6 +207,10 @@
     <Compile Include="Migrations\201609210117128_fullNameApplicationUserAdded.cs" />
     <Compile Include="Migrations\201609210117128_fullNameApplicationUserAdded.Designer.cs">
       <DependentUpon>201609210117128_fullNameApplicationUserAdded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609270356254_PhotoApplicationUserAdded.cs" />
+    <Compile Include="Migrations\201609270356254_PhotoApplicationUserAdded.Designer.cs">
+      <DependentUpon>201609270356254_PhotoApplicationUserAdded.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\BugReport.cs" />
     <Compile Include="Models\CreateVehiclePart.cs" />
@@ -558,6 +563,7 @@
     <Content Include="Views\Suggestion\Suggestion.cshtml" />
     <Content Include="Views\Shared\_AccountLayout.cshtml" />
     <Content Include="Views\Manage\Edit.cshtml" />
+    <Content Include="Views\PartialView\userView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -594,6 +600,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201609210117128_fullNameApplicationUserAdded.resx">
       <DependentUpon>201609210117128_fullNameApplicationUserAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609270356254_PhotoApplicationUserAdded.resx">
+      <DependentUpon>201609270356254_PhotoApplicationUserAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

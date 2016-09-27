@@ -10,6 +10,7 @@ namespace ElCarro.Web.Models
     public class ApplicationUser : IdentityUser
     {
         public string FullName { get; set; }
+        public string Photo { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
