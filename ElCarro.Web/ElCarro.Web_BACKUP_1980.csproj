@@ -181,7 +181,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\PartialViewController.cs" />
     <Compile Include="Controllers\SuggestionController.cs" />
     <Compile Include="Controllers\BugReportController.cs" />
     <Compile Include="Migrations\201609190248394_BugReport_Added.cs" />
@@ -192,6 +191,11 @@
     <Compile Include="Migrations\201609200743456_BugReport_Modification.Designer.cs">
       <DependentUpon>201609200743456_BugReport_Modification.cs</DependentUpon>
     </Compile>
+<<<<<<< a7c710552c9ebd09df47bd6ff265711c92119ecf
+    <Compile Include="Migrations\201609201842126_fullNameApplicationUser.cs" />
+    <Compile Include="Migrations\201609201842126_fullNameApplicationUser.Designer.cs">
+      <DependentUpon>201609201842126_fullNameApplicationUser.cs</DependentUpon>
+=======
     <Compile Include="Migrations\201609202033242_Suggestion_Added.cs" />
     <Compile Include="Migrations\201609202033242_Suggestion_Added.Designer.cs">
       <DependentUpon>201609202033242_Suggestion_Added.cs</DependentUpon>
@@ -203,14 +207,7 @@
     <Compile Include="Migrations\201609202045010_Suggestion_Updated_2.cs" />
     <Compile Include="Migrations\201609202045010_Suggestion_Updated_2.Designer.cs">
       <DependentUpon>201609202045010_Suggestion_Updated_2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201609210117128_fullNameApplicationUserAdded.cs" />
-    <Compile Include="Migrations\201609210117128_fullNameApplicationUserAdded.Designer.cs">
-      <DependentUpon>201609210117128_fullNameApplicationUserAdded.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201609270356254_PhotoApplicationUserAdded.cs" />
-    <Compile Include="Migrations\201609270356254_PhotoApplicationUserAdded.Designer.cs">
-      <DependentUpon>201609270356254_PhotoApplicationUserAdded.cs</DependentUpon>
+>>>>>>> elcarro-87-change to Implement-suggestions-forms-to-back-end
     </Compile>
     <Compile Include="Models\BugReport.cs" />
     <Compile Include="Models\CreateVehiclePart.cs" />
@@ -560,10 +557,12 @@
     <Content Include="www\fonts\roboto\Roboto-Thin.woff" />
     <Content Include="www\fonts\roboto\Roboto-Thin.woff2" />
     <Content Include="www\LICENSE" />
-    <Content Include="Views\Suggestion\Suggestion.cshtml" />
+<<<<<<< a7c710552c9ebd09df47bd6ff265711c92119ecf
     <Content Include="Views\Shared\_AccountLayout.cshtml" />
     <Content Include="Views\Manage\Edit.cshtml" />
-    <Content Include="Views\PartialView\userView.cshtml" />
+=======
+    <Content Include="Views\Suggestion\Suggestion.cshtml" />
+>>>>>>> elcarro-87-change to Implement-suggestions-forms-to-back-end
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -589,6 +588,10 @@
     <EmbeddedResource Include="Migrations\201609200743456_BugReport_Modification.resx">
       <DependentUpon>201609200743456_BugReport_Modification.cs</DependentUpon>
     </EmbeddedResource>
+<<<<<<< a7c710552c9ebd09df47bd6ff265711c92119ecf
+    <EmbeddedResource Include="Migrations\201609201842126_fullNameApplicationUser.resx">
+      <DependentUpon>201609201842126_fullNameApplicationUser.cs</DependentUpon>
+=======
     <EmbeddedResource Include="Migrations\201609202033242_Suggestion_Added.resx">
       <DependentUpon>201609202033242_Suggestion_Added.cs</DependentUpon>
     </EmbeddedResource>
@@ -597,12 +600,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201609202045010_Suggestion_Updated_2.resx">
       <DependentUpon>201609202045010_Suggestion_Updated_2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201609210117128_fullNameApplicationUserAdded.resx">
-      <DependentUpon>201609210117128_fullNameApplicationUserAdded.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201609270356254_PhotoApplicationUserAdded.resx">
-      <DependentUpon>201609270356254_PhotoApplicationUserAdded.cs</DependentUpon>
+>>>>>>> elcarro-87-change to Implement-suggestions-forms-to-back-end
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

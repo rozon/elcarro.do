@@ -19,10 +19,10 @@
                                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                                     <div class="row">
                                         <div class="input-field col s12">
-                                            <i class="material-icons prefix">perm_identity</i>
+                                            <i class="material-icons prefix">email</i>
                                             @Html.TextBoxFor(m => m.UserName)
                                             @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
-                                            @Html.LabelFor(m => m.UserName, "Nombre de usuario o compañia")
+                                            @Html.LabelFor(m => m.UserName, "Correo Electrónico")
                                         </div>
                                     </div>
                                     <div class="row">

@@ -12,27 +12,63 @@
     <hr>
 </div>
 <div class="row">
-    <div class="col s4">
+    <div class="col s12 m4">
         <div class="row">
             <div class="col s12">
-                <img class="materialboxed" data-caption="Imagen de Perfil" width="250" src="@Url.Content("~/static/user.png")">
+                <img class="materialboxed" data-caption="Imagen de Perfil" width="250" src="@Url.Content(Model.Photo)">
             </div>
         </div>
     </div>
-    <div class="col s8">
-        <div class="row">
-            <div class="input-field col s10">
-                <i class="material-icons prefix">account_circle</i>
-                <input disabled value="@Model.Name" type="text" class="validate">
-                <label>Nombre</label>
+    @if (Model.isCompany)
+    {
+        <div class="col s12 m8">
+            <div class="row">
+                <div class="input-field col s10">
+                    <i class="material-icons prefix">work</i>
+                    <input disabled value="@Model.FullName" type="text" class="validate">
+                    <label>Nombre de la Empresa</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s10">
+                    <i class="material-icons prefix">phone</i>
+                    <input disabled value="@Model.PhoneNumber" type="text" class="validate">
+                    <label>Telefono</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s10">
+                    <i class="material-icons prefix">email</i>
+                    <input disabled value="@Model.Email" type="email" class="validate">
+                    <label>Correo Electrónico</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s10">
+                    <i class="material-icons prefix">store</i>
+                    <input disabled value="@Model.NumStores" type="number" class="validate">
+                    <label>Sucursales</label>
+                </div>
             </div>
         </div>
-        <div class="row">
-            <div class="input-field col s10">
-                <i class="material-icons prefix">email</i>
-                <input disabled value="@Model.Email" type="email" class="validate">
-                <label>Correo Electrónico</label>
+    }
+    else
+    {
+        <div class="col s12 m8">
+            <div class="row">
+                <div class="input-field col s10">
+                    <i class="material-icons prefix">account_circle</i>
+                    <input disabled value="@Model.FullName" type="text" class="validate">
+                    <label>Nombre</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s10">
+                    <i class="material-icons prefix">email</i>
+                    <input disabled value="@Model.Email" type="email" class="validate">
+                    <label>Correo Electrónico</label>
+                </div>
             </div>
         </div>
-    </div>
+    }
 </div>

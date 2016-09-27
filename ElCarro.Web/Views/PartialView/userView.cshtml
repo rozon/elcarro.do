@@ -1,0 +1,43 @@
+﻿@model ElCarro.Web.Models.UserView
+
+
+<ul id="slide-out" class="side-nav fixed">
+    <li>
+        <div class="userView">
+            <img class="background" src="@Url.Content("~/static/office.jpg")">
+            <img class="circle" src="@Url.Content("~/static/user.png")">
+            <span class="white-text name">@Model.FullName</span>
+            <span class="white-text email">
+                @Model.Email
+            </span>
+        </div>
+    </li>
+    <li class="active"><a class="waves-effect" href="@Url.Action("Index", "Manage")"><i class="material-icons">perm_identity</i>Cuenta</a></li>
+    <li><a class="waves-effect" href="javascript:void(0)"><i class="material-icons">textsms</i>Mensajes</a></li>
+
+    @if (Model.isCompany)
+    {
+        <ul class="collapsible collapsible-accordion">
+            <li>
+                <a class="collapsible-header"><i class="material-icons left">store</i>Sucursales</a>
+                <div class="collapsible-body">
+                    <ul>
+                        <li><a href="account_business_store_1.html">Sucursal Herrera</a></li>
+                        <li><a href="#">Sucursal Alcarrizos</a></li>
+                        <li><a href="#">Sucursal Villa Agricola</a></li>
+                        <li><a class="waves-effect waves-teal btn-flat"><i class="material-icons left">library_add</i>Agregar Sucursal</a></li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    }
+    else
+    {
+        <li><a class="waves-effect" href="javascript:void(0)"><i class="material-icons">grade</i>Favoritos</a></li>
+    }
+
+    <ul class="hide-on-large-only">
+        <li><div class="divider"></div></li>
+        @Html.Partial("_LoginPartial", "")
+    </ul>
+</ul>
