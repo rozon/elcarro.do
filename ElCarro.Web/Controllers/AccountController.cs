@@ -71,8 +71,7 @@ namespace ElCarro.Web.Controllers
             }
 
             // Require the user to have a confirmed email before they can log on.
-            // var user = await UserManager.FindByNameAsync(model.Email);
-            var user = UserManager.Find(model.UserName, model.Password);
+            var user = await UserManager.FindByNameAsync(model.UserName);
             if (user != null)
             {
                 if (!await UserManager.IsEmailConfirmedAsync(user.Id))
@@ -127,9 +126,9 @@ namespace ElCarro.Web.Controllers
                 return View(model);
             }
 
-            // The following code protects for brute force attacks against the two factor codes. 
-            // If a user enters incorrect codes for a specified amount of time then the user account 
-            // will be locked out for a specified amount of time. 
+            // The following code protects for brute force attacks against the two factor codes.
+            // If a user enters incorrect codes for a specified amount of time then the user account
+            // will be locked out for a specified amount of time.
             // You can configure the account lockout settings in IdentityConfig
             var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
@@ -164,14 +163,15 @@ namespace ElCarro.Web.Controllers
             {
                 var user = new ApplicationUser
                 {
-                    UserName = model.UserName,
-                    Email = model.Email
+                    UserName = model.Email,
+                    Email = model.Email,
+                    FullName = model.FullName
                 };
 
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await UserManager.AddToRoleAsync(user.Id, "User");
+                    await UserManager.AddToRoleAsync(user.Id, Constants.UserRole);
                     // Comment the following line to prevent log in until the user is confirmed.
                     //await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
 
@@ -218,6 +218,7 @@ namespace ElCarro.Web.Controllers
             {
                 UserName = model.Email,
                 Email = model.Email,
+                FullName = model.CompanyName,
                 PhoneNumber = model.PhoneNumber,
                 PhoneNumberConfirmed = true
             };
