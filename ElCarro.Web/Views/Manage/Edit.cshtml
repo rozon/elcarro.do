@@ -1,35 +1,55 @@
-﻿@model ElCarro.Web.Models.UserDetailsViewModel
+﻿@model ElCarro.Web.Models.UserEditViewModel
 @{
     Layout = "~/Views/Shared/_AccountLayout.cshtml";
-    ViewBag.Title = "Manage";
+    ViewBag.Title = "Edit";
 }
 <div class="row">
     <h3 class="center">Actualizar Mi Cuenta</h3>
     <hr>
 </div>
 <div class="row">
-    <form class="col s6">
+    @using (Html.BeginForm("Edit", "Manage", null, FormMethod.Post, new { @class = "col s6", enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
         <div class="row">
             <div class="input-field col s12">
                 <i class="material-icons prefix">account_circle</i>
-                @Html.TextBoxFor(m => m.Name, new { @class = "validate" })
-                @Html.LabelFor(m => m.Name)
+                @Html.TextBoxFor(m => m.FullName, new { @class = "validate" })
+                @Html.ValidationMessageFor(m => m.FullName, "", new { @class = "text-danger" })
+                @Html.LabelFor(m => m.FullName, "Nombre")
             </div>
         </div>
+        if (Model.isCompany)
+        {
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">phone</i>
+                    @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "validate" })
+                    @Html.ValidationMessageFor(m => m.PhoneNumber, "", new { @class = "text-danger" })
+                    @Html.LabelFor(m => m.PhoneNumber, "Telefono")
+                </div>
+            </div>
+        }
         <div class="row">
             <div class="input-field col s12">
                 <i class="material-icons prefix">email</i>
                 @Html.TextBoxFor(m => m.Email, new { @class = "validate" })
-                @Html.LabelFor(m => m.Email)
+                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                @Html.LabelFor(m => m.Email, "Correo Electrónico")
             </div>
         </div>
-        <div class="file-field input-field col s12">
-            <div class="btn">
-                <span>Imagen</span>
-                <input type="file">
-            </div>
-            <div class="file-path-wrapper">
-                <input class="file-path validate" type="text" placeholder="Cambiar imagen de perfil">
+        <div class="row">
+            <div class="file-field input-field col s12">
+                <div class="btn">
+                    <span>@Html.DisplayNameFor(model => model.Photo)</span>
+                    @Html.TextBoxFor(model => model.Photo, new { type = "file" })
+                    @Html.ValidationMessageFor(model => model.Photo, "", new { @class = "text-danger" })
+                </div>
+                <div class="file-path-wrapper">
+                    <input class="file-path validate" type="text" placeholder="Cambiar imagen de perfil">
+                </div>
             </div>
         </div>
         <div class="row">
@@ -37,16 +57,18 @@
                 <button class="btn waves-effect waves-light" type="submit" name="action">Guardar</button>
             </div>
         </div>
-    </form>
+    }
     <div class="col s6">
         <div class="row">
             <div class="input-field col s12">
-                <i class="material-icons prefix">supervisor_account</i>
-                <label>Administrar cuentas conectadas</label>
+                <a class="color-inherit" href="@Url.Action("ManageLogins")">
+                    <i class="material-icons prefix">supervisor_account</i>
+                    <label>Administrar cuentas conectadas</label>
+                </a>
             </div>
         </div>
 
-            @Html.Action("ChangePassword", "Manage")
+        @Html.Action("ChangePassword", "Manage")
 
     </div>
 </div>

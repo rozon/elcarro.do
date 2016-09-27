@@ -214,12 +214,14 @@ namespace ElCarro.Web.Controllers
             if (!ModelState.IsValid)
                 return View(model);
 
+            string PhoneNumber = model.PhoneNumber.Replace(@"^[0-9]+$", "");
+
             var user = new ApplicationUser
             {
                 UserName = model.Email,
                 Email = model.Email,
                 FullName = model.CompanyName,
-                PhoneNumber = model.PhoneNumber,
+                PhoneNumber = PhoneNumber,
                 PhoneNumberConfirmed = true
             };
 
@@ -236,7 +238,7 @@ namespace ElCarro.Web.Controllers
                 dbContext.Company.Add(company);
                 dbContext.SaveChanges();
 
-                await UserManager.AddToRoleAsync(user.Id, "Company");
+                await UserManager.AddToRoleAsync(user.Id, Constants.CompanyRole);
                 string callbackUrl = await SendEmailConfirmationTokenAsync(user.Id, "Confirm your account");
 
                 await UserManager.SendEmailAsync(user.Id,

@@ -2,13 +2,35 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
+using System.Web;
 
 namespace ElCarro.Web.Models
 {
     public class UserDetailsViewModel
     {
-        public string Name { get; set; }
+        public string FullName { get; set; }
         public string Email { get; set; }
+        public int NumStores { get; set; }
+        public string PhoneNumber { get; set; }
+        public bool isCompany { get; set; }
+        public string Photo { get; set; }
+    }
+
+    public class UserView
+    {
+        public string FullName { get; set; }
+        public string Email { get; set; }
+        public bool isCompany { get; set; }
+    }
+
+    public class UserEditViewModel
+    {
+        public string FullName { get; set; }
+        public string Email { get; set; }
+        public int NumStores { get; set; }
+        public string PhoneNumber { get; set; }
+        public bool isCompany { get; set; }
+        public HttpPostedFileBase Photo { get; set; }
     }
 
     public class IndexViewModel

@@ -8,6 +8,9 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using ElCarro.Web.Models;
 using System.Web.Security;
+using System.Configuration;
+using System.IO;
+using System.Text.RegularExpressions;
 
 namespace ElCarro.Web.Controllers
 {
@@ -16,6 +19,7 @@ namespace ElCarro.Web.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         public ManageController()
         {
@@ -78,23 +82,145 @@ namespace ElCarro.Web.Controllers
 
         //
 
-        public ActionResult Index() =>
-            View(new UserDetailsViewModel
-            {
-                Name = UserManager.FindByEmail(User.Identity.Name).FullName,
-                Email = User.Identity.Name
-            });
+        public ActionResult Index()
+        {
+            var user = UserManager.FindByEmail(User.Identity.Name);
+            string urlPhoto = user.Photo;
+            if (string.IsNullOrEmpty(urlPhoto))
+                urlPhoto = "~/static/user.png";
 
-        public ActionResult Edit() =>
-             View(new UserDetailsViewModel
-             {
-                 Name = UserManager.FindByEmail(User.Identity.Name).FullName,
-                 Email = User.Identity.Name
-             });
+            UserDetailsViewModel result;
+
+            if (User.IsInRole(Constants.CompanyRole))
+            {
+                result = new UserDetailsViewModel
+                {
+                    FullName = user.FullName,
+                    Email = user.Email,
+                    PhoneNumber = FormatPhoneNumber(user.PhoneNumber),
+                    Photo = urlPhoto,
+                    NumStores = 3,
+                    isCompany = true
+                };
+            }
+            else
+            {
+                result = new UserDetailsViewModel
+                {
+                    FullName = user.FullName,
+                    Email = user.Email,
+                    Photo = urlPhoto,
+                    isCompany = false
+                };
+            }
+
+            return View(result);
+        }
+
+        public ActionResult Edit()
+        {
+            var user = UserManager.FindByEmail(User.Identity.Name);
+
+            UserEditViewModel result;
+
+            if (User.IsInRole(Constants.CompanyRole))
+            {
+                result = new UserEditViewModel
+                {
+                    FullName = user.FullName,
+                    Email = user.Email,
+                    PhoneNumber = FormatPhoneNumber(user.PhoneNumber),
+                    isCompany = true
+                };
+            }
+            else
+            {
+                result = new UserEditViewModel
+                {
+                    FullName = user.FullName,
+                    Email = user.Email,
+                    isCompany = false
+                };
+            }
+
+            return View(result);
+        }
 
         [HttpPost]
-        public ActionResult Edit(UserDetailsViewModel model) =>
-             View(model);
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Edit(UserEditViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                // Get the current application user
+                var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+                if (user != null)
+                {
+                    // Update the details
+                    var actualPhotoPath = user.Photo;
+                    user.FullName = model.FullName;
+                    user.PhoneNumber = OnlyNumbers(model.PhoneNumber);
+                    if(null != model.Photo)
+                    {
+                        user.Photo = SavePhoto(model);
+                        if(!string.IsNullOrEmpty(actualPhotoPath))
+                            System.IO.File.Delete(ControllerContext.HttpContext.Server.MapPath(actualPhotoPath));
+                    }
+
+                    // This is the part that doesn't work
+                    var result = await UserManager.UpdateAsync(user);
+                    await db.SaveChangesAsync();
+                }
+            }
+            return RedirectToAction("Index");
+        }
+
+        private string SavePhoto(UserEditViewModel modelUser)
+        {
+            var path = ConfigurationManager.AppSettings["FileUplodasFolder"];
+            var name = Guid.NewGuid().ToString() + Path.GetExtension(modelUser.Photo.FileName);
+            var fullPath = "~/" + path + "/" + name;
+            using (var f = new FileStream(ControllerContext.HttpContext.Server.MapPath(fullPath), FileMode.CreateNew))
+            {
+                modelUser
+                    .Photo
+                    .InputStream
+                    .CopyTo(f);
+            }
+            return fullPath;
+        }
+
+        private string OnlyNumbers(string _string)
+        {
+            if (string.IsNullOrEmpty(_string))
+                return string.Empty;
+
+            string pattern = "[^0-9]*";
+            string replacement = "";
+            Regex rgx = new Regex(pattern);
+            return rgx.Replace(_string, replacement);
+        }
+
+        private string FormatPhoneNumber(string PhoneNumber)
+        {
+            if (string.IsNullOrEmpty(PhoneNumber))
+                return string.Empty;
+
+            PhoneNumber = OnlyNumbers(PhoneNumber);
+
+            int counter = 2;
+            if (PhoneNumber.Length == 10)
+                counter = 4;
+
+            while(counter < 11)
+            {
+                if (PhoneNumber.Length >= counter)
+                    PhoneNumber = PhoneNumber.Insert((counter - 1), "-");
+                counter += 4;
+            }
+
+            return PhoneNumber;
+        }
 
         // POST: /Manage/RemoveLogin
         [HttpPost]
@@ -294,9 +420,10 @@ namespace ElCarro.Web.Controllers
         // GET: /Manage/ManageLogins
         public async Task<ActionResult> ManageLogins(ManageMessageId? message)
         {
+            ViewBag.Title = "Administrar logins externos";
             ViewBag.StatusMessage =
-                message == ManageMessageId.RemoveLoginSuccess ? "The external login was removed."
-                : message == ManageMessageId.Error ? "An error has occurred."
+                message == ManageMessageId.RemoveLoginSuccess ? "El login externo fue removido."
+                : message == ManageMessageId.Error ? "Un error a currido."
                 : "";
             var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
             if (user == null)

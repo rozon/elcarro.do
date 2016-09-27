@@ -27,7 +27,6 @@
 else
 {
     <li><a class="@_class" href="@Url.Action("Search", "Home")"><i class="material-icons left">search</i>Buscar pieza</a></li>
-    @*<li><a href="@Url.Action("Index", "Manage")" title="Manage"><i class="material-icons left">perm_identity</i>Mi Cuenta</a></li>*@
     <li><a class="@_class" href="@Url.Action("Store", "Home")"><i class="material-icons left">store</i>Repuestos</a></li>
     <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "waves-effect waves-light btn" })</li>
 }
