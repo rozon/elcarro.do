@@ -121,7 +121,7 @@ namespace ElCarro.Web.Controllers
 
                 db.Entry(temp).State = EntityState.Modified;
                 db.Entry(temp.StoreAddress).State = EntityState.Modified;
-                db.SaveChangesAsync();
+                await db.SaveChangesAsync();
                 return RedirectToAction("Details", "Stores", new { id = temp.StoreID });
             }
             return View(model);
@@ -152,7 +152,7 @@ namespace ElCarro.Web.Controllers
             Store store = await db.Stores.FindAsync(id);
             string urlImage = store.Logo;
             db.Stores.Remove(store);
-            db.SaveChangesAsync();
+            await db.SaveChangesAsync();
             DeletePhoto(urlImage);
             return RedirectToAction("Index", "Manage");
         }
