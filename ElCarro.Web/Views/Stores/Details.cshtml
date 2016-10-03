@@ -1,0 +1,102 @@
+﻿@model ElCarro.Web.Models.Store
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_AccountLayout.cshtml";
+}
+
+<div class="row">
+    <h3 class="center">
+        Sucursal: @Model.Name
+        <a href="@Url.Action("Edit", "Stores", new { id = Model.StoreID })" class="tooltipped" data-position="right"
+           data-delay="50" data-tooltip="Editar Informacion"><i class="material-icons">edit</i></a>
+        <a href="@Url.Action("Delete", "Stores", new { id = Model.StoreID })" class="tooltipped" data-position="right"
+           data-delay="50" data-tooltip="Borrar sucursal"><i class="material-icons">delete</i></a>
+    </h3>
+    <hr>
+</div>
+<div class="row">
+    <div class="col s12 m4">
+        <div class="row">
+            <div class="col s12">
+                <img class="materialboxed" data-caption="Logo de la empresa" width="200" src="@Url.Content(Model.Logo)">
+            </div>
+        </div>
+    </div>
+    <div class="col s12 m8">
+        <div class="row">
+            <div class="input-field">
+                <i class="material-icons prefix">work</i>
+                <input disabled value="@Model.Company.Name" type="text">
+                <label>Nombre de la Empresa</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field">
+                <i class="material-icons prefix">phone</i>
+                <input disabled value="@Model.PhoneNumber" type="text">
+                <label>Teléfono</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field">
+                <i class="material-icons prefix">email</i>
+                <input disabled value="@Model.Email" type="email">
+                <label>Correo Electrónico</label>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row container">
+    <div class="input-field col s12 m6">
+        <i class="material-icons prefix">business</i>
+        <input disabled value="@Model.StoreAddress.StreetName" type="text" class="validate">
+        <label>Calle</label>
+    </div>
+    <div class="input-field col s4 m2">
+        <input disabled value="@Model.StoreAddress.StreetNumber" type="text" class="validate">
+        <label>No.</label>
+    </div>
+    <div class="input-field col s8 m4">
+        <input disabled value="@Model.StoreAddress.Zone" type="text" class="validate">
+        <label>Sector</label>
+    </div>
+</div>
+<div class="row container">
+    <div class="input-field col s12 m6">
+        <input disabled value="@Model.StoreAddress.Province" type="text">
+        <label for="number">Provincia</label>
+    </div>
+    <div class="input-field col s12 m6">
+        <input disabled value="@Model.StoreAddress.City" type="text">
+        <label>Ciudad</label>
+    </div>
+</div>
+
+<div class="fixed-action-btn click-to-toggle" style="bottom: 45px; right: 24px;">
+    <a class="btn-floating btn-large red tooltipped" data-position="left" data-delay="50" data-tooltip="Inventario">
+        <i class="material-icons">menu</i>
+    </a>
+    <ul>
+        <li>
+            <a href="javascript:void(0)" class="btn-floating red tooltipped" data-position="left" data-delay="50" data-tooltip="Estadisticas">
+                <i class="material-icons">insert_chart</i>
+            </a>
+        </li>
+        <li>
+            <a href="@Url.Action("Edit", "Stores", new { id = Model.StoreID })" class="btn-floating yellow darken-1 tooltipped" data-position="left" data-delay="50" data-tooltip="Editar">
+                <i class="material-icons">edit</i>
+            </a>
+        </li>
+        <li>
+            <a href="javascript:void(0)" class="btn-floating green tooltipped" data-position="left" data-delay="50" data-tooltip="Descargar">
+                <i class="material-icons">publish</i>
+            </a>
+        </li>
+        <li>
+            <a href="@Url.Action("Create", "VehicleParts")" class="btn-floating blue tooltipped" data-position="left" data-delay="50" data-tooltip="Agregar">
+                <i class="material-icons">attach_file</i>
+            </a>
+        </li>
+    </ul>
+</div>

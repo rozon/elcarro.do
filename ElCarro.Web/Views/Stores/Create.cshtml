@@ -1,0 +1,109 @@
+﻿@model ElCarro.Web.Models.StoreView
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_AccountLayout.cshtml";
+}
+
+<div class="row">
+    <h3 class="center">
+        Crear Sucursal
+        <a href="@Url.Action("Index", "Manage")" class="tooltipped" data-position="right"
+           data-delay="50" data-tooltip="Volver"><i class="material-icons">undo</i></a>
+    </h3>
+    <hr>
+</div>
+
+@using (Html.BeginForm("Create", "Stores", FormMethod.Post, new { @class = "col s12", role = "form", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="row">
+            <div class="col s12 m6">
+                <div class="row">
+                    <div class="file-field input-field">
+                        <div class="btn">
+                            <span>@Html.DisplayNameFor(model => model.Logo)</span>
+                            @Html.TextBoxFor(model => model.Logo, new { type = "file" })
+                            @Html.ValidationMessageFor(model => model.Logo, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="file-path-wrapper">
+                            <input class="file-path validate" type="text" placeholder="Cambiar imagen de perfil">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">work</i>
+                        @Html.TextBoxFor(m => m.Name, new { @class = "validate" })
+                        @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+                        @Html.LabelFor(m => m.Name, "Nombre de la sucursal")
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m6">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">phone</i>
+                        @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "validate" })
+                        @Html.ValidationMessageFor(m => m.PhoneNumber, "", new { @class = "text-danger" })
+                        @Html.LabelFor(m => m.PhoneNumber, "Teléfono")
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">email</i>
+                        @Html.TextBoxFor(m => m.Email, new { @class = "validate" })
+                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                        @Html.LabelFor(m => m.Email, "Correo Electrónico")
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row container">
+            <div class="input-field col s12 m6">
+                <i class="material-icons prefix">business</i>
+                @Html.TextBoxFor(m => m.address.StreetName, new { @class = "validate" })
+                @Html.ValidationMessageFor(m => m.address.StreetName, "", new { @class = "text-danger" })
+                @Html.LabelFor(m => m.address.StreetName, "Calle")
+            </div>
+            <div class="input-field col s4 m2">
+                @Html.TextBoxFor(m => m.address.StreetNumber, new { @class = "validate" })
+                @Html.ValidationMessageFor(m => m.address.StreetNumber, "", new { @class = "text-danger" })
+                @Html.LabelFor(m => m.address.StreetNumber, "No.")
+            </div>
+            <div class="input-field col s8 m4">
+                @Html.TextBoxFor(m => m.address.Zone, new { @class = "validate" })
+                @Html.ValidationMessageFor(m => m.address.Zone, "", new { @class = "text-danger" })
+                @Html.LabelFor(m => m.address.Zone, "Sector")
+            </div>
+        </div>
+
+        <div class="row container">
+            <div class="input-field col s12 m6">
+                @Html.TextBoxFor(m => m.address.Province, new { @class = "validate" })
+                @Html.ValidationMessageFor(m => m.address.Province, "", new { @class = "text-danger" })
+                @Html.LabelFor(m => m.address.Province, "Provincia")
+            </div>
+            <div class="input-field col s12 m6">
+                @Html.TextBoxFor(m => m.address.City, new { @class = "validate" })
+                @Html.ValidationMessageFor(m => m.address.City, "", new { @class = "text-danger" })
+                @Html.LabelFor(m => m.address.City, "Ciudad")
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field col s12 center">
+                <button class="btn waves-effect waves-light" type="submit" name="action">Guardar</button>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
