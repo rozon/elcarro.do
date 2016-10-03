@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -7,15 +6,11 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using ElCarro.Web.Models;
-using System.Web.Security;
-using System.Configuration;
-using System.IO;
-using System.Text.RegularExpressions;
 
 namespace ElCarro.Web.Controllers
 {
     [Authorize]
-    public class ManageController : Controller
+    public class ManageController : CustomController
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
@@ -54,33 +49,6 @@ namespace ElCarro.Web.Controllers
                 _userManager = value;
             }
         }
-
-        //
-        // GET: /Manage/Index
-        //public async Task<ActionResult> Index(ManageMessageId? message)
-        //{
-        //    ViewBag.StatusMessage =
-        //        message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
-        //        : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
-        //        : message == ManageMessageId.SetTwoFactorSuccess ? "Your two-factor authentication provider has been set."
-        //        : message == ManageMessageId.Error ? "An error has occurred."
-        //        : message == ManageMessageId.AddPhoneSuccess ? "Your phone number was added."
-        //        : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
-        //        : "";
-
-        //    var userId = User.Identity.GetUserId();
-        //    var model = new IndexViewModel
-        //    {
-        //        HasPassword = HasPassword(),
-        //        PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
-        //        TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
-        //        Logins = await UserManager.GetLoginsAsync(userId),
-        //        BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
-        //    };
-        //    return View(model);
-        //}
-
-        //
 
         public ActionResult Index()
         {
@@ -153,18 +121,17 @@ namespace ElCarro.Web.Controllers
             if (ModelState.IsValid)
             {
                 // Get the current application user
-                var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+                var user = await UserManager.FindByIdAsync(GetUserId());
                 if (user != null)
                 {
                     // Update the details
-                    var actualPhotoPath = user.Photo;
+                    string actualPhotoPath = user.Photo;
                     user.FullName = model.FullName;
                     user.PhoneNumber = OnlyNumbers(model.PhoneNumber);
                     if(null != model.Photo)
                     {
-                        user.Photo = SavePhoto(model);
-                        if(!string.IsNullOrEmpty(actualPhotoPath))
-                            System.IO.File.Delete(ControllerContext.HttpContext.Server.MapPath(actualPhotoPath));
+                        user.Photo = SavePhoto(model.Photo);
+                        DeletePhoto(actualPhotoPath);
                     }
 
                     // This is the part that doesn't work
@@ -175,63 +142,16 @@ namespace ElCarro.Web.Controllers
             return RedirectToAction("Index");
         }
 
-        private string SavePhoto(UserEditViewModel modelUser)
-        {
-            var path = ConfigurationManager.AppSettings["FileUplodasFolder"];
-            var name = Guid.NewGuid().ToString() + Path.GetExtension(modelUser.Photo.FileName);
-            var fullPath = "~/" + path + "/" + name;
-            using (var f = new FileStream(ControllerContext.HttpContext.Server.MapPath(fullPath), FileMode.CreateNew))
-            {
-                modelUser
-                    .Photo
-                    .InputStream
-                    .CopyTo(f);
-            }
-            return fullPath;
-        }
-
-        private string OnlyNumbers(string _string)
-        {
-            if (string.IsNullOrEmpty(_string))
-                return string.Empty;
-
-            string pattern = "[^0-9]*";
-            string replacement = "";
-            Regex rgx = new Regex(pattern);
-            return rgx.Replace(_string, replacement);
-        }
-
-        private string FormatPhoneNumber(string PhoneNumber)
-        {
-            if (string.IsNullOrEmpty(PhoneNumber))
-                return string.Empty;
-
-            PhoneNumber = OnlyNumbers(PhoneNumber);
-
-            int counter = 2;
-            if (PhoneNumber.Length == 10)
-                counter = 4;
-
-            while(counter < 11)
-            {
-                if (PhoneNumber.Length >= counter)
-                    PhoneNumber = PhoneNumber.Insert((counter - 1), "-");
-                counter += 4;
-            }
-
-            return PhoneNumber;
-        }
-
         // POST: /Manage/RemoveLogin
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> RemoveLogin(string loginProvider, string providerKey)
         {
             ManageMessageId? message;
-            var result = await UserManager.RemoveLoginAsync(User.Identity.GetUserId(), new UserLoginInfo(loginProvider, providerKey));
+            var result = await UserManager.RemoveLoginAsync(GetUserId(), new UserLoginInfo(loginProvider, providerKey));
             if (result.Succeeded)
             {
-                var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+                var user = await UserManager.FindByIdAsync(GetUserId());
                 if (user != null)
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
@@ -263,7 +183,7 @@ namespace ElCarro.Web.Controllers
                 return View(model);
             }
             // Generate the token and send it
-            var code = await UserManager.GenerateChangePhoneNumberTokenAsync(User.Identity.GetUserId(), model.Number);
+            var code = await UserManager.GenerateChangePhoneNumberTokenAsync(GetUserId(), model.Number);
             if (UserManager.SmsService != null)
             {
                 var message = new IdentityMessage
@@ -282,8 +202,8 @@ namespace ElCarro.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> EnableTwoFactorAuthentication()
         {
-            await UserManager.SetTwoFactorEnabledAsync(User.Identity.GetUserId(), true);
-            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            await UserManager.SetTwoFactorEnabledAsync(GetUserId(), true);
+            var user = await UserManager.FindByIdAsync(GetUserId());
             if (user != null)
             {
                 await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
@@ -297,8 +217,8 @@ namespace ElCarro.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DisableTwoFactorAuthentication()
         {
-            await UserManager.SetTwoFactorEnabledAsync(User.Identity.GetUserId(), false);
-            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            await UserManager.SetTwoFactorEnabledAsync(GetUserId(), false);
+            var user = await UserManager.FindByIdAsync(GetUserId());
             if (user != null)
             {
                 await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
@@ -310,7 +230,7 @@ namespace ElCarro.Web.Controllers
         // GET: /Manage/VerifyPhoneNumber
         public async Task<ActionResult> VerifyPhoneNumber(string phoneNumber)
         {
-            var code = await UserManager.GenerateChangePhoneNumberTokenAsync(User.Identity.GetUserId(), phoneNumber);
+            var code = await UserManager.GenerateChangePhoneNumberTokenAsync(GetUserId(), phoneNumber);
             // Send an SMS through the SMS provider to verify the phone number
             return phoneNumber == null ? View("Error") : View(new VerifyPhoneNumberViewModel { PhoneNumber = phoneNumber });
         }
@@ -325,10 +245,10 @@ namespace ElCarro.Web.Controllers
             {
                 return View(model);
             }
-            var result = await UserManager.ChangePhoneNumberAsync(User.Identity.GetUserId(), model.PhoneNumber, model.Code);
+            var result = await UserManager.ChangePhoneNumberAsync(GetUserId(), model.PhoneNumber, model.Code);
             if (result.Succeeded)
             {
-                var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+                var user = await UserManager.FindByIdAsync(GetUserId());
                 if (user != null)
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
@@ -346,12 +266,12 @@ namespace ElCarro.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> RemovePhoneNumber()
         {
-            var result = await UserManager.SetPhoneNumberAsync(User.Identity.GetUserId(), null);
+            var result = await UserManager.SetPhoneNumberAsync(GetUserId(), null);
             if (!result.Succeeded)
             {
                 return RedirectToAction("Index", new { Message = ManageMessageId.Error });
             }
-            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            var user = await UserManager.FindByIdAsync(GetUserId());
             if (user != null)
             {
                 await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
@@ -370,10 +290,10 @@ namespace ElCarro.Web.Controllers
             {
                 return View(model);
             }
-            var result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword, model.NewPassword);
+            var result = await UserManager.ChangePasswordAsync(GetUserId(), model.OldPassword, model.NewPassword);
             if (result.Succeeded)
             {
-                var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+                var user = await UserManager.FindByIdAsync(GetUserId());
                 if (user != null)
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
@@ -399,10 +319,10 @@ namespace ElCarro.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = await UserManager.AddPasswordAsync(User.Identity.GetUserId(), model.NewPassword);
+                var result = await UserManager.AddPasswordAsync(GetUserId(), model.NewPassword);
                 if (result.Succeeded)
                 {
-                    var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+                    var user = await UserManager.FindByIdAsync(GetUserId());
                     if (user != null)
                     {
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
@@ -425,12 +345,12 @@ namespace ElCarro.Web.Controllers
                 message == ManageMessageId.RemoveLoginSuccess ? "El login externo fue removido."
                 : message == ManageMessageId.Error ? "Un error a currido."
                 : "";
-            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            var user = await UserManager.FindByIdAsync(GetUserId());
             if (user == null)
             {
                 return View("Error");
             }
-            var userLogins = await UserManager.GetLoginsAsync(User.Identity.GetUserId());
+            var userLogins = await UserManager.GetLoginsAsync(GetUserId());
             var otherLogins = AuthenticationManager.GetExternalAuthenticationTypes().Where(auth => userLogins.All(ul => auth.AuthenticationType != ul.LoginProvider)).ToList();
             ViewBag.ShowRemoveButton = user.PasswordHash != null || userLogins.Count > 1;
             return View(new ManageLoginsViewModel
@@ -447,19 +367,19 @@ namespace ElCarro.Web.Controllers
         public ActionResult LinkLogin(string provider)
         {
             // Request a redirect to the external login provider to link a login for the current user
-            return new AccountController.ChallengeResult(provider, Url.Action("LinkLoginCallback", "Manage"), User.Identity.GetUserId());
+            return new AccountController.ChallengeResult(provider, Url.Action("LinkLoginCallback", "Manage"), GetUserId());
         }
 
         //
         // GET: /Manage/LinkLoginCallback
         public async Task<ActionResult> LinkLoginCallback()
         {
-            var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync(XsrfKey, User.Identity.GetUserId());
+            var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync(XsrfKey, GetUserId());
             if (loginInfo == null)
             {
                 return RedirectToAction("ManageLogins", new { Message = ManageMessageId.Error });
             }
-            var result = await UserManager.AddLoginAsync(User.Identity.GetUserId(), loginInfo.Login);
+            var result = await UserManager.AddLoginAsync(GetUserId(), loginInfo.Login);
             return result.Succeeded ? RedirectToAction("ManageLogins") : RedirectToAction("ManageLogins", new { Message = ManageMessageId.Error });
         }
 

@@ -1,0 +1,78 @@
+﻿@model ElCarro.Web.Models.Store
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_AccountLayout.cshtml";
+}
+
+<div class="row">
+    <h3 class="center">Esta seguro que quieres borrar esta sucursal?</h3>
+    @using (Html.BeginForm("Delete", "Stores", FormMethod.Post, new { @class = "center" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Borrar" class="btn waves-effect waves-light" />
+            @Html.ActionLink("Regresar", "Details", "Stores", new { id = Model.StoreID }, new { @class = "btn waves-effect waves-light" })
+        </div>
+    }
+    <hr>
+</div>
+
+<div class="row">
+    <div class="col s12 m4">
+        <div class="row">
+            <div class="col s12">
+                <img class="materialboxed" data-caption="Logo de la empresa" width="200" src="@Url.Content(Model.Logo)">
+            </div>
+        </div>
+    </div>
+    <div class="col s12 m8">
+        <div class="row">
+            <div class="input-field">
+                <i class="material-icons prefix">work</i>
+                <input disabled value="@Model.Company.Name" type="text">
+                <label>Nombre de la Empresa</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field">
+                <i class="material-icons prefix">phone</i>
+                <input disabled value="@Model.PhoneNumber" type="text">
+                <label>Teléfono</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field">
+                <i class="material-icons prefix">email</i>
+                <input disabled value="@Model.Email" type="email">
+                <label>Correo Electrónico</label>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row container">
+    <div class="input-field col s12 m6">
+        <i class="material-icons prefix">business</i>
+        <input disabled value="@Model.StoreAddress.StreetName" type="text" class="validate">
+        <label>Calle</label>
+    </div>
+    <div class="input-field col s4 m2">
+        <input disabled value="@Model.StoreAddress.StreetNumber" type="text" class="validate">
+        <label>No.</label>
+    </div>
+    <div class="input-field col s8 m4">
+        <input disabled value="@Model.StoreAddress.Zone" type="text" class="validate">
+        <label>Sector</label>
+    </div>
+</div>
+<div class="row container">
+    <div class="input-field col s12 m6">
+        <input disabled value="@Model.StoreAddress.Province" type="text">
+        <label for="number">Provincia</label>
+    </div>
+    <div class="input-field col s12 m6">
+        <input disabled value="@Model.StoreAddress.City" type="text">
+        <label>Ciudad</label>
+    </div>
+</div>

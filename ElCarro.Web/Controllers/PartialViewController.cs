@@ -1,6 +1,9 @@
 ﻿using ElCarro.Web.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
@@ -10,6 +13,7 @@ namespace ElCarro.Web.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         public PartialViewController()
         {
@@ -49,15 +53,20 @@ namespace ElCarro.Web.Controllers
         {
             var user = UserManager.FindByEmail(User.Identity.Name);
             bool isCompany = false;
+            List<Store> stores = new List<Store>();
 
             if (User.IsInRole(Constants.CompanyRole))
                 isCompany = true;
+
+            if (isCompany)
+                stores = db.Stores.Include(s => s.Company).Where(s => s.Company.Admin.Id == user.Id).ToList();
 
             var result = new UserView
             {
                 FullName = user.FullName,
                 Email = user.Email,
-                isCompany = isCompany
+                isCompany = isCompany,
+                Stores = stores
             };
 
             return PartialView("userView", result);
