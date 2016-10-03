@@ -25,11 +25,11 @@ namespace ElCarro.Web
             if (message.Subject.Contains("Report Error") ||
                 message.Subject.Contains("Suggestion"))
             {
-                await sendMessageToAdmins(message);
+                sendMessageToAdmins(message);
             }
         }
 
-        private async Task sendMessageToAdmins(IdentityMessage message)
+        private void sendMessageToAdmins(IdentityMessage message)
         {
             ApplicationDbContext context = new ApplicationDbContext();
             var role = context.Roles.SingleOrDefault(m => m.Name.Equals(Constants.AdminRole));

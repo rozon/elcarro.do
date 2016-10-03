@@ -45,7 +45,7 @@ namespace ElCarro.Web.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> SendSuggestion(Suggestion model)
+        public ActionResult SendSuggestion(Suggestion model)
         {
             if (!ModelState.IsValid)
             {
