@@ -2,9 +2,9 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace PorPartes.Models
+namespace ElCarro.Web.Models
 {
-    [Table("Puntuation")]
+    [Table("Puntuations")]
     public class Puntuation
     {
         public Puntuation()

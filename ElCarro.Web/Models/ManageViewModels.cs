@@ -21,6 +21,7 @@ namespace ElCarro.Web.Models
         public string FullName { get; set; }
         public string Email { get; set; }
         public bool isCompany { get; set; }
+        public List<Store> Stores { get; set; }
     }
 
     public class UserEditViewModel
