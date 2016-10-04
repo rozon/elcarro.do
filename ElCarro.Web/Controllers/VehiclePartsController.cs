@@ -16,7 +16,6 @@ namespace ElCarro.Web.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: VehicleParts
         public async Task<ActionResult> Index()
         {
             string userId = GetUserId();
@@ -25,7 +24,6 @@ namespace ElCarro.Web.Controllers
 
         private string GetUserId() => User.Identity.GetUserId();
 
-        // GET: VehicleParts/Details/5
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
@@ -41,18 +39,11 @@ namespace ElCarro.Web.Controllers
             return View(vehiclePart);
         }
 
-        // GET: VehicleParts/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
+        public ActionResult Create() => View(NewViewModel());
 
-        // POST: VehicleParts/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Description,Photo")] CreateVehiclePart vehiclePart)
+        public async Task<ActionResult> Create([Bind(Include = "Description,Photo,Model")] CreateVehiclePart vehiclePart)
         {
             if (ModelState.IsValid)
             {
@@ -63,48 +54,32 @@ namespace ElCarro.Web.Controllers
                 {
                     Company = this.db.Company.Single(c => c.Admin.Id == userId),
                     Description = vehiclePart.Description,
-                    Photo = fullPath
+                    Photo = fullPath,
+                    Model = db.Models.Single(m => m.Id == vehiclePart.Id)
                 });
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-
+            FillCreateVehiclePartModel(vehiclePart);
             return View(vehiclePart);
         }
 
-        private string SavePhoto(CreateVehiclePart vehiclePart)
-        {
-            var path = ConfigurationManager.AppSettings["FileUplodasFolder"];
-            var name = Guid.NewGuid().ToString() + Path.GetExtension(vehiclePart.Photo.FileName);
-            var fullPath = "~/" + path + "/" + name;
-            using (var f = new FileStream(ControllerContext.HttpContext.Server.MapPath(fullPath), FileMode.CreateNew))
-            {
-                vehiclePart
-                    .Photo
-                    .InputStream
-                    .CopyTo(f);
-            }
-            return fullPath;
-        }
-
-        // GET: VehicleParts/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
-            {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+
             string userId = GetUserId();
-            VehiclePart vehiclePart = await db.VehiclePart.SingleOrDefaultAsync(m => m.Id == id.Value && m.Company.Admin.Id == userId);
+            var vehiclePart = await db.VehiclePart.SingleOrDefaultAsync(m => m.Id == id.Value && m.Company.Admin.Id == userId);
+
             if (vehiclePart == null)
-            {
                 return HttpNotFound();
-            }
-            return View(new CreateVehiclePart()
-            {
-                Id = vehiclePart.Id,
-                Description = vehiclePart.Description,
-            });
+
+            var model = NewViewModel();
+            vehiclePart.Id = vehiclePart.Id;
+            vehiclePart.Description = vehiclePart.Description;
+            FillCreateVehiclePartModel(model);
+            return View(model);
         }
 
         [HttpPost]
@@ -128,10 +103,10 @@ namespace ElCarro.Web.Controllers
                 System.IO.File.Delete(ControllerContext.HttpContext.Server.MapPath(actualPhotoPath));
                 return RedirectToAction("Details", new { id = actual.Id });
             }
+            FillCreateVehiclePartModel(vehiclePart);
             return View(vehiclePart);
         }
 
-        // GET: VehicleParts/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
@@ -147,7 +122,6 @@ namespace ElCarro.Web.Controllers
             return View(vehiclePart);
         }
 
-        // POST: VehicleParts/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int? id)
@@ -175,6 +149,28 @@ namespace ElCarro.Web.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        private CreateVehiclePart NewViewModel() =>
+            new CreateVehiclePart(db.Makes.AsEnumerable());
+
+        private void FillCreateVehiclePartModel(CreateVehiclePart vehiclePart) =>
+         vehiclePart.Makes =
+            CreateVehiclePart.MakesSelect(db.Makes.AsEnumerable(), db.Models.Single(m => m.Id == vehiclePart.Model).Make.Id);
+
+        private string SavePhoto(CreateVehiclePart vehiclePart)
+        {
+            var path = ConfigurationManager.AppSettings["FileUplodasFolder"];
+            var name = Guid.NewGuid().ToString() + Path.GetExtension(vehiclePart.Photo.FileName);
+            var fullPath = "~/" + path + "/" + name;
+            using (var f = new FileStream(ControllerContext.HttpContext.Server.MapPath(fullPath), FileMode.CreateNew))
+            {
+                vehiclePart
+                    .Photo
+                    .InputStream
+                    .CopyTo(f);
+            }
+            return fullPath;
         }
     }
 }

@@ -6,5 +6,6 @@
         public string Description { get; set; }
         public string Photo { get; set; }
         public virtual Company Company { get; set; }
+        public virtual Model Model { get; set; }
     }
 }

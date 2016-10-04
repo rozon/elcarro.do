@@ -14,6 +14,9 @@ namespace ElCarro.Web.Models
         public DbSet<Company> Company { get; set; }
         public DbSet<BugReport> BugReports { get; set; }
         public DbSet<Suggestion> Suggestions { get; set; }
+        public DbSet<Make> Makes { get; set; }
+        public DbSet<Model> Models { get; set; }
+
 
         public static ApplicationDbContext Create()
         {

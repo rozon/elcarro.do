@@ -1,6 +1,6 @@
 $(function () {
     $('.scrollspy').scrollSpy();
-    $('select').material_select('destroy');
+    //$('select').material_select('destroy');
     $('.button-collapse').sideNav();
     $('.parallax').parallax();
     $('select').material_select();
