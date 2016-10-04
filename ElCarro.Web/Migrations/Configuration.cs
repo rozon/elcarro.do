@@ -11,7 +11,7 @@ namespace ElCarro.Web.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(ElCarro.Web.Models.ApplicationDbContext context)

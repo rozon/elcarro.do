@@ -46,7 +46,7 @@ namespace ElCarro.Web.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> SendBugReport(BugReport model)
+        public ActionResult SendBugReport(BugReport model)
         {
             if (!ModelState.IsValid)
             {

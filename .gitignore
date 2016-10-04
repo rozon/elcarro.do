@@ -252,3 +252,5 @@ paket-files/
 .idea/
 *.sln.iml
 .DS_Store
+
+*.orig

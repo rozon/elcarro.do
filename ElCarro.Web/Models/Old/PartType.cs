@@ -2,14 +2,14 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace PorPartes.Models
+namespace ElCarro.Web.Models
 {
-    [Table("Item_Type")]
-    public class ItemType
+    [Table("Part_Types")]
+    public class PartType
     {
-        public ItemType()
+        public PartType()
         {
-            Items = new HashSet<Item>();
+            VehicleParts = new HashSet<VehiclePart>();
         }
 
         public int ID { get; set; }
@@ -17,6 +17,6 @@ namespace PorPartes.Models
         [MaxLength(50)]
         public string Type { get; set; }
 
-        public virtual ICollection<Item> Items { get; set; }
+        public virtual ICollection<VehiclePart> VehicleParts { get; set; }
     }
 }

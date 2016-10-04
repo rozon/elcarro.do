@@ -8,18 +8,23 @@ using Microsoft.AspNet.Identity;
 using System.IO;
 using System;
 using System.Configuration;
+using System.Collections.Generic;
 
 namespace ElCarro.Web.Controllers
 {
     [Authorize(Roles = Constants.CompanyRole)]
-    public class VehiclePartsController : Controller
+    public class VehiclePartsController : CustomController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
         public async Task<ActionResult> Index()
         {
             string userId = GetUserId();
-            return View(await db.VehiclePart.Where(m => m.Company.Admin.Id == userId).ToListAsync());
+            List<VehiclePart> result = await db.VehiclePart.Where(
+                v => v.StoreItems.Any(
+                    s => s.Store.Company.Admin.Id == userId)).ToListAsync();
+
+            return View(result);
         }
 
         private string GetUserId() => User.Identity.GetUserId();
@@ -31,7 +36,9 @@ namespace ElCarro.Web.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             string userId = GetUserId();
-            VehiclePart vehiclePart = await db.VehiclePart.SingleOrDefaultAsync(m => m.Id == id && m.Company.Admin.Id == userId);
+            VehiclePart vehiclePart = await db.VehiclePart.SingleOrDefaultAsync(
+                m => m.Id == id.Value && m.StoreItems.Any(
+                    s => s.Store.Company.Admin.Id == userId));
             if (vehiclePart == null)
             {
                 return HttpNotFound();
@@ -47,9 +54,9 @@ namespace ElCarro.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                string fullPath = SavePhoto(vehiclePart);
+                string fullPath = SavePhoto(vehiclePart.Photo);
 
-                var userId = User.Identity.GetUserId();
+                var userId = GetUserId();
                 db.VehiclePart.Add(new VehiclePart()
                 {
                     Company = this.db.Company.Single(c => c.Admin.Id == userId),
@@ -70,7 +77,9 @@ namespace ElCarro.Web.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
             string userId = GetUserId();
-            var vehiclePart = await db.VehiclePart.SingleOrDefaultAsync(m => m.Id == id.Value && m.Company.Admin.Id == userId);
+            VehiclePart vehiclePart = await db.VehiclePart.SingleOrDefaultAsync(
+                m => m.Id == id.Value && m.StoreItems.Any(
+                    s => s.Store.Company.Admin.Id == userId));
 
             if (vehiclePart == null)
                 return HttpNotFound();
@@ -89,7 +98,10 @@ namespace ElCarro.Web.Controllers
             if (ModelState.IsValid)
             {
                 string userId = GetUserId();
-                VehiclePart actual = await db.VehiclePart.SingleOrDefaultAsync(m => m.Id == vehiclePart.Id && m.Company.Admin.Id == userId);
+                VehiclePart actual = await db.VehiclePart.SingleOrDefaultAsync(
+                m => m.Id == vehiclePart.Id && m.StoreItems.Any(
+                    s => s.Store.Company.Admin.Id == userId));
+
                 if (vehiclePart == null)
                 {
                     return HttpNotFound();
@@ -97,7 +109,7 @@ namespace ElCarro.Web.Controllers
 
                 var actualPhotoPath = actual.Photo;
                 actual.Description = vehiclePart.Description;
-                actual.Photo = SavePhoto(vehiclePart);
+                actual.Photo = SavePhoto(vehiclePart.Photo);
                 db.Entry(actual).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 System.IO.File.Delete(ControllerContext.HttpContext.Server.MapPath(actualPhotoPath));
@@ -114,7 +126,10 @@ namespace ElCarro.Web.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             string userId = GetUserId();
-            VehiclePart vehiclePart = await db.VehiclePart.SingleOrDefaultAsync(m => m.Id == id && m.Company.Admin.Id == userId);
+            VehiclePart vehiclePart = await db.VehiclePart.SingleOrDefaultAsync(
+                m => m.Id == id.Value && m.StoreItems.Any(
+                    s => s.Store.Company.Admin.Id == userId));
+
             if (vehiclePart == null)
             {
                 return HttpNotFound();
@@ -131,7 +146,10 @@ namespace ElCarro.Web.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             string userId = GetUserId();
-            VehiclePart vehiclePart = await db.VehiclePart.SingleOrDefaultAsync(m => m.Id == id && m.Company.Admin.Id == userId);
+            VehiclePart vehiclePart = await db.VehiclePart.SingleOrDefaultAsync(
+                m => m.Id == id.Value && m.StoreItems.Any(
+                    s => s.Store.Company.Admin.Id == userId));
+
             if (vehiclePart == null)
             {
                 return HttpNotFound();
@@ -157,20 +175,5 @@ namespace ElCarro.Web.Controllers
         private void FillCreateVehiclePartModel(CreateVehiclePart vehiclePart) =>
          vehiclePart.Makes =
             CreateVehiclePart.MakesSelect(db.Makes.AsEnumerable(), db.Models.Single(m => m.Id == vehiclePart.Model).Make.Id);
-
-        private string SavePhoto(CreateVehiclePart vehiclePart)
-        {
-            var path = ConfigurationManager.AppSettings["FileUplodasFolder"];
-            var name = Guid.NewGuid().ToString() + Path.GetExtension(vehiclePart.Photo.FileName);
-            var fullPath = "~/" + path + "/" + name;
-            using (var f = new FileStream(ControllerContext.HttpContext.Server.MapPath(fullPath), FileMode.CreateNew))
-            {
-                vehiclePart
-                    .Photo
-                    .InputStream
-                    .CopyTo(f);
-            }
-            return fullPath;
-        }
     }
 }

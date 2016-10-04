@@ -22,10 +22,11 @@
                 <a class="collapsible-header"><i class="material-icons left">store</i>Sucursales</a>
                 <div class="collapsible-body">
                     <ul>
-                        <li><a href="account_business_store_1.html">Sucursal Herrera</a></li>
-                        <li><a href="#">Sucursal Alcarrizos</a></li>
-                        <li><a href="#">Sucursal Villa Agricola</a></li>
-                        <li><a class="waves-effect waves-teal btn-flat"><i class="material-icons left">library_add</i>Agregar Sucursal</a></li>
+                        @foreach (var item in Model.Stores)
+                        {
+                            <li>@Html.ActionLink(item.Name, "Details", "Stores", new { id = item.StoreID }, htmlAttributes: null)</li>
+                        }
+                        <li><a href="@Url.Action("Create", "Stores")" class="waves-effect waves-teal btn-flat"><i class="material-icons left">library_add</i>Agregar Sucursal</a></li>
                     </ul>
                 </div>
             </li>

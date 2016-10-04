@@ -188,9 +188,11 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\CustomController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ModelController.cs" />
     <Compile Include="Controllers\PartialViewController.cs" />
+    <Compile Include="Controllers\StoresController.cs" />
     <Compile Include="Controllers\SuggestionController.cs" />
     <Compile Include="Controllers\BugReportController.cs" />
     <Compile Include="Migrations\201609190248394_BugReport_Added.cs" />
@@ -224,7 +226,12 @@
     <Compile Include="Migrations\201609271819481_AddingMakeAndModel.cs" />
     <Compile Include="Migrations\201609271819481_AddingMakeAndModel.Designer.cs">
       <DependentUpon>201609271819481_AddingMakeAndModel.cs</DependentUpon>
+	</Compile>
+    <Compile Include="Migrations\201610030449376_New_Tables_Added.cs" />
+    <Compile Include="Migrations\201610030449376_New_Tables_Added.Designer.cs">
+      <DependentUpon>201610030449376_New_Tables_Added.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\StoreAddress.cs" />
     <Compile Include="Models\BugReport.cs" />
     <Compile Include="Models\CreateVehiclePart.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -251,8 +258,13 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Model.cs" />
+    <Compile Include="Models\Puntuation.cs" />
+    <Compile Include="Models\Review.cs" />
+    <Compile Include="Models\Store.cs" />
+    <Compile Include="Models\StoreItem.cs" />
     <Compile Include="Models\Suggestion.cs" />
     <Compile Include="Models\Make.cs" />
+    <Compile Include="Models\Vehicle.cs" />
     <Compile Include="Models\VehiclePart.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -579,6 +591,10 @@
     <Content Include="Views\Shared\_AccountLayout.cshtml" />
     <Content Include="Views\Manage\Edit.cshtml" />
     <Content Include="Views\PartialView\userView.cshtml" />
+    <Content Include="Views\Stores\Create.cshtml" />
+    <Content Include="Views\Stores\Delete.cshtml" />
+    <Content Include="Views\Stores\Details.cshtml" />
+    <Content Include="Views\Stores\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -622,6 +638,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201609271819481_AddingMakeAndModel.resx">
       <DependentUpon>201609271819481_AddingMakeAndModel.cs</DependentUpon>
+	 </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610030449376_New_Tables_Added.resx">
+      <DependentUpon>201610030449376_New_Tables_Added.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
