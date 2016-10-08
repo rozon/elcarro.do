@@ -1,6 +1,8 @@
 ﻿using ElCarro.Web.Models;
+using ElCarro.Web.StringResource;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -48,38 +50,32 @@ namespace ElCarro.Web.Controllers
         public ActionResult SendSuggestion(Suggestion model)
         {
             if (!ModelState.IsValid)
+                return Json(new { status = Messages.error, message = Messages.Error002 });
+
+            try
             {
-                List<SuggestionErrorView> listError = new List<SuggestionErrorView>();
-
-                for (int c = 0; c < ModelState.Count; c++)
-                {
-                    if (ModelState.Values.ElementAt(c).Errors.FirstOrDefault() != null)
+                Parallel.Invoke(
+                    () =>
                     {
-                        listError.Add(new SuggestionErrorView(ModelState.Keys.ElementAt(c),
-                            ModelState.Values.ElementAt(c).Errors.FirstOrDefault().ErrorMessage));
-                    }
-                }
-
-                return Json(new { status = "error", errors = listError });
+                        context.Suggestions.Add(model);
+                        context.SaveChangesAsync();
+                    },
+                    () =>
+                    {
+                        UserManager.EmailService.SendAsync(new IdentityMessage()
+                        {
+                            Body = model.SuggestionMsj,
+                            Destination = model.EmailSug,
+                            Subject = HelperString.Suggestion
+                        });
+                    });
+            }
+            catch (Exception)
+            {
+                return Json(new { status = Messages.error, message = Messages.Error001 });
             }
 
-            Parallel.Invoke(
-                () => 
-                {
-                    context.Suggestions.Add(model);
-                    context.SaveChangesAsync();
-                },
-                () => 
-                {
-                    UserManager.EmailService.SendAsync(new IdentityMessage()
-                    {
-                        Body = model.SuggestionMsj,
-                        Destination = model.Email,
-                        Subject = "Suggestion"
-                    });
-                });
-
-            return Json(new { status = "success", message = "Thanks for the Suggestion!!" });
+            return Json(new { status = Messages.success, message = Messages.ResMsjSugerencia });
         }
     }
 }

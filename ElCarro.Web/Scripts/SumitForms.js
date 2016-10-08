@@ -1,9 +1,12 @@
-﻿$(function () {
-    $('#BugReportForm').submit(function (e) {
+﻿var SumitForm = function (id) {
+    $("#" + id).submit(function (e) {
         e.preventDefault(); //prevent the default action
 
         //grab the form and wrap it with jQuery
         var $form = $(this);
+
+        if (!$form.valid())
+            return;
 
         //send your ajax request
         $.ajax({
@@ -14,10 +17,7 @@
             traditional: true,
             success: function (response) {
                 if (response.status === "error") {
-                    for (var c = 0; c < response.errors.length; c++) {
-                        var item = $("#" + response.errors[c].ID);
-                        item.siblings("span:first").text(response.errors[c].messageError);
-                    }
+                    Materialize.toast(response.message, 4000, 'rounded toast-error');
                 } else {
                     Materialize.toast(response.message, 4000, 'rounded toast-success');
                 }
@@ -29,4 +29,4 @@
             }
         });
     });
-});
+}
