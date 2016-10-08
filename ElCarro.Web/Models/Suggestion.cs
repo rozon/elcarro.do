@@ -8,33 +8,20 @@ namespace ElCarro.Web.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "El nombre es requerido.")]
         [StringLength(50, ErrorMessage = "Name cannot be longer than 50 characters.")]
-        [Display(Name = "Name")]
-        public string Name { get; set; }
+        [Column("Name")]
+        [Display(Name = "Nombre")]
+        public string NameSug { get; set; }
 
-        [Required]
-        [EmailAddress]
-        [Display(Name = "Email")]
-        public string Email { get; set; }
+        [Required(ErrorMessage = "El correo es requerido.")]
+        [EmailAddress(ErrorMessage = "El correo no es valido.")]
+        [Column("Email")]
+        [Display(Name = "Correo")]
+        public string EmailSug { get; set; }
 
-        [Required]
-        [Display(Name = "Suggestion")]
+        [Required(ErrorMessage = "La sugerencia es requerida.")]
+        [Display(Name = "Sugerencia")]
         public string SuggestionMsj { get; set; }
-    }
-
-    [NotMapped]
-    public class SuggestionErrorView
-    {
-        public string ID { get; set; }
-        public string messageError { get; set; }
-
-        public SuggestionErrorView() { }
-
-        public SuggestionErrorView(string ID, string message)
-        {
-            this.ID = ID;
-            messageError = message;
-        }
     }
 }
