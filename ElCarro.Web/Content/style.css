@@ -55,9 +55,17 @@ footer.page-footer {
     margin: 0;
 }
 
-/* Start BugReporst */
+.text-danger.field-validation-error {
+    color: #FFF;
+    background-color: #e57373;
+    border-color: #ebccd1;
+    border-radius: 20px;
+    padding: 10px;
+    border: 5px;
+}
+
+/* Start Forms */
 .toast-success {
-    color: #3c763d;
     background-color: #dff0d8;
     border-color: #d6e9c6;
     font-size: 21px;
@@ -66,11 +74,19 @@ footer.page-footer {
 }
 
 .toast-error {
-    color: #a94442;
     background-color: #f2dede;
     border-color: #ebccd1;
     font-size: 21px;
     font-weight: 600;
     color: #000;
 }
-/* End BugReporst */
+
+.not-active {
+    display: none;
+}
+
+.preloader-model-form {
+    margin-bottom: -5px !important;
+    margin-top: -20px !important;
+}
+/* End Forms */
