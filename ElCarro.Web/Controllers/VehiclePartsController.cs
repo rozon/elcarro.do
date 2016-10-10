@@ -64,15 +64,7 @@ namespace ElCarro.Web.Controllers
                     Model = db.Models.Single(m => m.Id == vehiclePart.Model),
                     LastView = DateTime.Now
                 });
-                try
-                {
-                    await db.SaveChangesAsync();
-                }
-                catch (Exception e)
-                {
-                    var x = 0;
-                }
-
+                await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
             FillCreateVehiclePartModel(vehiclePart);
