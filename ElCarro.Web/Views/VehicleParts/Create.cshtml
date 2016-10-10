@@ -13,7 +13,15 @@
 
             <div class="row">
                 <div class="input-field col s4">
-                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "validate" } })
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "validate" } })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                    @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "" })
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s4">
+                    @Html.TextBoxFor(model => model.Description, new { htmlAttributes = new { @class = "validate" } })
                     @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
                     @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "" })
                 </div>

@@ -19,30 +19,28 @@ namespace ElCarro.Web.Controllers
 
         public async Task<ActionResult> Index()
         {
-            string userId = GetUserId();
-            List<VehiclePart> result = await db.VehiclePart.Where(
-                v => v.StoreItems.Any(
-                    s => s.Store.Company.Admin.Id == userId)).ToListAsync();
+            var userId = GetUserId();
+            var companyId = db.Company.Single(c => c.Admin.Id == userId).Id;
+
+            var result = await db.VehiclePart
+                .Where(v => v.Store.Company.Id == companyId)
+                .ToListAsync();
 
             return View(result);
         }
 
-        private string GetUserId() => User.Identity.GetUserId();
-
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
-            {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+
             string userId = GetUserId();
-            VehiclePart vehiclePart = await db.VehiclePart.SingleOrDefaultAsync(
+            var vehiclePart = await db.VehiclePart.SingleOrDefaultAsync(
                 m => m.Id == id.Value && m.StoreItems.Any(
                     s => s.Store.Company.Admin.Id == userId));
             if (vehiclePart == null)
-            {
                 return HttpNotFound();
-            }
+
             return View(vehiclePart);
         }
 
@@ -50,7 +48,7 @@ namespace ElCarro.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Description,Photo,Model")] CreateVehiclePart vehiclePart)
+        public async Task<ActionResult> Create([Bind(Include = "Name,Description,Photo,Model,Store")] CreateVehiclePart vehiclePart)
         {
             if (ModelState.IsValid)
             {
@@ -59,12 +57,22 @@ namespace ElCarro.Web.Controllers
                 var userId = GetUserId();
                 db.VehiclePart.Add(new VehiclePart()
                 {
+                    Name = vehiclePart.Name,
                     Store = db.Stores.Single(m => m.StoreID == vehiclePart.Store),
                     Description = vehiclePart.Description,
                     Photo = fullPath,
-                    Model = db.Models.Single(m => m.Id == vehiclePart.Id)
+                    Model = db.Models.Single(m => m.Id == vehiclePart.Model),
+                    LastView = DateTime.Now
                 });
-                await db.SaveChangesAsync();
+                try
+                {
+                    await db.SaveChangesAsync();
+                }
+                catch (Exception e)
+                {
+                    var x = 0;
+                }
+
                 return RedirectToAction("Index");
             }
             FillCreateVehiclePartModel(vehiclePart);

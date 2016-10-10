@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -28,12 +29,15 @@ namespace ElCarro.Web.Models
         }
 
         public int Id { get; set; }
+        [Required]
+        public string Name { get; set; }
+        [Required]
         public string Description { get; set; }
-
+        [Required]
         public int Model { get; set; }
-
+        [Required]
         public int Make { get; set; }
-
+        [Required]
         public int Store { get; set; }
 
         public IEnumerable<SelectListItem> Makes { get; set; }
