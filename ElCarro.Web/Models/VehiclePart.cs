@@ -11,7 +11,6 @@ namespace ElCarro.Web.Models
     {
         public VehiclePart()
         {
-            StoreItems = new HashSet<StoreItem>();
         }
 
         public int Id { get; set; }
@@ -36,8 +35,7 @@ namespace ElCarro.Web.Models
         [Column("Last_View")]
         public DateTime? LastView { get; set; }
 
+        [Required]
         public int Popularity { get; set; }
-
-        public virtual ICollection<StoreItem> StoreItems { get; set; }
     }
 }

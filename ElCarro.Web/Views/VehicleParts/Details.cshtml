@@ -9,6 +9,21 @@
             <h4 class="center">Pieza de Vehículo</h4>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col s12 center">
+            <h5>
+                @Html.DisplayNameFor(model => model.Name)
+            </h5>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col s12 center">
+            @Html.DisplayFor(model => model.Name)
+        </div>
+    </div>
+
     <div class="row">
         <div class="col s12 center">
             <h5>
@@ -25,13 +40,42 @@
 
     <div class="row">
         <div class="col s12 center">
-            <h5>@Html.DisplayNameFor(model => model.Photo)</h5>
+            <h5>
+                @Html.DisplayNameFor(model => model.Store)
+            </h5>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col s12 center">
+            @Html.DisplayFor(model => model.Store.Name)
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col s12 center">
+            <h5>
+                @Html.DisplayNameFor(model => model.Model)
+            </h5>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col s12 center">
+            @Html.DisplayFor(model => model.Model.Make.Name) @Html.DisplayFor(model => model.Model.Name)
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col s12 center">
+            <h5>@Html.DisplayNameFor(m => m.Photo)</h5>
         </div>
     </div>
 
     <div class="row">
         <div class="col m8 offset-m4">
-            <img class="materialboxed" width="250" height="250" src="@Url.Content(@Model.Photo)" >
+            <img class="materialboxed" width="250" height="250" src="@Url.Content(@Model.Photo)">
         </div>
     </div>
 

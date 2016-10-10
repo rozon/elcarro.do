@@ -10,7 +10,6 @@ namespace ElCarro.Web.Models
     {
         public Vehicle()
         {
-            StoreItems = new HashSet<StoreItem>();
         }
 
         public int ID { get; set; }
@@ -21,7 +20,5 @@ namespace ElCarro.Web.Models
 
         [Required]
         public DateTime Year { get; set; }
-
-        public virtual ICollection<StoreItem> StoreItems { get; set; }
     }
 }

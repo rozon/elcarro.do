@@ -4,11 +4,7 @@ using System.Net;
 using System.Web.Mvc;
 using ElCarro.Web.Models;
 using System.Linq;
-using Microsoft.AspNet.Identity;
-using System.IO;
 using System;
-using System.Configuration;
-using System.Collections.Generic;
 
 namespace ElCarro.Web.Controllers
 {
@@ -19,25 +15,29 @@ namespace ElCarro.Web.Controllers
 
         public async Task<ActionResult> Index()
         {
-            var userId = GetUserId();
-            var companyId = db.Company.Single(c => c.Admin.Id == userId).Id;
-
+            var companyId = GetCompanyId();
             var result = await db.VehiclePart
                 .Where(v => v.Store.Company.Id == companyId)
                 .ToListAsync();
 
             return View(result);
         }
+        private int GetCompanyId()
+        {
+            var userId = GetUserId();
+            return db.Company.Single(c => c.Admin.Id == userId).Id;
+        }
+
 
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            string userId = GetUserId();
+            var userId = GetUserId();
+            var companyId = GetCompanyId();
             var vehiclePart = await db.VehiclePart.SingleOrDefaultAsync(
-                m => m.Id == id.Value && m.StoreItems.Any(
-                    s => s.Store.Company.Admin.Id == userId));
+                m => m.Id == id.Value && m.Store.Company.Id == companyId);
             if (vehiclePart == null)
                 return HttpNotFound();
 
@@ -77,9 +77,9 @@ namespace ElCarro.Web.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
             string userId = GetUserId();
+            var companyId = GetCompanyId();
             VehiclePart vehiclePart = await db.VehiclePart.SingleOrDefaultAsync(
-                m => m.Id == id.Value && m.StoreItems.Any(
-                    s => s.Store.Company.Admin.Id == userId));
+                m => m.Id == id.Value && m.Store.Company.Id == companyId);
 
             if (vehiclePart == null)
                 return HttpNotFound();
@@ -98,14 +98,13 @@ namespace ElCarro.Web.Controllers
             if (ModelState.IsValid)
             {
                 string userId = GetUserId();
+                var companyId = GetCompanyId();
                 VehiclePart actual = await db.VehiclePart.SingleOrDefaultAsync(
-                m => m.Id == vehiclePart.Id && m.StoreItems.Any(
-                    s => s.Store.Company.Admin.Id == userId));
+                m => m.Id == vehiclePart.Id && m.Store.Company.Id == companyId);
 
                 if (vehiclePart == null)
-                {
                     return HttpNotFound();
-                }
+
 
                 var actualPhotoPath = actual.Photo;
                 actual.Description = vehiclePart.Description;
@@ -122,18 +121,15 @@ namespace ElCarro.Web.Controllers
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
-            {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+
             string userId = GetUserId();
+            var companyId = GetCompanyId();
             VehiclePart vehiclePart = await db.VehiclePart.SingleOrDefaultAsync(
-                m => m.Id == id.Value && m.StoreItems.Any(
-                    s => s.Store.Company.Admin.Id == userId));
+                m => m.Id == id.Value && m.Store.Company.Id == companyId);
 
             if (vehiclePart == null)
-            {
                 return HttpNotFound();
-            }
             return View(vehiclePart);
         }
 
@@ -142,18 +138,16 @@ namespace ElCarro.Web.Controllers
         public async Task<ActionResult> DeleteConfirmed(int? id)
         {
             if (id == null)
-            {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+
             string userId = GetUserId();
+            var companyId = GetCompanyId();
             VehiclePart vehiclePart = await db.VehiclePart.SingleOrDefaultAsync(
-                m => m.Id == id.Value && m.StoreItems.Any(
-                    s => s.Store.Company.Admin.Id == userId));
+                m => m.Id == id.Value && m.Store.Company.Id == companyId);
 
             if (vehiclePart == null)
-            {
                 return HttpNotFound();
-            }
+
             db.VehiclePart.Remove(vehiclePart);
             await db.SaveChangesAsync();
             System.IO.File.Delete(ControllerContext.HttpContext.Server.MapPath(vehiclePart.Photo));
@@ -163,9 +157,7 @@ namespace ElCarro.Web.Controllers
         protected override void Dispose(bool disposing)
         {
             if (disposing)
-            {
                 db.Dispose();
-            }
             base.Dispose(disposing);
         }
 

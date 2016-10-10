@@ -223,6 +223,10 @@
     <Compile Include="Migrations\201610101621529_VehiclePartLastViewNotRequired.Designer.cs">
       <DependentUpon>201610101621529_VehiclePartLastViewNotRequired.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201610101712044_ChanginVehiclePart.cs" />
+    <Compile Include="Migrations\201610101712044_ChanginVehiclePart.Designer.cs">
+      <DependentUpon>201610101712044_ChanginVehiclePart.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\StoreAddress.cs" />
     <Compile Include="Models\BugReport.cs" />
     <Compile Include="Models\CreateVehiclePart.cs" />
@@ -253,7 +257,6 @@
     <Compile Include="Models\Puntuation.cs" />
     <Compile Include="Models\Review.cs" />
     <Compile Include="Models\Store.cs" />
-    <Compile Include="Models\StoreItem.cs" />
     <Compile Include="Models\Suggestion.cs" />
     <Compile Include="Models\Make.cs" />
     <Compile Include="Models\Vehicle.cs" />
@@ -627,6 +630,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201610101621529_VehiclePartLastViewNotRequired.resx">
       <DependentUpon>201610101621529_VehiclePartLastViewNotRequired.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610101712044_ChanginVehiclePart.resx">
+      <DependentUpon>201610101712044_ChanginVehiclePart.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

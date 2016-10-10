@@ -23,7 +23,6 @@ namespace ElCarro.Web.Models
         public DbSet<Puntuation> Puntuations { get; set; }
         public DbSet<Review> Reviews { get; set; }
         public DbSet<Store> Stores { get; set; }
-        public DbSet<StoreItem> StoreItems { get; set; }
         public DbSet<Vehicle> Vehicles { get; set; }
 
         public static ApplicationDbContext Create()
