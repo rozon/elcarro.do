@@ -59,7 +59,7 @@ namespace ElCarro.Web.Controllers
                 var userId = GetUserId();
                 db.VehiclePart.Add(new VehiclePart()
                 {
-                    Company = this.db.Company.Single(c => c.Admin.Id == userId),
+                    Store = db.Stores.Single(m => m.StoreID == vehiclePart.Store),
                     Description = vehiclePart.Description,
                     Photo = fullPath,
                     Model = db.Models.Single(m => m.Id == vehiclePart.Id)
@@ -169,8 +169,13 @@ namespace ElCarro.Web.Controllers
             base.Dispose(disposing);
         }
 
-        private CreateVehiclePart NewViewModel() =>
-            new CreateVehiclePart(db.Makes.AsEnumerable());
+        private CreateVehiclePart NewViewModel()
+        {
+            var userId = GetUserId();
+            return new CreateVehiclePart(db.Makes.AsEnumerable(),
+                db.Stores.Where(s => s.Company.Admin.Id == userId).AsEnumerable());
+        }
+
 
         private void FillCreateVehiclePartModel(CreateVehiclePart vehiclePart) =>
          vehiclePart.Makes =

@@ -32,6 +32,13 @@
                 </div>
             </div>
 
+            <div class="row">
+                <div class="input-field col s4">
+                    @Html.DropDownListFor(model => model.Store, Model.Stores)
+                    @Html.ValidationMessageFor(model => model.Store, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
             <div class="row center">
                 <div class="file-field input-field col s4">
                     <div class="btn">

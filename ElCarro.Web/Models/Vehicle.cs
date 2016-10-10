@@ -14,12 +14,11 @@ namespace ElCarro.Web.Models
         }
 
         public int ID { get; set; }
-        [Required]
-        [MaxLength(30)]
-        public string Brand { get; set; }
+
         [Required]
         [MaxLength(50)]
-        public string Model { get; set; }
+        public virtual Model Model { get; set; }
+
         [Required]
         public DateTime Year { get; set; }
 

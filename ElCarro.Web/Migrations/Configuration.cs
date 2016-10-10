@@ -11,7 +11,11 @@ namespace ElCarro.Web.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationsEnabled = false;
+#if Debug
+            AutomaticMigrationDataLossAllowed = true;
+#endif
+
         }
 
         protected override void Seed(ElCarro.Web.Models.ApplicationDbContext context)
@@ -67,6 +71,7 @@ namespace ElCarro.Web.Migrations
                     Make = toyota
                 });
             #endregion
+            context.SaveChanges();
         }
 
         private void AddMakes(ApplicationDbContext context)
@@ -80,6 +85,7 @@ namespace ElCarro.Web.Migrations
                 {
                     Name = "Toyota"
                 });
+            context.SaveChanges();
         }
 
         private void AddUser(string username, string email, string password, string role, UserManager<ApplicationUser> userManager)

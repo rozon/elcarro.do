@@ -16,12 +16,15 @@ namespace ElCarro.Web.Models
                     Selected = true
                 }
             };
+            Makes = new List<SelectListItem>();
+            Stores = new List<SelectListItem>();
         }
 
-        public CreateVehiclePart(IEnumerable<Make> makes)
-            : this()
+        public CreateVehiclePart(IEnumerable<Make> makes, IEnumerable<Store> stores)
+                : this()
         {
             Makes = MakesSelect(makes);
+            Stores = StoreSelect(stores);
         }
 
         public int Id { get; set; }
@@ -31,8 +34,11 @@ namespace ElCarro.Web.Models
 
         public int Make { get; set; }
 
+        public int Store { get; set; }
+
         public IEnumerable<SelectListItem> Makes { get; set; }
         public IEnumerable<SelectListItem> Models { get; set; }
+        public IEnumerable<SelectListItem> Stores { get; set; }
 
 
         public HttpPostedFileBase Photo { get; set; }
@@ -55,6 +61,29 @@ namespace ElCarro.Web.Models
                     Text = m.Name,
                     Value = m.Id.ToString(),
                     Selected = selectedValue != null ? m.Id == selectedValue : false,
+                }));
+
+            return data;
+        }
+
+        public static IEnumerable<SelectListItem> StoreSelect(IEnumerable<Store> stores, int? selectedValue = null)
+        {
+            var data = new List<SelectListItem>()
+            {
+                //The default option, no selectable.
+                new SelectListItem
+                {
+                    Text="Select a Store",
+                    Value = null,
+                    Selected = selectedValue == null,
+                }
+            };
+            if (stores != null)
+                data.AddRange(stores.Select(s => new SelectListItem()
+                {
+                    Text = s.Name,
+                    Value = s.StoreID.ToString(),
+                    Selected = selectedValue != null ? s.StoreID == selectedValue : false,
                 }));
 
             return data;
