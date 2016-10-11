@@ -7,13 +7,13 @@ namespace ElCarro.Web.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class New_Tables_Added : IMigrationMetadata
+    public sealed partial class afterMerge : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(New_Tables_Added));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(afterMerge));
         
         string IMigrationMetadata.Id
         {
-            get { return "201610030449376_New_Tables_Added"; }
+            get { return "201610040603510_afterMerge"; }
         }
         
         string IMigrationMetadata.Source

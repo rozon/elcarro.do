@@ -3,12 +3,10 @@ namespace ElCarro.Web.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class New_Tables_Added : DbMigration
+    public partial class afterMerge : DbMigration
     {
         public override void Up()
         {
-            DropForeignKey("dbo.VehicleParts", "Company_Id", "dbo.Companies");
-            DropIndex("dbo.VehicleParts", new[] { "Company_Id" });
             CreateTable(
                 "dbo.Stores",
                 c => new
@@ -85,37 +83,66 @@ namespace ElCarro.Web.Migrations
                 .Index(t => t.PartId);
             
             CreateTable(
+                "dbo.Models",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Name = c.String(),
+                        Make_Id = c.Int(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Makes", t => t.Make_Id)
+                .Index(t => t.Make_Id);
+            
+            CreateTable(
+                "dbo.Makes",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Name = c.String(),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
                 "dbo.Vehicle",
                 c => new
                     {
                         ID = c.Int(nullable: false, identity: true),
-                        Brand = c.String(nullable: false, maxLength: 30),
-                        Model = c.String(nullable: false, maxLength: 50),
                         Year = c.DateTime(nullable: false),
+                        Model_Id = c.Int(nullable: false),
                     })
-                .PrimaryKey(t => t.ID);
+                .PrimaryKey(t => t.ID)
+                .ForeignKey("dbo.Models", t => t.Model_Id, cascadeDelete: true)
+                .Index(t => t.Model_Id);
             
             AddColumn("dbo.VehicleParts", "Name", c => c.String(nullable: false, maxLength: 75));
             AddColumn("dbo.VehicleParts", "Last_View", c => c.DateTime(nullable: false));
             AddColumn("dbo.VehicleParts", "Popularity", c => c.Int(nullable: false));
+            AddColumn("dbo.VehicleParts", "Model_Id", c => c.Int());
             AlterColumn("dbo.Companies", "Name", c => c.String(nullable: false, maxLength: 75));
             AlterColumn("dbo.VehicleParts", "Description", c => c.String(maxLength: 1000));
+            CreateIndex("dbo.VehicleParts", "Model_Id");
+            AddForeignKey("dbo.VehicleParts", "Model_Id", "dbo.Models", "Id");
             DropColumn("dbo.Companies", "Address");
-            DropColumn("dbo.VehicleParts", "Company_Id");
         }
         
         public override void Down()
         {
-            AddColumn("dbo.VehicleParts", "Company_Id", c => c.Int());
             AddColumn("dbo.Companies", "Address", c => c.String());
             DropForeignKey("dbo.Store_Items", "VehiculeId", "dbo.Vehicle");
+            DropForeignKey("dbo.Vehicle", "Model_Id", "dbo.Models");
             DropForeignKey("dbo.Store_Items", "StoreId", "dbo.Stores");
             DropForeignKey("dbo.Store_Items", "PartId", "dbo.VehicleParts");
+            DropForeignKey("dbo.VehicleParts", "Model_Id", "dbo.Models");
+            DropForeignKey("dbo.Models", "Make_Id", "dbo.Makes");
             DropForeignKey("dbo.StoreAddress", "StoreID", "dbo.Stores");
             DropForeignKey("dbo.Reviews", "User_Id", "dbo.AspNetUsers");
             DropForeignKey("dbo.Reviews", "StoreId", "dbo.Stores");
             DropForeignKey("dbo.Reviews", "PuntuationId", "dbo.Puntuations");
             DropForeignKey("dbo.Stores", "CompanyId", "dbo.Companies");
+            DropIndex("dbo.Vehicle", new[] { "Model_Id" });
+            DropIndex("dbo.Models", new[] { "Make_Id" });
+            DropIndex("dbo.VehicleParts", new[] { "Model_Id" });
             DropIndex("dbo.Store_Items", new[] { "PartId" });
             DropIndex("dbo.Store_Items", new[] { "VehiculeId" });
             DropIndex("dbo.Store_Items", new[] { "StoreId" });
@@ -126,17 +153,18 @@ namespace ElCarro.Web.Migrations
             DropIndex("dbo.Stores", new[] { "CompanyId" });
             AlterColumn("dbo.VehicleParts", "Description", c => c.String());
             AlterColumn("dbo.Companies", "Name", c => c.String());
+            DropColumn("dbo.VehicleParts", "Model_Id");
             DropColumn("dbo.VehicleParts", "Popularity");
             DropColumn("dbo.VehicleParts", "Last_View");
             DropColumn("dbo.VehicleParts", "Name");
             DropTable("dbo.Vehicle");
+            DropTable("dbo.Makes");
+            DropTable("dbo.Models");
             DropTable("dbo.Store_Items");
             DropTable("dbo.StoreAddress");
             DropTable("dbo.Puntuations");
             DropTable("dbo.Reviews");
             DropTable("dbo.Stores");
-            CreateIndex("dbo.VehicleParts", "Company_Id");
-            AddForeignKey("dbo.VehicleParts", "Company_Id", "dbo.Companies", "Id");
         }
     }
 }
