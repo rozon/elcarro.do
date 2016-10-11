@@ -23,14 +23,14 @@ namespace ElCarro.Web.Models
         }
 
         public int StoreID { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Este campo es requerido")]
         [MaxLength(75)]
         public string Name { get; set; }
         public string Logo { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Este campo es requerido")]
         public string PhoneNumber { get; set; }
         [EmailAddress]
-        [Required]
+        [Required(ErrorMessage = "Este campo es requerido")]
         public string Email { get; set; }
 
         public int CompanyId { get; set; }
