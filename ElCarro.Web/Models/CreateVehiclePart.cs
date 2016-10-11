@@ -18,27 +18,27 @@ namespace ElCarro.Web.Models
 
         public int Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Este campo es requerido")]
         [Display(Name = "Nombre")]
         public string Name { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Este campo es requerido")]
         [Display(Name = "Descripción")]
         public string Description { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Este campo es requerido")]
         [Display(Name = "Modelo")]
         public int Model { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Este campo es requerido")]
         [Display(Name = "Marca")]
         public int Make { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Este campo es requerido")]
         [Display(Name = "Repuesto")]
         public int Store { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Este campo es requerido")]
         [Display(Name = "Año")]
         public int Year { get; set; }
 
