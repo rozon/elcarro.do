@@ -283,7 +283,6 @@
     <Content Include="Content\account_style.css" />
     <Content Include="Content\materialize.css" />
     <Content Include="Content\materialize.min.css" />
-    <Content Include="Content\Social\zocial.css" />
     <Content Include="Content\style.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />

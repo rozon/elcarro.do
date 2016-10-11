@@ -51,7 +51,7 @@ namespace ElCarro.Web.Controllers
         public async Task<ActionResult> Create([Bind(Include = "Name,Description,Photo,Model,Make,Store,Year")] CreateVehiclePart vehiclePart)
         {
             if (vehiclePart.Photo == null)
-                ModelState.AddModelError(nameof(CreateVehiclePart.Photo), "The Photo is required");
+                ModelState.AddModelError(nameof(CreateVehiclePart.Photo), "La foto es requerida.");
 
             if (ModelState.IsValid)
             {

@@ -189,7 +189,7 @@ namespace ElCarro.Web.Controllers
                 var message = new IdentityMessage
                 {
                     Destination = model.Number,
-                    Body = "Your security code is: " + code
+                    Body = "Tu codigo de seguridad es: " + code
                 };
                 await UserManager.SmsService.SendAsync(message);
             }
@@ -256,7 +256,7 @@ namespace ElCarro.Web.Controllers
                 return RedirectToAction("Index", new { Message = ManageMessageId.AddPhoneSuccess });
             }
             // If we got this far, something failed, redisplay form
-            ModelState.AddModelError("", "Failed to verify phone");
+            ModelState.AddModelError("", "Falla al verificar su telefono");
             return View(model);
         }
 
@@ -343,7 +343,7 @@ namespace ElCarro.Web.Controllers
             ViewBag.Title = "Administrar logins externos";
             ViewBag.StatusMessage =
                 message == ManageMessageId.RemoveLoginSuccess ? "El login externo fue removido."
-                : message == ManageMessageId.Error ? "Un error a currido."
+                : message == ManageMessageId.Error ? "Un error a ocurrido."
                 : "";
             var user = await UserManager.FindByIdAsync(GetUserId());
             if (user == null)

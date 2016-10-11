@@ -15,7 +15,7 @@ namespace ElCarro.Web.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "La pagina de descripcion de tu aplicacion.";
             return View();
         }
 
@@ -55,7 +55,7 @@ namespace ElCarro.Web.Controllers
         [Authorize]
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Tu pagina de contacto.";
 
             return View();
         }

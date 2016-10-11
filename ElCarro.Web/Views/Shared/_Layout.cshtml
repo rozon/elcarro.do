@@ -8,7 +8,6 @@
     <!-- CSS  -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     @Styles.Render("~/Content/css")
-    @RenderSection("styles", false)
 </head>
 <body>
 
@@ -81,8 +80,6 @@
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/site")
-
-    @RenderSection("Scripts", false)
 
     <!-- Modal Structure -->
     @{ Html.RenderAction("PrivacyPolicy", "Modals"); }
