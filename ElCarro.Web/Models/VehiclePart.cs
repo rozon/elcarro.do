@@ -30,6 +30,9 @@ namespace ElCarro.Web.Models
         public virtual Store Store { get; set; }
 
         [Required]
+        public int Year { get; set; }
+
+        [Required]
         public virtual Model Model { get; set; }
 
         [Column("Last_View")]

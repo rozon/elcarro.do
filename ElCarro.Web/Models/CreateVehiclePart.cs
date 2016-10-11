@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
@@ -31,6 +32,28 @@ namespace ElCarro.Web.Models
 
         [Required]
         public int Store { get; set; }
+
+        [Required]
+        public int Year { get; set; }
+
+        public IEnumerable<SelectListItem> Years =>
+            new List<SelectListItem>()
+            {
+                new SelectListItem
+                {
+                    Text="Select a Year",
+                    Value = null,
+                    Selected = Year == 0,
+                }
+            }
+            .Concat(Enumerable.Range(1986, DateTime.Now.Year)
+                .Select(y =>
+                    new SelectListItem
+                    {
+                        Text = y.ToString(),
+                        Value = y.ToString(),
+                        Selected = y == Year,
+                    }));
 
         public IEnumerable<SelectListItem> Makes { get; set; }
         public IEnumerable<SelectListItem> Models { get; set; }

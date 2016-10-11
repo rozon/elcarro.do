@@ -48,7 +48,7 @@ namespace ElCarro.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Name,Description,Photo,Model,Make,Store")] CreateVehiclePart vehiclePart)
+        public async Task<ActionResult> Create([Bind(Include = "Name,Description,Photo,Model,Make,Store,Year")] CreateVehiclePart vehiclePart)
         {
             if (vehiclePart.Photo == null)
                 ModelState.AddModelError(nameof(CreateVehiclePart.Photo), "The Photo is required");
@@ -94,7 +94,7 @@ namespace ElCarro.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Name,Description,Photo,Model,Make,Store")] CreateVehiclePart vehiclePart)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,Name,Description,Photo,Model,Make,Store,Year")] CreateVehiclePart vehiclePart)
         {
             if (ModelState.IsValid)
             {

@@ -227,6 +227,10 @@
     <Compile Include="Migrations\201610101712044_ChanginVehiclePart.Designer.cs">
       <DependentUpon>201610101712044_ChanginVehiclePart.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201610110503263_AddYearVehiclePart.cs" />
+    <Compile Include="Migrations\201610110503263_AddYearVehiclePart.Designer.cs">
+      <DependentUpon>201610110503263_AddYearVehiclePart.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\StoreAddress.cs" />
     <Compile Include="Models\BugReport.cs" />
     <Compile Include="Models\CreateVehiclePart.cs" />
@@ -633,6 +637,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201610101712044_ChanginVehiclePart.resx">
       <DependentUpon>201610101712044_ChanginVehiclePart.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610110503263_AddYearVehiclePart.resx">
+      <DependentUpon>201610110503263_AddYearVehiclePart.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
