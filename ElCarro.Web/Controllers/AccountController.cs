@@ -77,9 +77,9 @@ namespace ElCarro.Web.Controllers
             {
                 if (!await UserManager.IsEmailConfirmedAsync(user.Id))
                 {
-                    string callbackUrl = await SendEmailConfirmationTokenAsync(user.Id, "Confirm your account-Resend");
+                    string callbackUrl = await SendEmailConfirmationTokenAsync(user.Id, "Confirme su re-envio de cuenta");
 
-                    ViewBag.errorMessage = "You must have a confirmed email to log on.";
+                    ViewBag.errorMessage = "Tu debes tener un correo de confirmacion para loguearte.";
                     return View("Error");
                 }
             }
@@ -97,7 +97,7 @@ namespace ElCarro.Web.Controllers
                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
                 case SignInStatus.Failure:
                 default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
+                    ModelState.AddModelError("", "Intento invalido para loguearse.");
                     return View(model);
             }
         }
@@ -140,7 +140,7 @@ namespace ElCarro.Web.Controllers
                     return View("Lockout");
                 case SignInStatus.Failure:
                 default:
-                    ModelState.AddModelError("", "Invalid code.");
+                    ModelState.AddModelError("", "Codigo invalido.");
                     return View(model);
             }
         }
@@ -181,12 +181,12 @@ namespace ElCarro.Web.Controllers
                     string callbackUrl = await SendEmailConfirmationTokenAsync(user.Id, "Confirm your account");
 
                     await UserManager.SendEmailAsync(user.Id,
-                        "Confirm your account",
-                        "Please confirm your account by clicking this link: <a href=\""
+                        "Confirmar tu cuenta",
+                        "Por favor confirme su cuenta haciendo click en este link: <a href=\""
                         + callbackUrl + "\">link</a>");
 
-                    ViewBag.Message = "Check your email and confirm your account, you must be confirmed "
-                                    + "before you can log in.";
+                    ViewBag.Message = "Verifique su correo y confirme su cuenta, usted debe confirmar "
+                                    + "antes de que se pueda loguear.";
 
                     return View("Info");
                     //return RedirectToAction("Index", "Home");
@@ -240,16 +240,16 @@ namespace ElCarro.Web.Controllers
                 dbContext.SaveChanges();
 
                 await UserManager.AddToRoleAsync(user.Id, Constants.CompanyRole);
-                string callbackUrl = await SendEmailConfirmationTokenAsync(user.Id, "Confirm your account");
+                string callbackUrl = await SendEmailConfirmationTokenAsync(user.Id, "Confirme su cuenta");
 
                 await UserManager.SendEmailAsync(user.Id,
-                    "Confirm your account",
-                    "Please confirm your account by clicking this link: <a href=\""
+                    "Confirme su cuenta",
+                    "Por favor confirme su cuenta haciendo click en este link: <a href=\""
                     + callbackUrl + "\">link</a>");
 
-                ViewBag.Message = "We will contact you to validate some data, After that " +
-                    "check your email and confirm your account, you must be confirmed "
-                                + "before you can log in.";
+                ViewBag.Message = "Nosotros lo contactaremos para validar algunas datos, Despues " +
+                    "verifique su correo y confirme su cuenta, usted debe confirmar "
+                                + "antes de que pueda loguearse.";
 
                 return View("Info");
             }
@@ -304,8 +304,8 @@ namespace ElCarro.Web.Controllers
                     protocol: Request.Url.Scheme);
 
                 await UserManager.SendEmailAsync(
-                    user.Id, "Reset Password",
-                    "Please reset your password by clicking <a href=\""
+                    user.Id, "Cambiar contraseña",
+                    "Por favor cambie su contraseña al hacer click <a href=\""
                     + callbackUrl + "\">here</a>");
 
                 return RedirectToAction("ForgotPasswordConfirmation", "Account");
@@ -581,7 +581,7 @@ namespace ElCarro.Web.Controllers
             var callbackUrl = Url.Action(HelperString.ConfirmEmail, "Account",
                new { userId = userID, code = code }, protocol: Request.Url.Scheme);
             await UserManager.SendEmailAsync(userID, subject,
-               "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+               "Por favor confirme su cuenta al hacer click <a href=\"" + callbackUrl + "\">here</a>");
 
             return callbackUrl;
         }

@@ -2,7 +2,7 @@
 @using Microsoft.Owin.Security
 
 <div class="card-content white-text">
-    <span class="card-title">Use another service to log in.</span>
+    <span class="card-title">Use otro servicio para logearse.</span>
 </div>
 @{
     var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
@@ -26,13 +26,19 @@
                     @Html.AntiForgeryToken()
                     foreach (AuthenticationDescription p in loginProviders)
                     {
+                        string _class = "loginBtn--google";
+                        if (p.AuthenticationType.ToLower().Equals("facebook"))
+                        {
+                            _class = "loginBtn--facebook";
+                        }
+                        
                         <div class="input-field col s12 @m center">
                             <button type="submit"
-                                    class="zocial @p.AuthenticationType.ToLower()"
+                                    class="loginBtn @_class @p.AuthenticationType.ToLower()"
                                     id="@p.AuthenticationType" name="provider"
                                     value="@p.AuthenticationType"
-                                    title="Log in using your @p.Caption account">
-                                @p.AuthenticationType
+                                    title="Loguearse con @p.Caption">
+                                Loguearse con @p.AuthenticationType
                             </button>
                         </div>
                     }
