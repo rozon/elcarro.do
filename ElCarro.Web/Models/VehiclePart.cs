@@ -11,30 +11,34 @@ namespace ElCarro.Web.Models
     {
         public VehiclePart()
         {
-            StoreItems = new HashSet<StoreItem>();
         }
 
         public int Id { get; set; }
+
         [Required]
         [MaxLength(75)]
         public string Name { get; set; }
+
+        [Required]
         [StringLength(1000)]
         public string Description { get; set; }
-        public string Photo { get; set; }
+
         [Required]
+        public string Photo { get; set; }
+
+        [Required]
+        public virtual Store Store { get; set; }
+
+        [Required]
+        public int Year { get; set; }
+
+        [Required]
+        public virtual Model Model { get; set; }
+
         [Column("Last_View")]
-        public DateTime LastView { get; set; }
+        public DateTime? LastView { get; set; }
+
         [Required]
         public int Popularity { get; set; }
-
-        public virtual ICollection<StoreItem> StoreItems { get; set; }
-    }
-
-    [NotMapped]
-    public class CreateVehiclePart
-    {
-        public int Id { get; set; }
-        public string Description { get; set; }
-        public HttpPostedFileBase Photo { get; set; }
     }
 }

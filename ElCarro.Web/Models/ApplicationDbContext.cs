@@ -16,11 +16,13 @@ namespace ElCarro.Web.Models
         public DbSet<Company> Company { get; set; }
         public DbSet<BugReport> BugReports { get; set; }
         public DbSet<Suggestion> Suggestions { get; set; }
+        public DbSet<Make> Makes { get; set; }
+        public DbSet<Model> Models { get; set; }
+
         public DbSet<StoreAddress> StoreAddress { get; set; }
         public DbSet<Puntuation> Puntuations { get; set; }
         public DbSet<Review> Reviews { get; set; }
         public DbSet<Store> Stores { get; set; }
-        public DbSet<StoreItem> StoreItems { get; set; }
         public DbSet<Vehicle> Vehicles { get; set; }
 
         public static ApplicationDbContext Create()

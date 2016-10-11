@@ -7,13 +7,13 @@ namespace ElCarro.Web.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class BugReport_Modification : IMigrationMetadata
+    public sealed partial class ChanginVehiclePart : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(BugReport_Modification));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(ChanginVehiclePart));
         
         string IMigrationMetadata.Id
         {
-            get { return "201609200743456_BugReport_Modification"; }
+            get { return "201610101712044_ChanginVehiclePart"; }
         }
         
         string IMigrationMetadata.Source

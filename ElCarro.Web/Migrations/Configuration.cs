@@ -11,7 +11,11 @@ namespace ElCarro.Web.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationsEnabled = false;
+#if Debug
+            AutomaticMigrationDataLossAllowed = true;
+#endif
+
         }
 
         protected override void Seed(ElCarro.Web.Models.ApplicationDbContext context)
@@ -24,6 +28,8 @@ namespace ElCarro.Web.Migrations
                 {
                     AddRoles(roleManager, Web.Constants.CompanyRole, Web.Constants.UserRole, Web.Constants.AdminRole);
                     AddUser("ElCarro", "elcarro.do@gmail.com", "_Welc0me1_", Web.Constants.AdminRole, userManager);
+                    AddMakes(context);
+                    AddModels(context);
                 }
                 catch (Exception)
                 {
@@ -32,6 +38,54 @@ namespace ElCarro.Web.Migrations
                 }
                 trans.Commit();
             }
+        }
+
+        private void AddModels(ApplicationDbContext context)
+        {
+            var honda = context.Makes.First(m => m.Name == "Honda");
+            #region Honda
+            context.Models.AddOrUpdate(m => m.Name,
+                new Model
+                {
+                    Name = "Accord",
+                    Make = honda
+                },
+                new Model
+                {
+                    Name = "Civic",
+                    Make = honda
+                });
+            #endregion
+
+            var toyota = context.Makes.First(m => m.Name == "Toyota");
+            #region Toyota
+            context.Models.AddOrUpdate(m => m.Name,
+                new Model
+                {
+                    Name = "Corrolla",
+                    Make = toyota
+                },
+                new Model
+                {
+                    Name = "Camry",
+                    Make = toyota
+                });
+            #endregion
+            context.SaveChanges();
+        }
+
+        private void AddMakes(ApplicationDbContext context)
+        {
+            context.Makes.AddOrUpdate(m => m.Name,
+                new Make
+                {
+                    Name = "Honda"
+                },
+                new Make
+                {
+                    Name = "Toyota"
+                });
+            context.SaveChanges();
         }
 
         private void AddUser(string username, string email, string password, string role, UserManager<ApplicationUser> userManager)

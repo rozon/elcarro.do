@@ -74,6 +74,14 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -182,25 +190,15 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\CustomController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ModelController.cs" />
     <Compile Include="Controllers\PartialViewController.cs" />
+    <Compile Include="Models\SearchViewModel.cs" />
     <Compile Include="Controllers\StoresController.cs" />
     <Compile Include="Controllers\SuggestionController.cs" />
     <Compile Include="Controllers\BugReportController.cs" />
     <Compile Include="Migrations\201609190248394_BugReport_Added.cs" />
     <Compile Include="Migrations\201609190248394_BugReport_Added.Designer.cs">
       <DependentUpon>201609190248394_BugReport_Added.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201609200743456_BugReport_Modification.cs" />
-    <Compile Include="Migrations\201609200743456_BugReport_Modification.Designer.cs">
-      <DependentUpon>201609200743456_BugReport_Modification.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201609202033242_Suggestion_Added.cs" />
-    <Compile Include="Migrations\201609202033242_Suggestion_Added.Designer.cs">
-      <DependentUpon>201609202033242_Suggestion_Added.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201609202041214_Suggestion_Updated.cs" />
-    <Compile Include="Migrations\201609202041214_Suggestion_Updated.Designer.cs">
-      <DependentUpon>201609202041214_Suggestion_Updated.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\201609202045010_Suggestion_Updated_2.cs" />
     <Compile Include="Migrations\201609202045010_Suggestion_Updated_2.Designer.cs">
@@ -214,12 +212,29 @@
     <Compile Include="Migrations\201609270356254_PhotoApplicationUserAdded.Designer.cs">
       <DependentUpon>201609270356254_PhotoApplicationUserAdded.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201610030449376_New_Tables_Added.cs" />
-    <Compile Include="Migrations\201610030449376_New_Tables_Added.Designer.cs">
-      <DependentUpon>201610030449376_New_Tables_Added.cs</DependentUpon>
+    <Compile Include="Migrations\201610040603510_afterMerge.cs" />
+    <Compile Include="Migrations\201610040603510_afterMerge.Designer.cs">
+      <DependentUpon>201610040603510_afterMerge.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201610081634384_changeOnVehiclePartsEntity.cs" />
+    <Compile Include="Migrations\201610081634384_changeOnVehiclePartsEntity.Designer.cs">
+      <DependentUpon>201610081634384_changeOnVehiclePartsEntity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201610101621529_VehiclePartLastViewNotRequired.cs" />
+    <Compile Include="Migrations\201610101621529_VehiclePartLastViewNotRequired.Designer.cs">
+      <DependentUpon>201610101621529_VehiclePartLastViewNotRequired.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201610101712044_ChanginVehiclePart.cs" />
+    <Compile Include="Migrations\201610101712044_ChanginVehiclePart.Designer.cs">
+      <DependentUpon>201610101712044_ChanginVehiclePart.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201610110503263_AddYearVehiclePart.cs" />
+    <Compile Include="Migrations\201610110503263_AddYearVehiclePart.Designer.cs">
+      <DependentUpon>201610110503263_AddYearVehiclePart.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\StoreAddress.cs" />
     <Compile Include="Models\BugReport.cs" />
+    <Compile Include="Models\CreateVehiclePart.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ModalsController.cs" />
@@ -243,11 +258,12 @@
     <Compile Include="Models\Company.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Model.cs" />
     <Compile Include="Models\Puntuation.cs" />
     <Compile Include="Models\Review.cs" />
     <Compile Include="Models\Store.cs" />
-    <Compile Include="Models\StoreItem.cs" />
     <Compile Include="Models\Suggestion.cs" />
+    <Compile Include="Models\Make.cs" />
     <Compile Include="Models\Vehicle.cs" />
     <Compile Include="Models\VehiclePart.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -588,10 +604,12 @@
     <Content Include="Views\Stores\Delete.cshtml" />
     <Content Include="Views\Stores\Details.cshtml" />
     <Content Include="Views\Stores\Edit.cshtml" />
+    <Content Include="Views\VehicleParts\PublicDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Uploads\" />
+    <Folder Include="Views\Model\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -610,15 +628,6 @@
     <EmbeddedResource Include="Migrations\201609190248394_BugReport_Added.resx">
       <DependentUpon>201609190248394_BugReport_Added.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201609200743456_BugReport_Modification.resx">
-      <DependentUpon>201609200743456_BugReport_Modification.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201609202033242_Suggestion_Added.resx">
-      <DependentUpon>201609202033242_Suggestion_Added.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201609202041214_Suggestion_Updated.resx">
-      <DependentUpon>201609202041214_Suggestion_Updated.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201609202045010_Suggestion_Updated_2.resx">
       <DependentUpon>201609202045010_Suggestion_Updated_2.cs</DependentUpon>
     </EmbeddedResource>
@@ -628,8 +637,20 @@
     <EmbeddedResource Include="Migrations\201609270356254_PhotoApplicationUserAdded.resx">
       <DependentUpon>201609270356254_PhotoApplicationUserAdded.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201610030449376_New_Tables_Added.resx">
-      <DependentUpon>201610030449376_New_Tables_Added.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201610040603510_afterMerge.resx">
+      <DependentUpon>201610040603510_afterMerge.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610081634384_changeOnVehiclePartsEntity.resx">
+      <DependentUpon>201610081634384_changeOnVehiclePartsEntity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610101621529_VehiclePartLastViewNotRequired.resx">
+      <DependentUpon>201610101621529_VehiclePartLastViewNotRequired.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610101712044_ChanginVehiclePart.resx">
+      <DependentUpon>201610101712044_ChanginVehiclePart.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610110503263_AddYearVehiclePart.resx">
+      <DependentUpon>201610110503263_AddYearVehiclePart.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="StringResource\HelperString.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
