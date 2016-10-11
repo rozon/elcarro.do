@@ -17,22 +17,28 @@ namespace ElCarro.Web.Models
 
         [Required]
         [MaxLength(75)]
+        [Display(Name = "Nombre")]
         public string Name { get; set; }
 
         [Required]
         [StringLength(1000)]
+        [Display(Name = "Descripción")]
         public string Description { get; set; }
 
         [Required]
+        [Display(Name = "Foto")]
         public string Photo { get; set; }
 
         [Required]
+        [Display(Name = "Repuesto")]
         public virtual Store Store { get; set; }
 
         [Required]
+        [Display(Name = "Año")]
         public int Year { get; set; }
 
         [Required]
+        [Display(Name = "Modelo")]
         public virtual Model Model { get; set; }
 
         [Column("Last_View")]
