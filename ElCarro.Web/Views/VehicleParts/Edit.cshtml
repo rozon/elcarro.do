@@ -45,6 +45,13 @@
 
             <div class="row">
                 <div class="input-field col s4">
+                    @Html.DropDownListFor(m => m.Year, Model.Years)
+                    @Html.ValidationMessageFor(model => model.Year, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s4">
                     @Html.DropDownListFor(model => model.Store, Model.Stores)
                     @Html.ValidationMessageFor(model => model.Store, "", new { @class = "text-danger" })
                 </div>

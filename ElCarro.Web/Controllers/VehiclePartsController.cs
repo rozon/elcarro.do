@@ -65,7 +65,8 @@ namespace ElCarro.Web.Controllers
                     Description = vehiclePart.Description,
                     Photo = fullPath,
                     Model = db.Models.Single(m => m.Id == vehiclePart.Model),
-                    LastView = DateTime.Now
+                    LastView = DateTime.Now,
+                    Year = vehiclePart.Year
                 });
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
@@ -111,6 +112,7 @@ namespace ElCarro.Web.Controllers
                     actual.Photo = SavePhoto(vehiclePart.Photo);
                 actual.Description = vehiclePart.Description;
                 actual.Name = vehiclePart.Name;
+                actual.Year = vehiclePart.Year;
                 actual.Store = db.Stores.Single(m => m.StoreID == vehiclePart.Store);
                 actual.Description = vehiclePart.Description;
                 actual.Model = db.Models.Single(m => m.Id == vehiclePart.Model);

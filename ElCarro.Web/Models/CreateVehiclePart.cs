@@ -46,7 +46,7 @@ namespace ElCarro.Web.Models
                     Selected = Year == 0,
                 }
             }
-            .Concat(Enumerable.Range(1986, DateTime.Now.Year)
+            .Concat(Enumerable.Range(1986, DateTime.Now.Year - 1986 + 1)
                 .Select(y =>
                     new SelectListItem
                     {
@@ -149,6 +149,7 @@ namespace ElCarro.Web.Models
                 model.Description = vehiclePart.Description;
                 model.Make = vehiclePart.Model.Make.Id;
                 model.Model = vehiclePart.Model.Id;
+                model.Year = vehiclePart.Year;
                 model.Store = vehiclePart.Store.StoreID;
             }
 
