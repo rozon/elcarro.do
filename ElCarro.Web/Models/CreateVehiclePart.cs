@@ -10,22 +10,9 @@ namespace ElCarro.Web.Models
     {
         public CreateVehiclePart()
         {
-            Models = new List<SelectListItem>() {  new SelectListItem
-                {
-                    Text="Select a Model",
-                    Value=null,
-                    Selected = true
-                }
-            };
+            Models = new List<SelectListItem>();
             Makes = new List<SelectListItem>();
             Stores = new List<SelectListItem>();
-        }
-
-        public CreateVehiclePart(IEnumerable<Make> makes, IEnumerable<Store> stores)
-                : this()
-        {
-            Makes = MakesSelect(makes);
-            Stores = StoreSelect(stores);
         }
 
         public int Id { get; set; }
@@ -47,16 +34,15 @@ namespace ElCarro.Web.Models
 
         public HttpPostedFileBase Photo { get; set; }
 
-        public static IEnumerable<SelectListItem> MakesSelect(IEnumerable<Make> makes, int? selectedValue = null)
+        private void FillMakes(IEnumerable<Make> makes)
         {
             var data = new List<SelectListItem>()
             {
-                //The default option, no selectable.
                 new SelectListItem
                 {
                     Text="Select a Make",
-                    Value=null,
-                    Selected = selectedValue == null,
+                    Value = null,
+                    Selected = Make == 0,
                 }
             };
             if (makes != null)
@@ -64,13 +50,35 @@ namespace ElCarro.Web.Models
                 {
                     Text = m.Name,
                     Value = m.Id.ToString(),
-                    Selected = selectedValue != null ? m.Id == selectedValue : false,
+                    Selected = Make != 0 ? m.Id == Make : false,
                 }));
-
-            return data;
+            Makes = data;
         }
 
-        public static IEnumerable<SelectListItem> StoreSelect(IEnumerable<Store> stores, int? selectedValue = null)
+        private void FillModels(IQueryable<Model> models)
+        {
+            var data = new List<SelectListItem>()
+            {
+                //The default option, no selectable.
+                new SelectListItem
+                {
+                    Text = "Select a Model",
+                    Value = null,
+                    Selected = Model == 0,
+                }
+            };
+            if (Make != 0)
+                data.AddRange(models.Where(m => m.Make.Id == Make).Select(s => new SelectListItem
+                {
+                    Text = s.Name,
+                    Value = s.Id.ToString(),
+                    Selected = Model != 0 ? s.Id == Model : false,
+                }).ToList());
+
+            Models = data;
+        }
+
+        private void FillStores(IEnumerable<Store> stores)
         {
             var data = new List<SelectListItem>()
             {
@@ -79,7 +87,7 @@ namespace ElCarro.Web.Models
                 {
                     Text="Select a Store",
                     Value = null,
-                    Selected = selectedValue == null,
+                    Selected = Store == 0,
                 }
             };
             if (stores != null)
@@ -87,11 +95,41 @@ namespace ElCarro.Web.Models
                 {
                     Text = s.Name,
                     Value = s.StoreID.ToString(),
-                    Selected = selectedValue != null ? s.StoreID == selectedValue : false,
+                    Selected = Store != 0 ? s.StoreID == Store : false,
                 }));
 
-            return data;
+            Stores = data;
         }
 
+        public void FillDropDowns(IEnumerable<Make> makes,
+            IEnumerable<Store> stores,
+            IQueryable<Model> models)
+        {
+            FillMakes(makes);
+            FillStores(stores);
+            FillModels(models);
+        }
+
+        public static CreateVehiclePart Factory(IEnumerable<Make> makes,
+            IEnumerable<Store> stores,
+            IQueryable<Model> models,
+            VehiclePart vehiclePart)
+        {
+            var model = new CreateVehiclePart();
+            if (vehiclePart != null)
+            {
+                model.Name = vehiclePart.Name;
+                model.Description = vehiclePart.Description;
+                model.Make = vehiclePart.Model.Make.Id;
+                model.Model = vehiclePart.Model.Id;
+                model.Store = vehiclePart.Store.StoreID;
+            }
+
+            model.FillMakes(makes);
+            model.FillStores(stores);
+            model.FillModels(models);
+
+            return model;
+        }
     }
 }

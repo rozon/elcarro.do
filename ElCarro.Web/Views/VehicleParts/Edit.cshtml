@@ -16,9 +16,37 @@
 
             <div class="row">
                 <div class="input-field col s4">
-                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "validate" } })
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "validate" } })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                    @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "" })
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s4">
+                    @Html.TextBoxFor(model => model.Description, new { htmlAttributes = new { @class = "validate" } })
                     @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
                     @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "" })
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s4">
+                    @Html.DropDownList(Html.IdFor(m => m.Makes).ToHtmlString(), Model.Makes)
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s4">
+                    @Html.DropDownListFor(model => model.Model, Model.Models)
+                    @Html.ValidationMessageFor(model => model.Model, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s4">
+                    @Html.DropDownListFor(model => model.Store, Model.Stores)
+                    @Html.ValidationMessageFor(model => model.Store, "", new { @class = "text-danger" })
                 </div>
             </div>
 
@@ -46,4 +74,27 @@
 </div>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+
+    <script type="text/javascript">
+        $(function () {
+            $("#@Html.IdFor(m=>m.Makes)").change(function (e, obj) {
+                $.get('@Url.Action("ByMake", "Model", new { make=""})?makeId=' + $(this).val(), function (data) {
+                    var select = $('#@Html.IdFor(m=>m.Model)');
+                    select.find('option').each(function (i, o) {
+                        if (o.value === '') return;
+                        $(o).remove();
+                    });
+                    $.each(data, function (e, d) {
+                        var option = new Option(d.Name, d.Id);
+                        select.append($(option));
+                    });
+                    $('select').material_select();
+                }).fail(function () {
+                    //TODO: Add the submit error form here.
+                    alert("Error fetching the models. ");
+                });
+            });
+        });
+    </script>
 }

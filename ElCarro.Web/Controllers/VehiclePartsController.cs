@@ -67,7 +67,7 @@ namespace ElCarro.Web.Controllers
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            FillCreateVehiclePartModel(vehiclePart);
+            FillViewModelDropDowns(vehiclePart);
             return View(vehiclePart);
         }
 
@@ -76,18 +76,16 @@ namespace ElCarro.Web.Controllers
             if (id == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            string userId = GetUserId();
+            var userId = GetUserId();
             var companyId = GetCompanyId();
-            VehiclePart vehiclePart = await db.VehiclePart.SingleOrDefaultAsync(
-                m => m.Id == id.Value && m.Store.Company.Id == companyId);
+            var vehiclePart = await db.VehiclePart
+                .SingleOrDefaultAsync(m => m.Id == id.Value
+                    && m.Store.Company.Id == companyId);
 
             if (vehiclePart == null)
                 return HttpNotFound();
 
-            var model = NewViewModel();
-            vehiclePart.Id = vehiclePart.Id;
-            vehiclePart.Description = vehiclePart.Description;
-            FillCreateVehiclePartModel(model);
+            var model = NewViewModel(vehiclePart);
             return View(model);
         }
 
@@ -114,7 +112,7 @@ namespace ElCarro.Web.Controllers
                 System.IO.File.Delete(ControllerContext.HttpContext.Server.MapPath(actualPhotoPath));
                 return RedirectToAction("Details", new { id = actual.Id });
             }
-            FillCreateVehiclePartModel(vehiclePart);
+            //FillCreateVehiclePartModel(vehiclePart);
             return View(vehiclePart);
         }
 
@@ -161,16 +159,21 @@ namespace ElCarro.Web.Controllers
             base.Dispose(disposing);
         }
 
-        private CreateVehiclePart NewViewModel()
+        private CreateVehiclePart NewViewModel(VehiclePart vehiclePart = null)
         {
             var userId = GetUserId();
-            return new CreateVehiclePart(db.Makes.AsEnumerable(),
-                db.Stores.Where(s => s.Company.Admin.Id == userId).AsEnumerable());
+            var companyId = db.Company.Single(c => c.Admin.Id == userId).Id;
+            var model = CreateVehiclePart.Factory(db.Makes.AsEnumerable(),
+                db.Stores.Where(m => m.Company.Id == companyId).AsEnumerable(), db.Models, vehiclePart);
+            return model;
         }
 
-
-        private void FillCreateVehiclePartModel(CreateVehiclePart vehiclePart) =>
-         vehiclePart.Makes =
-            CreateVehiclePart.MakesSelect(db.Makes.AsEnumerable(), db.Models.Single(m => m.Id == vehiclePart.Model).Make.Id);
+        private void FillViewModelDropDowns(CreateVehiclePart vehiclePart)
+        {
+            var userId = GetUserId();
+            var companyId = db.Company.Single(c => c.Admin.Id == userId).Id;
+            vehiclePart.FillDropDowns(db.Makes.AsEnumerable(),
+                db.Stores.Where(m => m.Company.Id == companyId).AsEnumerable(), db.Models);
+        }
     }
 }
