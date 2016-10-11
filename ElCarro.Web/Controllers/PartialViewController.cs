@@ -59,7 +59,7 @@ namespace ElCarro.Web.Controllers
                 isCompany = true;
 
             if (isCompany)
-                stores = db.Stores.Include(s => s.Company).Where(s => s.Company.Admin.Id == user.Id).ToList();
+                stores = db.Stores.Where(s => s.Company.Admin.Id == user.Id).ToList();
 
             var result = new UserView
             {

@@ -1,6 +1,6 @@
 ﻿@model ElCarro.Web.Models.VerifyCodeViewModel
 @{
-    ViewBag.Title = "Verify";
+    ViewBag.Title = "Verificar";
 }
 
 <div class="container">
@@ -12,7 +12,7 @@
             @Html.AntiForgeryToken()
             @Html.Hidden("provider", @Model.Provider)
             @Html.Hidden("rememberMe", @Model.RememberMe)
-            <h4>Enter verification code</h4>
+            <h4>Entre el codigo de verificación</h4>
             <hr />
             @Html.ValidationSummary("", new { @class = "text-danger" })
             <div class="form-group">
