@@ -8,8 +8,6 @@
     <!-- CSS  -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-    @RenderSection("styles", false)
 </head>
 <body>
 
@@ -37,18 +35,6 @@
 
 
     @RenderBody()
-
-
-    <!-- Modal Structure -->
-    @{ Html.RenderAction("PrivacyPolicy", "Modals"); }
-
-    @{ Html.RenderAction("TermsConditions", "Modals"); }
-
-    @{ Html.RenderAction("Rules", "Modals"); }
-
-    @{ Html.RenderAction("Suggestion", "Suggestion"); }
-
-    @{ Html.RenderAction("BugReport", "BugReport"); }
 
     <!-- Footer  -->
     <footer class="page-footer teal">
@@ -92,8 +78,18 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/site")
 
-    @RenderSection("scripts", required: false)
+    <!-- Modal Structure -->
+    @{ Html.RenderAction("PrivacyPolicy", "Modals"); }
+
+    @{ Html.RenderAction("TermsConditions", "Modals"); }
+
+    @{ Html.RenderAction("Rules", "Modals"); }
+
+    @{ Html.RenderAction("Suggestion", "Suggestion"); }
+
+    @{ Html.RenderAction("BugReport", "BugReport"); }
 </body>
 </html>

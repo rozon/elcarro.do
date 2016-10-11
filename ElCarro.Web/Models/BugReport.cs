@@ -8,33 +8,21 @@
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
 
-        [Required]
-        [StringLength(50, ErrorMessage = "Name cannot be longer than 50 characters.")]
-        [Display(Name = "Name")]
-        public string Name { get; set; }
+        [Required(ErrorMessage = "El nombre es requerido.")]
+        [StringLength(50, ErrorMessage = "El nombre no puede ser mas grande de 50 caracteres.")]
+        [Column("Name")]
+        [Display(Name = "Nombre")]
+        public string NameBR { get; set; }
 
-        [Required]
-        [EmailAddress]
-        [Display(Name = "Email")]
-        public string Email { get; set; }
+        [Required(ErrorMessage = "El correo es requerido.")]
+        [EmailAddress(ErrorMessage = "El correo no es valido.")]
+        [Column("Email")]
+        [Display(Name = "Correo")]
+        public string EmailBR { get; set; }
 
-        [Required]
-        [Display(Name = "Description")]
-        public string Description { get; set; }
-    }
-
-    [NotMapped]
-    public class BugReportErrorView
-    {
-        public string ID { get; set; }
-        public string messageError { get; set; }
-
-        public BugReportErrorView() { }
-
-        public BugReportErrorView(string ID, string message)
-        {
-            this.ID = ID;
-            messageError = message;
-        }
+        [Required(ErrorMessage = "La descripción es requerida.")]
+        [Column("Description")]
+        [Display(Name = "Descripción")]
+        public string DescriptionBR { get; set; }
     }
 }

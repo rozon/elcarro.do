@@ -10,25 +10,32 @@
             <div class="row">
                 <div class="input-field col s12">
                     <i class="material-icons prefix">perm_identity</i>
-                    @Html.TextBoxFor(m => m.Name)
-                    @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
-                    @Html.LabelFor(m => m.Name, "Nombre")
+                    @Html.TextBoxFor(m => m.NameBR)
+                    @Html.ValidationMessageFor(m => m.NameBR, "", new { @class = "text-danger" })
+                    @Html.LabelFor(m => m.NameBR, "Nombre")
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s12">
                     <i class="material-icons prefix">email</i>
-                    @Html.TextBoxFor(m => m.Email)
-                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-                    @Html.LabelFor(m => m.Email, "Correo Electrónico")
+                    @Html.TextBoxFor(m => m.EmailBR)
+                    @Html.ValidationMessageFor(m => m.EmailBR, "", new { @class = "text-danger" })
+                    @Html.LabelFor(m => m.EmailBR, "Correo Electrónico")
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s12">
                     <i class="material-icons prefix">mode_edit</i>
-                    @Html.TextAreaFor(m => m.Description, new { @class = "materialize-textarea" })
-                    @Html.ValidationMessageFor(m => m.Description, "", new { @class = "text-danger" })
-                    @Html.LabelFor(m => m.Description, "Descripción del error")
+                    @Html.TextAreaFor(m => m.DescriptionBR, new { @class = "materialize-textarea" })
+                    @Html.ValidationMessageFor(m => m.DescriptionBR, "", new { @class = "text-danger" })
+                    @Html.LabelFor(m => m.DescriptionBR, "Descripción del error")
+                </div>
+            </div>
+            <div class="row preloader-model-form">
+                <div class="col s11 offset-s1">
+                    <div class="progress preloader-form not-active">
+                        <div class="indeterminate"></div>
+                    </div>
                 </div>
             </div>
             <div class="row">
@@ -39,3 +46,7 @@
         }
     </div>
 </div>
+
+<script type="text/javascript">
+    SumitForm("BugReportForm");
+</script>

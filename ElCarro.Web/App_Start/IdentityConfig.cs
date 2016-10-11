@@ -11,6 +11,7 @@ using SendGrid;
 using System.Configuration;
 using SendGrid.Helpers.Mail;
 using System.Linq;
+using ElCarro.Web.StringResource;
 
 namespace ElCarro.Web
 {
@@ -18,12 +19,12 @@ namespace ElCarro.Web
     {
         public async Task SendAsync(IdentityMessage message)
         {
-            if (message.Body.Contains("ConfirmEmail"))
+            if (message.Body.Contains(HelperString.ConfirmEmail))
             {
                 await configSendGridAsync(message);
             }
-            if (message.Subject.Contains("Report Error") ||
-                message.Subject.Contains("Suggestion"))
+            if (message.Subject.Contains(HelperString.BugReport) ||
+                message.Subject.Contains(HelperString.Suggestion))
             {
                 sendMessageToAdmins(message);
             }

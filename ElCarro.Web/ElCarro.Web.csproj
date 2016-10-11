@@ -266,6 +266,16 @@
     <Compile Include="Models\Vehicle.cs" />
     <Compile Include="Models\VehiclePart.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StringResource\HelperString.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HelperString.resx</DependentUpon>
+    </Compile>
+    <Compile Include="StringResource\Messages.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Messages.resx</DependentUpon>
+    </Compile>
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -312,8 +322,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\materialize.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Scripts\BugReport\SumitForms.js" />
-    <Content Include="Scripts\Suggestion\SumitForms.js" />
+    <Content Include="Scripts\SumitForms.js" />
     <Content Include="www\account.html" />
     <Content Include="www\account_business.html" />
     <Content Include="www\account_business_edit.html" />
@@ -641,6 +650,15 @@
     <EmbeddedResource Include="Migrations\201610110503263_AddYearVehiclePart.resx">
       <DependentUpon>201610110503263_AddYearVehiclePart.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="StringResource\HelperString.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>HelperString.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StringResource\Messages.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Messages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -656,7 +674,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>20316</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

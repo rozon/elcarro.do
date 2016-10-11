@@ -1,4 +1,5 @@
 ﻿using ElCarro.Web.Models;
+using ElCarro.Web.StringResource;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using System;
@@ -49,38 +50,32 @@ namespace ElCarro.Web.Controllers
         public ActionResult SendBugReport(BugReport model)
         {
             if (!ModelState.IsValid)
+                return Json(new { status = Messages.error, message = Messages.Error002 });
+
+            try
             {
-                List<BugReportErrorView> listError = new List<BugReportErrorView>();
-
-                for (int c = 0; c < ModelState.Count; c++)
-                {
-                    if (ModelState.Values.ElementAt(c).Errors.FirstOrDefault() != null)
+                Parallel.Invoke(
+                    () =>
                     {
-                        listError.Add(new BugReportErrorView(ModelState.Keys.ElementAt(c),
-                            ModelState.Values.ElementAt(c).Errors.FirstOrDefault().ErrorMessage));
-                    }
-                }
-
-                return Json(new { status = "error", errors = listError });
+                        context.BugReports.Add(model);
+                        context.SaveChangesAsync();
+                    },
+                    () =>
+                    {
+                        UserManager.EmailService.SendAsync(new IdentityMessage()
+                        {
+                            Body = model.DescriptionBR,
+                            Destination = model.EmailBR,
+                            Subject = HelperString.BugReport
+                        });
+                    });
+            }
+            catch (Exception)
+            {
+                return Json(new { status = Messages.error, message = Messages.Error001 });
             }
 
-            Parallel.Invoke(
-                () => 
-                {
-                    context.BugReports.Add(model);
-                    context.SaveChangesAsync();
-                },
-                () => 
-                {
-                    UserManager.EmailService.SendAsync(new IdentityMessage()
-                    {
-                        Body = model.Description,
-                        Destination = model.Email,
-                        Subject = "Report Error"
-                    });
-                });
-
-            return Json(new { status = "success", message = "Thanks for the help!!" });
+            return Json(new { status = Messages.success, message = Messages.ResMsjBugReport });
         }
     }
 }
