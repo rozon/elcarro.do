@@ -4,7 +4,6 @@
     ViewBag.Title = "Editar";
 }
 
-
 <div class="container">
     <div class="row">
         @using (Html.BeginForm("Edit", "VehicleParts", null, FormMethod.Post, new { @class = "col s12", enctype = "multipart/form-data" }))
@@ -79,7 +78,7 @@
 
     <script type="text/javascript">
         $(function () {
-            $("#@Html.IdFor(m=>m.Makes)").change(function (e, obj) {
+            $("#@Html.IdFor(m=>m.Make)").change(function (e, obj) {
                 $.get('@Url.Action("ByMake", "Model", new { make=""})?makeId=' + $(this).val(), function (data) {
                     var select = $('#@Html.IdFor(m=>m.Model)');
                     select.find('option').each(function (i, o) {

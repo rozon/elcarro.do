@@ -48,8 +48,11 @@ namespace ElCarro.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Name,Description,Photo,Model,Store")] CreateVehiclePart vehiclePart)
+        public async Task<ActionResult> Create([Bind(Include = "Name,Description,Photo,Model,Make,Store")] CreateVehiclePart vehiclePart)
         {
+            if (vehiclePart.Photo == null)
+                ModelState.AddModelError(nameof(CreateVehiclePart.Photo), "The Photo is required");
+
             if (ModelState.IsValid)
             {
                 string fullPath = SavePhoto(vehiclePart.Photo);
@@ -91,25 +94,46 @@ namespace ElCarro.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Name,Description,Photo,Model,Store")] CreateVehiclePart vehiclePart)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,Name,Description,Photo,Model,Make,Store")] CreateVehiclePart vehiclePart)
         {
             if (ModelState.IsValid)
             {
-                string userId = GetUserId();
                 var companyId = GetCompanyId();
-                VehiclePart actual = await db.VehiclePart.SingleOrDefaultAsync(
-                m => m.Id == vehiclePart.Id && m.Store.Company.Id == companyId);
+                var actual = await db.VehiclePart.SingleOrDefaultAsync(
+                    m => m.Id == vehiclePart.Id && m.Store.Company.Id == companyId);
 
-                if (vehiclePart == null)
+                if (actual == null)
                     return HttpNotFound();
 
-
-                var actualPhotoPath = actual.Photo;
+                var newPhoto = vehiclePart.Photo != null;
+                var oldPhotoPath = actual.Photo;
+                if (newPhoto)
+                    actual.Photo = SavePhoto(vehiclePart.Photo);
                 actual.Description = vehiclePart.Description;
-                actual.Photo = SavePhoto(vehiclePart.Photo);
-                db.Entry(actual).State = EntityState.Modified;
-                await db.SaveChangesAsync();
-                System.IO.File.Delete(ControllerContext.HttpContext.Server.MapPath(actualPhotoPath));
+                actual.Name = vehiclePart.Name;
+                actual.Store = db.Stores.Single(m => m.StoreID == vehiclePart.Store);
+                actual.Description = vehiclePart.Description;
+                actual.Model = db.Models.Single(m => m.Id == vehiclePart.Model);
+
+                using (var trans = db.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        await db.SaveChangesAsync();
+                        if (newPhoto)
+                            System.IO.File.Delete(ControllerContext.HttpContext.Server.MapPath(oldPhotoPath));
+                        trans.Commit();
+                    }
+                    catch (Exception e)
+                    {
+                        //If some exception is thrown then delete the temporal photo added
+                        trans.Rollback();
+                        if (newPhoto)
+                            System.IO.File.Delete(ControllerContext.HttpContext.Server.MapPath(actual.Photo));
+                        throw e;
+                    }
+                }
+
                 return RedirectToAction("Details", new { id = actual.Id });
             }
             FillViewModelDropDowns(vehiclePart);
@@ -121,13 +145,13 @@ namespace ElCarro.Web.Controllers
             if (id == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            string userId = GetUserId();
             var companyId = GetCompanyId();
             VehiclePart vehiclePart = await db.VehiclePart.SingleOrDefaultAsync(
                 m => m.Id == id.Value && m.Store.Company.Id == companyId);
 
             if (vehiclePart == null)
                 return HttpNotFound();
+
             return View(vehiclePart);
         }
 
@@ -138,9 +162,8 @@ namespace ElCarro.Web.Controllers
             if (id == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            string userId = GetUserId();
             var companyId = GetCompanyId();
-            VehiclePart vehiclePart = await db.VehiclePart.SingleOrDefaultAsync(
+            var vehiclePart = await db.VehiclePart.SingleOrDefaultAsync(
                 m => m.Id == id.Value && m.Store.Company.Id == companyId);
 
             if (vehiclePart == null)
@@ -161,8 +184,7 @@ namespace ElCarro.Web.Controllers
 
         private CreateVehiclePart NewViewModel(VehiclePart vehiclePart = null)
         {
-            var userId = GetUserId();
-            var companyId = db.Company.Single(c => c.Admin.Id == userId).Id;
+            var companyId = GetCompanyId();
             var model = CreateVehiclePart.Factory(db.Makes.AsEnumerable(),
                 db.Stores.Where(m => m.Company.Id == companyId).AsEnumerable(), db.Models, vehiclePart);
             return model;
@@ -170,8 +192,7 @@ namespace ElCarro.Web.Controllers
 
         private void FillViewModelDropDowns(CreateVehiclePart vehiclePart)
         {
-            var userId = GetUserId();
-            var companyId = db.Company.Single(c => c.Admin.Id == userId).Id;
+            var companyId = GetCompanyId();
             vehiclePart.FillDropDowns(db.Makes.AsEnumerable(),
                 db.Stores.Where(m => m.Company.Id == companyId).AsEnumerable(), db.Models);
         }

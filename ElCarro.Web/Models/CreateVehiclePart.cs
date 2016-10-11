@@ -16,21 +16,25 @@ namespace ElCarro.Web.Models
         }
 
         public int Id { get; set; }
+
         [Required]
         public string Name { get; set; }
+
         [Required]
         public string Description { get; set; }
+
         [Required]
         public int Model { get; set; }
+
         [Required]
         public int Make { get; set; }
+
         [Required]
         public int Store { get; set; }
 
         public IEnumerable<SelectListItem> Makes { get; set; }
         public IEnumerable<SelectListItem> Models { get; set; }
         public IEnumerable<SelectListItem> Stores { get; set; }
-
 
         public HttpPostedFileBase Photo { get; set; }
 

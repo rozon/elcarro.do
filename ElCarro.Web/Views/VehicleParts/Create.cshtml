@@ -53,10 +53,10 @@
                     <div class="btn">
                         <span>@Html.DisplayNameFor(model => model.Photo)</span>
                         @Html.TextBoxFor(model => model.Photo, new { type = "file" })
-                        @Html.ValidationMessageFor(model => model.Photo, "", new { @class = "text-danger" })
                     </div>
                     <div class="file-path-wrapper">
                         <input class="file-path validate" type="text" placeholder="Eliga la foto del artículo">
+                        @Html.ValidationMessageFor(model => model.Photo, "", new { @class = "text-danger" })
                     </div>
                 </div>
             </div>
@@ -77,7 +77,7 @@
 
     <script type="text/javascript">
         $(function () {
-            $("#@Html.IdFor(m=>m.Makes)").change(function (e, obj) {
+            $("#@Html.IdFor(m=>m.Make)").change(function (e, obj) {
                 $.get('@Url.Action("ByMake", "Model", new { make=""})?makeId=' + $(this).val(), function (data) {
                     var select = $('#@Html.IdFor(m=>m.Model)');
                     select.find('option').each(function (i, o) {
