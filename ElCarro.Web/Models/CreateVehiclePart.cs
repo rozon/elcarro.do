@@ -65,6 +65,7 @@ namespace ElCarro.Web.Models
         public IEnumerable<SelectListItem> Models { get; set; }
         public IEnumerable<SelectListItem> Stores { get; set; }
 
+        [Display(Name = "Foto")]
         public HttpPostedFileBase Photo { get; set; }
 
         private void FillMakes(IEnumerable<Make> makes)
