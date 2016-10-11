@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -12,12 +13,16 @@ namespace ElCarro.Web.Models
             ActualPage = ActualPage <= 0 ? 1 : ActualPage;
         }
 
+        [Display(Name="Nombre o Descripción")]
         public string NameOrDescription { get; set; }
 
+        [Display(Name = "Modelo")]
         public int Model { get; set; }
 
+        [Display(Name = "Marca")]
         public int Make { get; set; }
 
+        [Display(Name = "Año")]
         public int Year { get; set; }
 
         public int FromPage { get; set; }
@@ -49,7 +54,7 @@ namespace ElCarro.Web.Models
             {
                 new SelectListItem
                 {
-                    Text="Select a Year",
+                    Text="Seleccionar año",
                     Value = 0.ToString(),
                     Selected = Year == 0,
                 }
@@ -78,7 +83,7 @@ namespace ElCarro.Web.Models
             {
                 new SelectListItem
                 {
-                    Text="Select a Make",
+                    Text="Seleccionar una Marca",
                     Value = 0.ToString(),
                     Selected = Make == 0,
                 }
@@ -100,7 +105,7 @@ namespace ElCarro.Web.Models
                 //The default option, no selectable.
                 new SelectListItem
                 {
-                    Text = "Select a Model",
+                    Text = "Seleccionar un Modelo",
                     Value = 0.ToString(),
                     Selected = Model == 0,
                 }

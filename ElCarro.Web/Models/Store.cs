@@ -38,6 +38,7 @@ namespace ElCarro.Web.Models
         public virtual Company Company { get; set; }
 
         [NotMapped]
+        [Display(Name = "Dirección")]
         public string FullAdress => StoreAddress.StreetName + " #"
             + StoreAddress.StreetNumber + ", "
             + StoreAddress.Zone + ", "

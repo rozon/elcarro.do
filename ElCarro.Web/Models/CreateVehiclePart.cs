@@ -19,21 +19,27 @@ namespace ElCarro.Web.Models
         public int Id { get; set; }
 
         [Required]
+        [Display(Name = "Nombre")]
         public string Name { get; set; }
 
         [Required]
+        [Display(Name = "Descripción")]
         public string Description { get; set; }
 
         [Required]
+        [Display(Name = "Modelo")]
         public int Model { get; set; }
 
         [Required]
+        [Display(Name = "Marca")]
         public int Make { get; set; }
 
         [Required]
+        [Display(Name = "Repuesto")]
         public int Store { get; set; }
 
         [Required]
+        [Display(Name = "Año")]
         public int Year { get; set; }
 
         public IEnumerable<SelectListItem> Years =>
@@ -41,7 +47,7 @@ namespace ElCarro.Web.Models
             {
                 new SelectListItem
                 {
-                    Text="Select a Year",
+                    Text="Seleccionar año",
                     Value = null,
                     Selected = Year == 0,
                 }
@@ -67,7 +73,7 @@ namespace ElCarro.Web.Models
             {
                 new SelectListItem
                 {
-                    Text="Select a Make",
+                    Text = "Seleccionar marca",
                     Value = null,
                     Selected = Make == 0,
                 }
@@ -89,7 +95,7 @@ namespace ElCarro.Web.Models
                 //The default option, no selectable.
                 new SelectListItem
                 {
-                    Text = "Select a Model",
+                    Text = "Seleccionar modelo",
                     Value = null,
                     Selected = Model == 0,
                 }
@@ -112,7 +118,7 @@ namespace ElCarro.Web.Models
                 //The default option, no selectable.
                 new SelectListItem
                 {
-                    Text="Select a Store",
+                    Text="Seleccionar repuesto",
                     Value = null,
                     Selected = Store == 0,
                 }
