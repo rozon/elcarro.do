@@ -142,6 +142,38 @@ namespace ElCarro.Web.Controllers
             return View(vehiclePart);
         }
 
+        public async Task<ActionResult> PublicDetails(int? id)
+        {
+            if (id == null)
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            var vehiclePart = await db.VehiclePart.SingleOrDefaultAsync(m => m.Id == id.Value);
+            if (vehiclePart == null)
+                return HttpNotFound();
+
+            return View(vehiclePart);
+        }
+
+        public JsonResult All()
+        {
+            return Json(db.VehiclePart.ToList().Select(v => new
+            {
+                v.Name,
+                v.Description,
+                Model = new
+                {
+                    v.Model.Id,
+                    v.Model.Name
+                },
+                Make = new
+                {
+                    Id = v.Model.Make.Id,
+                    Name = v.Model.Make.Name
+                },
+                v.Year,
+                Photo = Url.Content(v.Photo)
+            }).ToList(), JsonRequestBehavior.AllowGet);
+        }
+
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)

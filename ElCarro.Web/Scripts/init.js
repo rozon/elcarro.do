@@ -1,6 +1,5 @@
 $(function () {
     $('.scrollspy').scrollSpy();
-    //$('select').material_select('destroy');
     $('.button-collapse').sideNav();
     $('.parallax').parallax();
     $('select').material_select();
@@ -18,12 +17,4 @@ $(function () {
         }],
         placeholder: 'Añade más filtros',
     });
-
-    $('input.autocomplete').autocomplete({
-        data: {
-            "bumper": null,
-            "bumper delantero": null,
-            "bumper trasero": null,
-        }
-    });
-}); // end of document ready
+});

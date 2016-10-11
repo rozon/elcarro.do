@@ -11,10 +11,10 @@
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.Description)
+                    @Html.DisplayNameFor(model => model.Name)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Photo)
+                    @Html.DisplayNameFor(model => model.Model)
                 </th>
                 <th></th>
             </tr>
@@ -24,10 +24,10 @@
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Description)
+                        @Html.DisplayFor(modelItem => item.Name)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Photo)
+                        @Html.DisplayFor(modelItem => item.Model.Make.Name) @Html.DisplayFor(modelItem => item.Model.Name) @Html.DisplayFor(modelItem => item.Year)
                     </td>
                     <td>
                         <a href="@Url.Action("Edit","VehicleParts", new { id = item.Id })"><i class="small material-icons">mode_edit</i></a>

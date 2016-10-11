@@ -37,6 +37,13 @@ namespace ElCarro.Web.Models
         [ForeignKey("CompanyId")]
         public virtual Company Company { get; set; }
 
+        [NotMapped]
+        public string FullAdress => StoreAddress.StreetName + " #"
+            + StoreAddress.StreetNumber + ", "
+            + StoreAddress.Zone + ", "
+            + StoreAddress.Province + " "
+            + StoreAddress.City;
+
         public virtual StoreAddress StoreAddress { get; set; }
         public virtual ICollection<VehiclePart> VehicleParts { get; set; }
         public virtual ICollection<Review> Reviews { get; set; }
