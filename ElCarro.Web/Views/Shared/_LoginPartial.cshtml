@@ -21,12 +21,12 @@
         {
             <li><a class="@_class" href="@Url.Action("Index", "VehicleParts")"><i class="material-icons left">store</i>Piezas</a></li>
         }
-        <li><a class="waves-effect waves-light btn" href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+        <li><a class="waves-effect waves-light btn" href="javascript:document.getElementById('logoutForm').submit()">Cerrar Sesión</a></li>
     }
 }
 else
 {
     <li><a class="@_class" href="@Url.Action("Search", "Home")"><i class="material-icons left">search</i>Buscar pieza</a></li>
-    <li><a class="@_class" href="@Url.Action("Store", "Home")"><i class="material-icons left">store</i>Repuestos</a></li>
-    <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "waves-effect waves-light btn" })</li>
+    @*<li><a class="@_class" href="@Url.Action("Store", "Home")"><i class="material-icons left">store</i>Repuestos</a></li>*@
+    <li>@Html.ActionLink("Inicar Sesión", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "waves-effect waves-light btn" })</li>
 }
