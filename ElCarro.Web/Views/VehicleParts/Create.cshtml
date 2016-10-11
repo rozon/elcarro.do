@@ -29,7 +29,8 @@
 
             <div class="row">
                 <div class="input-field col s4">
-                    @Html.DropDownList(Html.IdFor(m => m.Makes).ToHtmlString(), Model.Makes)
+                    @Html.DropDownListFor(m => m.Make, Model.Makes)
+                    @Html.ValidationMessageFor(model => model.Make, "", new { @class = "text-danger" })
                 </div>
             </div>
 

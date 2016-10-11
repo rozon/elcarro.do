@@ -91,7 +91,7 @@ namespace ElCarro.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Description,Photo")] CreateVehiclePart vehiclePart)
+        public async Task<ActionResult> Edit([Bind(Include = "Name,Description,Photo,Model,Store")] CreateVehiclePart vehiclePart)
         {
             if (ModelState.IsValid)
             {
@@ -112,7 +112,7 @@ namespace ElCarro.Web.Controllers
                 System.IO.File.Delete(ControllerContext.HttpContext.Server.MapPath(actualPhotoPath));
                 return RedirectToAction("Details", new { id = actual.Id });
             }
-            //FillCreateVehiclePartModel(vehiclePart);
+            FillViewModelDropDowns(vehiclePart);
             return View(vehiclePart);
         }
 
