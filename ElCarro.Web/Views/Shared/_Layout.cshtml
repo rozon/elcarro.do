@@ -8,6 +8,7 @@
     <!-- CSS  -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     @Styles.Render("~/Content/css")
+    @RenderSection("Styles", false)
 </head>
 <body>
 
@@ -75,6 +76,8 @@
             </div>
         </div>
     </footer>
+
+    @RenderSection("Scripts", false)
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/modernizr")
