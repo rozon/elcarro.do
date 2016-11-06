@@ -21,8 +21,6 @@
             <div id="socialLoginList" class="row">
                 @using (Html.BeginForm("ExternalLogin", "Account", new { ReturnUrl = Model.ReturnUrl }))
                 {
-                    int amount = (12 / loginProviders.Count());
-                    string m = "m" + amount;
                     @Html.AntiForgeryToken()
                     foreach (AuthenticationDescription p in loginProviders)
                     {
@@ -32,7 +30,7 @@
                             _class = "loginBtn--facebook";
                         }
                         
-                        <div class="input-field col s12 @m center">
+                        <div class="input-field col s12 center">
                             <button type="submit"
                                     class="loginBtn @_class @p.AuthenticationType.ToLower()"
                                     id="@p.AuthenticationType" name="provider"
