@@ -6,8 +6,8 @@ namespace ElCarro.Web.Models
 {
     public class ExternalLoginConfirmationViewModel
     {
-        [Required]
-        [Display(Name = "Email")]
+        [Required(ErrorMessage = "El correo es requerido.")]
+        [Display(Name = "Correo")]
         public string Email { get; set; }
     }
 
@@ -49,93 +49,74 @@ namespace ElCarro.Web.Models
 
     public class LoginViewModel
     {
-        [Required]
-        [Display(Name = "UserName")]
+        [Required(ErrorMessage = "El nombre de usuario es requerido.")]
+        [Display(Name = "Nombre de usuario")]
         public string UserName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "La contraseña es requerida.")]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Contraseña")]
         public string Password { get; set; }
-
-        [Display(Name = "Remember me?")]
-        public bool RememberMe { get; set; }
     }
 
-    public class RegisterViewModel
+    public class RegisterBaseViewModel
     {
-        [Required]
-        [Display(Name = "Full Name")]
-        public string FullName { get; set; }
-
-        [Required]
+        [Required(ErrorMessage = "El correo electrónico es requerido.")]
         [EmailAddress]
-        [Display(Name = "Email")]
+        [Display(Name = "Correo electrónico")]
         public string Email { get; set; }
 
-        [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [Required(ErrorMessage = "La contraseña es requerida.")]
+        [StringLength(100, ErrorMessage = "La {0} debe ser mayor o igual a {2} caracteres de longitud.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Contraseña")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Display(Name = "Confirmar contraseña")]
+        [Compare("Password", ErrorMessage = "La contraseña y la contraseña de confirmación no son iguales.")]
         public string ConfirmPassword { get; set; }
 
-        [Display(Name = "Privacy Policy")]
-        [MustBeTrue(ErrorMessage = "The Policy Privacy should be accepted")]
+        [Display(Name = "Políticas de privacidad")]
+        [MustBeTrue(ErrorMessage = "La política de privacidad debe ser aceptada.")]
         public bool PrivacyPolicy { get; set; }
     }
 
-    public class RegisterCompanyViewModel
+
+    public class RegisterViewModel : RegisterBaseViewModel
     {
-        [Required]
-        [Display(Name = "Company Name")]
+        [Required(ErrorMessage = "El nombre completo es requerido.")]
+        [Display(Name = "Nombre completo")]
+        public string FullName { get; set; }
+    }
+
+    public class RegisterCompanyViewModel : RegisterBaseViewModel
+    {
+        [Required(ErrorMessage = "El nombre de la compañia es requerido.")]
+        [Display(Name = "Nombre de la compañia")]
         public string CompanyName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "El numero de telefono es requerdo.")]
         [Phone]
-        [Display(Name = "Phone Number")]
+        [Display(Name = "Numero de telefono")]
         public string PhoneNumber { get; set; }
-
-        [Required]
-        [EmailAddress]
-        [Display(Name = "Email")]
-        public string Email { get; set; }
-
-        [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
-        [DataType(DataType.Password)]
-        [Display(Name = "Password")]
-        public string Password { get; set; }
-
-        [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
-        public string ConfirmPassword { get; set; }
-
-        [Display(Name = "Privacy Policy")]
-        [MustBeTrue(ErrorMessage = "The Policy Privacy should be accepted")]
-        public bool PrivacyPolicy { get; set; }
     }
 
     public class ResetPasswordViewModel
     {
-        [Required]
-        [Display(Name = "Name")]
+        [Required(ErrorMessage = "El nombre es requerido.")]
+        [Display(Name = "Nombre")]
         public string Name { get; set; }
 
-        [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [Required(ErrorMessage = "La contraseña es requerida.")]
+        [StringLength(100, ErrorMessage = "La {0} debe ser mayor o igual a {2} caracteres de longitud.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Contraseña")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Display(Name = "Confirmar contraseña")]
+        [Compare("Password", ErrorMessage = "La contraseña y la contraseña de confirmación no son iguales.")]
         public string ConfirmPassword { get; set; }
 
         public string Code { get; set; }
@@ -143,8 +124,8 @@ namespace ElCarro.Web.Models
 
     public class ForgotPasswordViewModel
     {
-        [Required]
-        [Display(Name = "Name")]
-        public string Name { get; set; }
+        [Required(ErrorMessage = "El nombre de usuario es requerido.")]
+        [Display(Name = "Nombre de usuario")]
+        public string UserName { get; set; }
     }
 }
