@@ -6,8 +6,8 @@ namespace ElCarro.Web.Models
 {
     public class ExternalLoginConfirmationViewModel
     {
-        [Required(ErrorMessage = "El correo es requerido.")]
-        [Display(Name = "Correo")]
+        [Required(ErrorMessage = "El correo electrónico es requerido.")]
+        [Display(Name = "Correo electrónico")]
         public string Email { get; set; }
     }
 
@@ -42,16 +42,18 @@ namespace ElCarro.Web.Models
 
     public class ForgotViewModel
     {
-        [Required]
-        [Display(Name = "Email")]
+        [Required(ErrorMessage = "El correo electrónico es requerido.")]
+        [EmailAddress]
+        [Display(Name = "Correo electrónico")]
         public string Email { get; set; }
     }
 
     public class LoginViewModel
     {
-        [Required(ErrorMessage = "El nombre de usuario es requerido.")]
-        [Display(Name = "Nombre de usuario")]
-        public string UserName { get; set; }
+        [Required(ErrorMessage = "El correo electrónico es requerido.")]
+        [EmailAddress]
+        [Display(Name = "Correo electrónico")]
+        public string Email { get; set; }
 
         [Required(ErrorMessage = "La contraseña es requerida.")]
         [DataType(DataType.Password)]
@@ -73,7 +75,7 @@ namespace ElCarro.Web.Models
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirmar contraseña")]
+        [Display(Name = "Contraseña de confirmación")]
         [Compare("Password", ErrorMessage = "La contraseña y la contraseña de confirmación no son iguales.")]
         public string ConfirmPassword { get; set; }
 
@@ -96,9 +98,9 @@ namespace ElCarro.Web.Models
         [Display(Name = "Nombre de la compañia")]
         public string CompanyName { get; set; }
 
-        [Required(ErrorMessage = "El numero de telefono es requerdo.")]
+        [Required(ErrorMessage = "El número de teléfono es requerido.")]
         [Phone]
-        [Display(Name = "Numero de telefono")]
+        [Display(Name = "Número de teléfono")]
         public string PhoneNumber { get; set; }
     }
 
@@ -115,7 +117,7 @@ namespace ElCarro.Web.Models
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirmar contraseña")]
+        [Display(Name = "Contraseña de confirmación")]
         [Compare("Password", ErrorMessage = "La contraseña y la contraseña de confirmación no son iguales.")]
         public string ConfirmPassword { get; set; }
 
@@ -124,8 +126,9 @@ namespace ElCarro.Web.Models
 
     public class ForgotPasswordViewModel
     {
-        [Required(ErrorMessage = "El nombre de usuario es requerido.")]
-        [Display(Name = "Nombre de usuario")]
-        public string UserName { get; set; }
+        [Required(ErrorMessage = "El correo electrónico es requerido.")]
+        [EmailAddress]
+        [Display(Name = "Correo electrónico")]
+        public string Email { get; set; }
     }
 }
