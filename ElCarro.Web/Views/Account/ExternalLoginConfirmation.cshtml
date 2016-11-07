@@ -6,7 +6,7 @@
 <div class="container">
     <div class="section">
         <h2>@ViewBag.Title.</h2>
-        <h3>Asocia tu cuenta de @ViewBag.LoginProvider.</h3>
+        <h3>Asocia tu cuenta de @Model.Provider.</h3>
 
         @using (Html.BeginForm("ExternalLoginConfirmation", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
         {
@@ -16,7 +16,7 @@
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <p class="text-info">
-                Usted ha sido autenticado correctamente con <strong>@ViewBag.LoginProvider</strong>.
+                Usted ha sido autenticado correctamente con <strong>@Model.Provider</strong>.
                 Por favor entre su correo o usuario y haga click en el boton de registrarse para terminar de
                 loguearse.
             </p>
@@ -28,8 +28,12 @@
                 </div>
             </div>
             <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" class="btn btn-default" value="Register" />
+                <div>
+                    <input type="submit" class="btn btn-default" value="Registrarse" />
+                    @if (ViewBag.showButton)
+                    {
+                        @Html.ActionLink("Volver al login", "Login", "Account", routeValues: new { returnUrl = ViewBag.ReturnUrl }, htmlAttributes: null)
+                    }
                 </div>
             </div>
         }

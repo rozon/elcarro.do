@@ -1,0 +1,10 @@
+﻿#map-create {
+    width: 100%;
+    height: 500px;
+}
+
+@media only screen and (max-width : 600px) {
+    #map-create {
+        height: 350px !important;
+    }
+}

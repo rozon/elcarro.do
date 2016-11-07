@@ -20,6 +20,8 @@ namespace ElCarro.Web.Models
             PhoneNumber = store.PhoneNumber;
             Email = store.Email;
             CompanyId = store.CompanyId;
+            latitude = store.lat_long.lat;
+            longitude = store.lat_long.lng;
         }
 
         public int StoreID { get; set; }
@@ -33,19 +35,14 @@ namespace ElCarro.Web.Models
         [Required(ErrorMessage = "Este campo es requerido")]
         public string Email { get; set; }
 
+        [Required(ErrorMessage = "La ubicación es requerida.")]
+        public double latitude { get; set; }
+        [Required(ErrorMessage = "La ubicación es requerida.")]
+        public double longitude { get; set; }
+
         public int CompanyId { get; set; }
         [ForeignKey("CompanyId")]
         public virtual Company Company { get; set; }
-
-        [NotMapped]
-        [Display(Name = "Dirección")]
-        public string FullAdress => StoreAddress.StreetName + " #"
-            + StoreAddress.StreetNumber + ", "
-            + StoreAddress.Zone + ", "
-            + StoreAddress.Province + " "
-            + StoreAddress.City;
-
-        public virtual StoreAddress StoreAddress { get; set; }
         public virtual ICollection<VehiclePart> VehicleParts { get; set; }
         public virtual ICollection<Review> Reviews { get; set; }
     }
@@ -62,6 +59,7 @@ namespace ElCarro.Web.Models
             PhoneNumber = store.PhoneNumber;
             Email = store.Email;
             CompanyId = store.CompanyId;
+            lat_long = new pos(store.latitude, store.longitude);
         }
 
         public int StoreID { get; set; }
@@ -76,8 +74,24 @@ namespace ElCarro.Web.Models
         [Required]
         [Display(Name = "Correo Electrónico")]
         public string Email { get; set; }
-        public int CompanyId { get; set; }
 
-        public StoreAddressView address { get; set; }
+        [Required(ErrorMessage = "La ubicación es requerida.")]
+        public pos lat_long { get; set; }
+        public int CompanyId { get; set; }
+    }
+
+    [NotMapped]
+    public class pos
+    {
+        public pos() { }
+
+        public pos(double lat, double lng)
+        {
+            this.lat = lat;
+            this.lng = lng;
+        }
+
+        public double lat { get; set; }
+        public double lng { get; set; }
     }
 }

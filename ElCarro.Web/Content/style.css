@@ -64,6 +64,20 @@ footer.page-footer {
     border: 5px;
 }
 
+.validation-summary-errors.text-danger li{
+    display: none;
+}
+
+.validation-summary-errors.text-danger li:last-child {
+    color: #FFF;
+    background-color: #e57373;
+    border-color: #ebccd1;
+    border-radius: 20px;
+    padding: 10px;
+    border: 5px;
+    display: block !important;
+}
+
 /* Start Forms */
 .toast-success {
     background-color: #dff0d8;

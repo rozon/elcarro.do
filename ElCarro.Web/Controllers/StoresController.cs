@@ -61,10 +61,6 @@ namespace ElCarro.Web.Controllers
                 temp.Company = await db.Company.SingleAsync(c => c.Admin.Id.Equals(userId));
                 temp = db.Stores.Add(temp);
 
-                StoreAddress tempAddress = new StoreAddress(store.address);
-                tempAddress.StoreID = temp.StoreID;
-                db.StoreAddress.Add(tempAddress);
-
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index", "Manage");
             }
@@ -83,7 +79,6 @@ namespace ElCarro.Web.Controllers
             Store temp = await db.Stores.FindAsync(id);
             StoreView store = new StoreView(temp);
             store.PhoneNumber = FormatPhoneNumber(store.PhoneNumber);
-            store.address = new StoreAddressView(temp.StoreAddress);
 
             if (store == null)
             {
@@ -105,6 +100,9 @@ namespace ElCarro.Web.Controllers
                 temp.Name = model.Name;
                 temp.PhoneNumber = OnlyNumbers(model.PhoneNumber);
                 temp.Email = model.Email;
+                temp.latitude = model.lat_long.lat;
+                temp.longitude = model.lat_long.lng;
+
                 string actualPhotoPath = temp.Logo;
                 if (null != model.Logo)
                 {
@@ -112,15 +110,7 @@ namespace ElCarro.Web.Controllers
                     DeletePhoto(actualPhotoPath);
                 }
 
-                temp.StoreAddress = await db.StoreAddress.FindAsync(model.StoreID);
-                temp.StoreAddress.Zone = model.address.Zone;
-                temp.StoreAddress.Province = model.address.Province;
-                temp.StoreAddress.City = model.address.City;
-                temp.StoreAddress.StreetName = model.address.StreetName;
-                temp.StoreAddress.StreetNumber = model.address.StreetNumber;
-
                 db.Entry(temp).State = EntityState.Modified;
-                db.Entry(temp.StoreAddress).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Details", "Stores", new { id = temp.StoreID });
             }
@@ -147,8 +137,6 @@ namespace ElCarro.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            StoreAddress storeAddress = await db.StoreAddress.FindAsync(id);
-            db.StoreAddress.Remove(storeAddress);
             Store store = await db.Stores.FindAsync(id);
             string urlImage = store.Logo;
             db.Stores.Remove(store);
