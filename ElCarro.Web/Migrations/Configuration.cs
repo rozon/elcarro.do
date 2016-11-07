@@ -7,18 +7,18 @@ namespace ElCarro.Web.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<ElCarro.Web.Models.ApplicationDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<ApplicationDbContext>
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
 #if Debug
             AutomaticMigrationDataLossAllowed = true;
 #endif
 
         }
 
-        protected override void Seed(ElCarro.Web.Models.ApplicationDbContext context)
+        protected override void Seed(ApplicationDbContext context)
         {
             using (var trans = context.Database.BeginTransaction())
             {

@@ -18,8 +18,6 @@ namespace ElCarro.Web.Models
         public DbSet<Suggestion> Suggestions { get; set; }
         public DbSet<Make> Makes { get; set; }
         public DbSet<Model> Models { get; set; }
-
-        public DbSet<StoreAddress> StoreAddress { get; set; }
         public DbSet<Puntuation> Puntuations { get; set; }
         public DbSet<Review> Reviews { get; set; }
         public DbSet<Store> Stores { get; set; }
