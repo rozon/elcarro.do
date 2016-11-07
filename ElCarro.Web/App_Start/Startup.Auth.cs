@@ -54,15 +54,15 @@ namespace ElCarro.Web
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseFacebookAuthentication(
+               appId: "284591295256133",
+               appSecret: "51b17d0f3c22367ec6f3020538a3f333");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "912712930283-1sbkpthrt7cnod415l92chegvrv2ndjc.apps.googleusercontent.com",
+                ClientSecret = "hFch4J5we-W1c9-lsuDU5Paq"
+            });
         }
     }
 }
