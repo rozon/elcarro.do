@@ -5,6 +5,8 @@
     Layout = "~/Views/Shared/_AccountLayout.cshtml";
 }
 
+@Styles.Render("~/Content/map-store")
+
 <div class="row">
     <h3 class="center">
         Sucursal: @Model.Name
@@ -47,30 +49,13 @@
         </div>
     </div>
 </div>
+
 <div class="row container">
-    <div class="input-field col s12 m6">
-        <i class="material-icons prefix">business</i>
-        <input disabled value="@Model.StoreAddress.StreetName" type="text" class="validate">
-        <label>Calle</label>
-    </div>
-    <div class="input-field col s4 m2">
-        <input disabled value="@Model.StoreAddress.StreetNumber" type="text" class="validate">
-        <label>No.</label>
-    </div>
-    <div class="input-field col s8 m4">
-        <input disabled value="@Model.StoreAddress.Zone" type="text" class="validate">
-        <label>Sector</label>
-    </div>
-</div>
-<div class="row container">
-    <div class="input-field col s12 m6">
-        <input disabled value="@Model.StoreAddress.Province" type="text">
-        <label for="number">Provincia</label>
-    </div>
-    <div class="input-field col s12 m6">
-        <input disabled value="@Model.StoreAddress.City" type="text">
-        <label>Ciudad</label>
-    </div>
+    <h3>Ubicación del negocio.</h3>
+    <input type="hidden" id="no-drageble" value="true"/>
+    @Html.HiddenFor(m => m.latitude)
+    @Html.HiddenFor(m => m.longitude)
+    <div id="map-create"></div>
 </div>
 
 <div class="fixed-action-btn click-to-toggle" style="bottom: 45px; right: 24px;">
@@ -100,3 +85,8 @@
         </li>
     </ul>
 </div>
+
+@Scripts.Render("~/bundles/map-init")
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBr1uQbYB27-9TXYvVAjRYqPou1QkcTdgk&callback=initMap">
+</script>

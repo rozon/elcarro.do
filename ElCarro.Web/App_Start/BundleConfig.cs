@@ -23,9 +23,15 @@ namespace ElCarro.Web
                 "~/Scripts/init.js",
                 "~/Scripts/SumitForms.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/map-init").Include(
+                "~/Scripts/Store/map-init.js"));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/materialize.css",
                 "~/Content/style.css"));
+
+            bundles.Add(new StyleBundle("~/Content/map-store").Include(
+                "~/Content/map-store.css"));
 
             bundles.Add(new StyleBundle("~/Content/account").Include(
                 "~/Content/materialize.css",

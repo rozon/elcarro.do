@@ -5,6 +5,8 @@
     Layout = "~/Views/Shared/_AccountLayout.cshtml";
 }
 
+@Styles.Render("~/Content/map-store")
+
 <div class="row">
     <h3 class="center">
         Editando sucursal: @Model.Name
@@ -67,35 +69,10 @@
         </div>
 
         <div class="row container">
-            <div class="input-field col s12 m6">
-                <i class="material-icons prefix">business</i>
-                @Html.TextBoxFor(m => m.address.StreetName, new { @class = "validate" })
-                @Html.ValidationMessageFor(m => m.address.StreetName, "", new { @class = "text-danger" })
-                @Html.LabelFor(m => m.address.StreetName, "Calle")
-            </div>
-            <div class="input-field col s4 m2">
-                @Html.TextBoxFor(m => m.address.StreetNumber, new { @class = "validate" })
-                @Html.ValidationMessageFor(m => m.address.StreetNumber, "", new { @class = "text-danger" })
-                @Html.LabelFor(m => m.address.StreetNumber, "No.")
-            </div>
-            <div class="input-field col s8 m4">
-                @Html.TextBoxFor(m => m.address.Zone, new { @class = "validate" })
-                @Html.ValidationMessageFor(m => m.address.Zone, "", new { @class = "text-danger" })
-                @Html.LabelFor(m => m.address.Zone, "Sector")
-            </div>
-        </div>
-
-        <div class="row container">
-            <div class="input-field col s12 m6">
-                @Html.TextBoxFor(m => m.address.Province, new { @class = "validate" })
-                @Html.ValidationMessageFor(m => m.address.Province, "", new { @class = "text-danger" })
-                @Html.LabelFor(m => m.address.Province, "Provincia")
-            </div>
-            <div class="input-field col s12 m6">
-                @Html.TextBoxFor(m => m.address.City, new { @class = "validate" })
-                @Html.ValidationMessageFor(m => m.address.City, "", new { @class = "text-danger" })
-                @Html.LabelFor(m => m.address.City, "Ciudad")
-            </div>
+            <h3>Ubicación del negocio.</h3>
+            @Html.HiddenFor(m => m.lat_long.lat, new { id = "latitude" })
+            @Html.HiddenFor(m => m.lat_long.lng, new { id = "longitude" })
+            <div id="map-create"></div>
         </div>
 
         <div class="row">
@@ -105,3 +82,8 @@
         </div>
     </div>
 }
+
+@Scripts.Render("~/bundles/map-init")
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBr1uQbYB27-9TXYvVAjRYqPou1QkcTdgk&callback=initMap">
+</script>

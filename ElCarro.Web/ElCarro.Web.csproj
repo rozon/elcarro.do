@@ -192,6 +192,14 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ModelController.cs" />
     <Compile Include="Controllers\PartialViewController.cs" />
+    <Compile Include="Migrations\201611062250171_Changing-Address-of-Store.cs" />
+    <Compile Include="Migrations\201611062250171_Changing-Address-of-Store.Designer.cs">
+      <DependentUpon>201611062250171_Changing-Address-of-Store.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611062300317_Adding-Latitude-and-Longitude-to-Store.cs" />
+    <Compile Include="Migrations\201611062300317_Adding-Latitude-and-Longitude-to-Store.Designer.cs">
+      <DependentUpon>201611062300317_Adding-Latitude-and-Longitude-to-Store.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\SearchViewModel.cs" />
     <Compile Include="Controllers\StoresController.cs" />
     <Compile Include="Controllers\SuggestionController.cs" />
@@ -232,7 +240,6 @@
     <Compile Include="Migrations\201610110503263_AddYearVehiclePart.Designer.cs">
       <DependentUpon>201610110503263_AddYearVehiclePart.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\StoreAddress.cs" />
     <Compile Include="Models\BugReport.cs" />
     <Compile Include="Models\CreateVehiclePart.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -281,6 +288,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\account_style.css" />
+    <Content Include="Content\map-store.css" />
     <Content Include="Content\materialize.css" />
     <Content Include="Content\materialize.min.css" />
     <Content Include="Content\style.css" />
@@ -322,6 +330,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\materialize.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\Store\map-init.js" />
     <Content Include="Scripts\SumitForms.js" />
     <Content Include="www\account.html" />
     <Content Include="www\account_business.html" />
@@ -650,6 +659,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201610110503263_AddYearVehiclePart.resx">
       <DependentUpon>201610110503263_AddYearVehiclePart.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611062250171_Changing-Address-of-Store.resx">
+      <DependentUpon>201611062250171_Changing-Address-of-Store.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611062300317_Adding-Latitude-and-Longitude-to-Store.resx">
+      <DependentUpon>201611062300317_Adding-Latitude-and-Longitude-to-Store.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="StringResource\HelperString.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

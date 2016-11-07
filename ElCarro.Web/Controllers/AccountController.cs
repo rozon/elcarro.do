@@ -436,8 +436,8 @@ namespace ElCarro.Web.Controllers
                 default:
                     // If the user does not have an account, then prompt the user to create an account
                     ViewBag.ReturnUrl = returnUrl;
-                    ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
-                    return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
+                    return View("ExternalLoginConfirmation",
+                        new ExternalLoginConfirmationViewModel { Email = loginInfo.Email, Provider = loginInfo.Login.LoginProvider });
             }
         }
 
@@ -448,6 +448,8 @@ namespace ElCarro.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ExternalLoginConfirmation(ExternalLoginConfirmationViewModel model, string returnUrl)
         {
+            ViewBag.showButton = false;
+
             if (User.Identity.IsAuthenticated)
             {
                 return RedirectToAction("Index", "Manage");
@@ -473,6 +475,7 @@ namespace ElCarro.Web.Controllers
                     }
                 }
                 AddErrors(result);
+                ViewBag.showButton = true;
             }
 
             ViewBag.ReturnUrl = returnUrl;
@@ -531,9 +534,13 @@ namespace ElCarro.Web.Controllers
 
         private void AddErrors(IdentityResult result)
         {
+            string temp = string.Empty;
             foreach (var error in result.Errors)
             {
-                ModelState.AddModelError("", error);
+                temp = error;
+                temp = temp.Replace("Email", "Correo electrónico");
+                temp = temp.Replace("is already taken", "ya esta siendo usado");
+                ModelState.AddModelError("", temp);
             }
         }
 

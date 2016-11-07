@@ -9,6 +9,8 @@ namespace ElCarro.Web.Models
         [Required(ErrorMessage = "El correo electrónico es requerido.")]
         [Display(Name = "Correo electrónico")]
         public string Email { get; set; }
+
+        public string Provider { get; set; }
     }
 
     public class ExternalLoginListViewModel
