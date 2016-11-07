@@ -70,6 +70,20 @@ function getPosition() {
     }
 }
 
+function codeAddress() {
+    var address = document.getElementById('address-map').value;
+    geocoder.geocode({ 'address': address }, function (results, status) {
+        if (status == 'OK') {
+            map.setCenter(results[0].geometry.location);
+            var loc = results[0].geometry.location;
+            pos = { lat: loc.lat(), lng: loc.lng() };
+            _initMap(16);
+        } else {
+            alert('Geocode was not successful for the following reason: ' + status);
+        }
+    });
+}
+
 function initMap() {
     geocoder = new google.maps.Geocoder;
     infowindow = new google.maps.InfoWindow;
