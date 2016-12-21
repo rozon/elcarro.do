@@ -44,6 +44,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
@@ -51,6 +55,22 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NPOI, Version=2.2.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.2.1\lib\net40\NPOI.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NPOI.OOXML, Version=2.2.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.2.1\lib\net40\NPOI.OOXML.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NPOI.OpenXml4Net, Version=2.2.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.2.1\lib\net40\NPOI.OpenXml4Net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NPOI.OpenXmlFormats, Version=2.2.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.2.1\lib\net40\NPOI.OpenXmlFormats.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="SendGrid, Version=8.0.2.0, Culture=neutral, PublicKeyToken=4f047e93159395ca, processorArchitecture=MSIL">
@@ -192,18 +212,16 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ModelController.cs" />
     <Compile Include="Controllers\PartialViewController.cs" />
-    <Compile Include="Migrations\201611062250171_Changing-Address-of-Store.cs" />
-    <Compile Include="Migrations\201611062250171_Changing-Address-of-Store.Designer.cs">
-      <DependentUpon>201611062250171_Changing-Address-of-Store.cs</DependentUpon>
+    <Compile Include="EmailSender\EmailSender.cs" />
+    <Compile Include="Helpers\HelperMethods.cs" />
+    <Compile Include="Migrations\201608120317132_0.cs" />
+    <Compile Include="Migrations\201608120317132_0.Designer.cs">
+      <DependentUpon>201608120317132_0.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201611062300317_Adding-Latitude-and-Longitude-to-Store.cs" />
-    <Compile Include="Migrations\201611062300317_Adding-Latitude-and-Longitude-to-Store.Designer.cs">
-      <DependentUpon>201611062300317_Adding-Latitude-and-Longitude-to-Store.cs</DependentUpon>
+    <Compile Include="Migrations\201608301405258_CompanyAndVehiclePartsAdded.cs" />
+    <Compile Include="Migrations\201608301405258_CompanyAndVehiclePartsAdded.Designer.cs">
+      <DependentUpon>201608301405258_CompanyAndVehiclePartsAdded.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\SearchViewModel.cs" />
-    <Compile Include="Controllers\StoresController.cs" />
-    <Compile Include="Controllers\SuggestionController.cs" />
-    <Compile Include="Controllers\BugReportController.cs" />
     <Compile Include="Migrations\201609190248394_BugReport_Added.cs" />
     <Compile Include="Migrations\201609190248394_BugReport_Added.Designer.cs">
       <DependentUpon>201609190248394_BugReport_Added.cs</DependentUpon>
@@ -240,6 +258,23 @@
     <Compile Include="Migrations\201610110503263_AddYearVehiclePart.Designer.cs">
       <DependentUpon>201610110503263_AddYearVehiclePart.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201611062250171_Changing-Address-of-Store.cs" />
+    <Compile Include="Migrations\201611062250171_Changing-Address-of-Store.Designer.cs">
+      <DependentUpon>201611062250171_Changing-Address-of-Store.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611062300317_Adding-Latitude-and-Longitude-to-Store.cs" />
+    <Compile Include="Migrations\201611062300317_Adding-Latitude-and-Longitude-to-Store.Designer.cs">
+      <DependentUpon>201611062300317_Adding-Latitude-and-Longitude-to-Store.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612130429568_upload-excel-file.cs" />
+    <Compile Include="Migrations\201612130429568_upload-excel-file.Designer.cs">
+      <DependentUpon>201612130429568_upload-excel-file.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Model.cs" />
+    <Compile Include="Models\SearchViewModel.cs" />
+    <Compile Include="Controllers\StoresController.cs" />
+    <Compile Include="Controllers\SuggestionController.cs" />
+    <Compile Include="Controllers\BugReportController.cs" />
     <Compile Include="Models\BugReport.cs" />
     <Compile Include="Models\CreateVehiclePart.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -251,27 +286,18 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201608120317132_0.cs" />
-    <Compile Include="Migrations\201608120317132_0.Designer.cs">
-      <DependentUpon>201608120317132_0.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201608301405258_CompanyAndVehiclePartsAdded.cs" />
-    <Compile Include="Migrations\201608301405258_CompanyAndVehiclePartsAdded.Designer.cs">
-      <DependentUpon>201608301405258_CompanyAndVehiclePartsAdded.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\Company.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\Model.cs" />
+    <Compile Include="Models\Vehicle.cs" />
     <Compile Include="Models\Puntuation.cs" />
     <Compile Include="Models\Review.cs" />
     <Compile Include="Models\Store.cs" />
     <Compile Include="Models\Suggestion.cs" />
     <Compile Include="Models\Make.cs" />
-    <Compile Include="Models\Vehicle.cs" />
     <Compile Include="Models\VehiclePart.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StringResource\HelperString.Designer.cs">
@@ -285,12 +311,18 @@
       <DependentUpon>Messages.resx</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
+    <Compile Include="StringResource\Store\Store_SR.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Store_SR.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\account_style.css" />
-    <Content Include="Content\map-store.css" />
+    <Content Include="Content\Store\map-store.css" />
     <Content Include="Content\materialize.css" />
     <Content Include="Content\materialize.min.css" />
+    <Content Include="Content\Store\store.css" />
     <Content Include="Content\style.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -332,6 +364,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\Store\map-init.js" />
     <Content Include="Scripts\SumitForms.js" />
+    <Content Include="static\excel_example.png" />
     <Content Include="www\account.html" />
     <Content Include="www\account_business.html" />
     <Content Include="www\account_business_edit.html" />
@@ -623,7 +656,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="packages.config" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
@@ -666,6 +701,9 @@
     <EmbeddedResource Include="Migrations\201611062300317_Adding-Latitude-and-Longitude-to-Store.resx">
       <DependentUpon>201611062300317_Adding-Latitude-and-Longitude-to-Store.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612130429568_upload-excel-file.resx">
+      <DependentUpon>201612130429568_upload-excel-file.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="StringResource\HelperString.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>HelperString.Designer.cs</LastGenOutput>
@@ -674,6 +712,10 @@
     <EmbeddedResource Include="StringResource\Messages.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Messages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StringResource\Store\Store_SR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Store_SR.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

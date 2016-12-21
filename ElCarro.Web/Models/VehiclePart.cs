@@ -18,19 +18,23 @@ namespace ElCarro.Web.Models
         [Display(Name = "Nombre")]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "Este campo es requerido")]
         [StringLength(1000)]
         [Display(Name = "Descripción")]
         public string Description { get; set; }
 
-        [Required(ErrorMessage = "Este campo es requerido")]
         [Display(Name = "Foto")]
         public string Photo { get; set; }
+
+        [Range(0, double.MaxValue, ErrorMessage = "Por favor entre un numero valido.")]
+        [Required(ErrorMessage = "El precio es requerido.")]
+        [Display(Name = "Precio")]
+        public double Price { get; set; }
 
         [Required(ErrorMessage = "Este campo es requerido")]
         [Display(Name = "Repuesto")]
         public virtual Store Store { get; set; }
 
+        [Range(1000, 9999, ErrorMessage = "Por favor entre un numero valido.")]
         [Required(ErrorMessage = "Este campo es requerido")]
         [Display(Name = "Año")]
         public int Year { get; set; }

@@ -6,8 +6,27 @@
 }
 
 @Styles.Render("~/Content/map-store")
+@Styles.Render("~/Content/store")
 
 <div class="row">
+    @if (!String.IsNullOrEmpty(ViewBag.SuccessMessage))
+    {
+        <div class="msg-success-detail-store">
+            <button type="button" class="close-msg" aria-label="Close">
+                <span aria-hidden="true" onclick="closeMsg('msg-success-detail-store')">&times;</span>
+            </button>
+            @ViewBag.SuccessMessage
+        </div>
+    }
+    @if (!String.IsNullOrEmpty(ViewBag.ErrorMessage))
+    {
+        <div class="msg-error-detail-store">
+            <button type="button" class="close-msg" aria-label="Close">
+                <span aria-hidden="true" onclick="closeMsg('msg-error-detail-store')">&times;</span>
+            </button>
+            @ViewBag.ErrorMessage
+        </div>
+    }
     <h3 class="center">
         Sucursal: @Model.Name
         <a href="@Url.Action("Edit", "Stores", new { id = Model.StoreID })" class="tooltipped" data-position="right"
@@ -52,7 +71,7 @@
 
 <div class="row container">
     <h3>Ubicación del negocio.</h3>
-    <input type="hidden" id="no-drageble" value="true"/>
+    <input type="hidden" id="no-drageble" value="true" />
     @Html.HiddenFor(m => m.latitude)
     @Html.HiddenFor(m => m.longitude)
     <div id="map-create"></div>
@@ -74,7 +93,7 @@
             </a>
         </li>
         <li>
-            <a href="javascript:void(0)" class="btn-floating green tooltipped" data-position="left" data-delay="50" data-tooltip="Descargar">
+            <a href="#upload_excel" class="btn-floating green tooltipped modal-trigger" data-position="left" data-delay="50" data-tooltip="Subir excel">
                 <i class="material-icons">publish</i>
             </a>
         </li>
@@ -86,7 +105,56 @@
     </ul>
 </div>
 
+<div id="upload_excel" class="modal modal-fixed-footer">
+    <div class="modal-content">
+        @using (Html.BeginForm("AddExcelFile", "Stores", FormMethod.Post,
+                        new { id = "upload_excel_form", @class = "col s12", role = "form", enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(m => m.StoreID)
+            <div class="row">
+                <div class="file-field input-field">
+                    <div class="btn">
+                        <span for="UploadExcel">Subir excel</span>
+                        <input type="file" name="UploadExcel" id="UploadExcel" />
+                    </div>
+                    <div class="file-path-wrapper">
+                        <input class="file-path validate file-excel" type="text" placeholder="Subir excel">
+                    </div>
+                </div>
+            </div>
+            <div class="row excel-example-image">
+                <p>
+                    Imagen que muestra las columnas que son necesarios en el archivo.
+                </p>
+                <img src="~/static/excel_example.png" />
+            </div>
+            <div class="row preloader-model-form">
+                <div class="col s10 offset-s1">
+                    <div class="progress preloader-form not-active">
+                        <div class="indeterminate"></div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
 @Scripts.Render("~/bundles/map-init")
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBr1uQbYB27-9TXYvVAjRYqPou1QkcTdgk&callback=initMap">
+</script>
+<script type="text/javascript">
+    document.getElementById("UploadExcel").addEventListener("change", function () {
+        $(".preloader-form").removeClass("not-active");
+        $("div.excel-example-image").addClass("not-active");
+        document.getElementById("upload_excel_form").submit();
+    });
+
+    var closeMsg = function (className) {
+        var x = document.getElementsByClassName(className)[0];
+        if (x) {
+            x.parentNode.removeChild(x);
+        }
+    }
 </script>
