@@ -7,6 +7,7 @@ namespace ElCarro.Web
         // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
+            #region JS
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                 "~/Scripts/jquery-{version}.js"));
 
@@ -25,17 +26,23 @@ namespace ElCarro.Web
 
             bundles.Add(new ScriptBundle("~/bundles/map-init").Include(
                 "~/Scripts/Store/map-init.js"));
+            #endregion
 
+            #region CSS
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/materialize.css",
                 "~/Content/style.css"));
 
             bundles.Add(new StyleBundle("~/Content/map-store").Include(
-                "~/Content/map-store.css"));
+                "~/Content/Store/map-store.css"));
+
+            bundles.Add(new StyleBundle("~/Content/store").Include(
+                "~/Content/Store/store.css"));
 
             bundles.Add(new StyleBundle("~/Content/account").Include(
                 "~/Content/materialize.css",
                 "~/Content/account_style.css"));
+            #endregion
         }
     }
 }

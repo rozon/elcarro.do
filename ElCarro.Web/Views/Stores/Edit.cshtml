@@ -1,4 +1,4 @@
-﻿@model ElCarro.Web.Models.StoreView
+﻿@model ElCarro.Web.Models.Store
 
 @{
     ViewBag.Title = "Edit";
@@ -24,15 +24,16 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.StoreID)
         @Html.HiddenFor(model => model.CompanyId)
+        @Html.HiddenFor(model => model.Logo)
 
         <div class="row">
             <div class="col s12 m6">
                 <div class="row">
                     <div class="file-field input-field">
                         <div class="btn">
-                            <span>@Html.DisplayNameFor(model => model.Logo)</span>
-                            @Html.TextBoxFor(model => model.Logo, new { type = "file" })
-                            @Html.ValidationMessageFor(model => model.Logo, "", new { @class = "text-danger" })
+                            <span>@Html.DisplayNameFor(model => model.LogoFile)</span>
+                            @Html.TextBoxFor(model => model.LogoFile, new { type = "file" })
+                            @Html.ValidationMessageFor(model => model.LogoFile, "", new { @class = "text-danger" })
                         </div>
                         <div class="file-path-wrapper">
                             <input class="file-path validate" type="text" placeholder="Cambiar imagen de perfil">
@@ -70,16 +71,8 @@
 
         <div class="row container">
             <h3>Ubicación del negocio.</h3>
-            <div class="file-field input-field">
-                <div class="btn" onclick="codeAddress()">
-                    <span>Ubicar</span>
-                </div>
-                <div class="file-path-wrapper">
-                    <input class="file-path validate" type="text" id="address-map">
-                </div>
-            </div>
-            @Html.HiddenFor(m => m.lat_long.lat, new { id = "latitude" })
-            @Html.HiddenFor(m => m.lat_long.lng, new { id = "longitude" })
+            @Html.HiddenFor(m => m.latitude)
+            @Html.HiddenFor(m => m.longitude)
             <div id="map-create"></div>
         </div>
 

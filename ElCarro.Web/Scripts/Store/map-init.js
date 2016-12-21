@@ -38,17 +38,17 @@ function setValuesModel(pos) {
 
 function geocodeLatLng(pos) {
     geocoder.geocode({ 'location': pos }, function (results, status) {
+        setMarker(pos, "Tu ubicación!!!");
+        setValuesModel(pos);
         if (status === 'OK') {
             if (results[0]) {
-                setMarker(pos, "Tu ubicación!!!");
-                setValuesModel(pos);
                 infowindow.setContent(results[0].formatted_address);
                 infowindow.open(map, marker);
             } else {
-                window.alert('No se encontraron resultados.');
+                console.log('No se encontraron resultados.');
             }
         } else {
-            window.alert('Geocoder falló debido a: ' + status);
+            console.log('Geocoder falló debido a: ' + status);
         }
     });
 }
