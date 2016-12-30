@@ -19,7 +19,7 @@
                     @Html.DropDownListFor(m => m.Make, Model.Makes)
                 </div>
                 <div class="input-field col s12 m2">
-                    @Html.DropDownListFor(model => model.Model, Model.Models)
+                    @Html.DropDownListFor(m => m.Model, Model.Models)
                 </div>
                 <div class="col s12 m12 center">
                     <button class="btn waves-effect waves-light" type="submit" name="action" id="btnBuscar">
@@ -57,7 +57,14 @@
                                             </div>
                                             <div class="row">
                                                 <div class="col s4 m4 l4">
-                                                    <img class="responsive-img" src="@Url.Content(row.Photo)">
+                                                    @if (string.IsNullOrWhiteSpace(row.Photo))
+                                                    {
+                                                        <img class="responsive-img" src="~/static/logo_elcarro.png">
+                                                    }
+                                                    else
+                                                    {
+                                                        <img class="responsive-img" src="@Url.Content(row.Photo)">
+                                                    }
                                                 </div>
                                                 <div class="col s8">
                                                     <div class="row">
