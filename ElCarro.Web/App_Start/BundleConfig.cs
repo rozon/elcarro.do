@@ -26,6 +26,9 @@ namespace ElCarro.Web
 
             bundles.Add(new ScriptBundle("~/bundles/map-init").Include(
                 "~/Scripts/Store/map-init.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/map-search").Include(
+                "~/Scripts/Home/Search/map-init.js"));
             #endregion
 
             #region CSS
@@ -36,6 +39,9 @@ namespace ElCarro.Web
             bundles.Add(new StyleBundle("~/Content/map-store").Include(
                 "~/Content/Store/map-store.css"));
 
+            bundles.Add(new StyleBundle("~/Content/Home/Search").Include(
+                "~/Content/Home/Search/map-search.css"));
+
             bundles.Add(new StyleBundle("~/Content/store").Include(
                 "~/Content/Store/store.css"));
 
@@ -43,6 +49,8 @@ namespace ElCarro.Web
                 "~/Content/materialize.css",
                 "~/Content/account_style.css"));
             #endregion
+
+            BundleTable.EnableOptimizations = true;
         }
     }
 }

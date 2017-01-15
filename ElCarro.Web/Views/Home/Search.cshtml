@@ -1,6 +1,9 @@
 ﻿@using ElCarro.Web.Models
 @model SearchViewModel
 
+@Styles.Render("~/Content/Home/Search")
+@Html.Hidden("link_to_store_icon", Url.Content("~/static/sportutilityvehicle.png"))
+
 <div class="container">
     <div class="row">
         @using (Html.BeginForm("Search", "Home", FormMethod.Get, htmlAttributes: new { @class = "col s12", id = "searchForm" }))
@@ -51,7 +54,11 @@
                                             <div class="row">
                                                 <div class="col">
                                                     <h5>
-                                                        @Html.ActionLink(row.Name, "PublicDetails", "VehicleParts", routeValues: new { id = row.Id }, htmlAttributes: null)
+                                                        @*@Html.ActionLink(row.Name, "PublicDetails", "VehicleParts", routeValues: new { id = row.Id }, htmlAttributes: null)*@
+                                                        <a href="#maps_search" class="modal-trigger" onclick="return setModal('@row.Store.latitude', '@row.Store.longitude', '@row.Name');">@row.Name</a>
+                                                        @*<a href="#upload_excel" class="btn-floating green tooltipped modal-trigger" data-position="left" data-delay="50" data-tooltip="Subir excel">
+                                                                <i class="material-icons">publish</i>
+                                                            </a>*@
                                                     </h5>
                                                 </div>
                                             </div>
@@ -111,6 +118,20 @@
     </li>
 </ul>
 
+<div id="maps_search" class="modal modal-fixed-footer">
+    <div class="modal-content">
+        <input type="hidden" id="no-drageble" value="true" />
+        <div id="map-create"></div>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cerrar</a>
+    </div>
+</div>
+
+@Scripts.Render("~/bundles/map-search")
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBr1uQbYB27-9TXYvVAjRYqPou1QkcTdgk&callback=initMap">
+</script>
 @section Scripts {
     <script type="text/javascript">
         $(function () {
