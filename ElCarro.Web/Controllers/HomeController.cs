@@ -22,6 +22,9 @@ namespace ElCarro.Web.Controllers
         public ActionResult Search(SearchViewModel viewModel)
         {
             var all = db.VehiclePart.AsQueryable();
+
+            all = all.Where(s => s.Store.latitude != 0 || s.Store.longitude != 0);
+
             if (viewModel.Year != 0)
                 all = all
                     .Where(m => m.Year == viewModel.Year);
