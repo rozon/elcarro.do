@@ -170,7 +170,7 @@ namespace ElCarro.Web.Controllers
                     Name = v.Model.Make.Name
                 },
                 v.Year,
-                Photo = Url.Content(v.Photo)
+                Photo = string.IsNullOrWhiteSpace(v.Photo)? Url.Content("~/static/ logo_elcarro.png") : Url.Content(v.Photo)
             }).ToList(), JsonRequestBehavior.AllowGet);
         }
 
