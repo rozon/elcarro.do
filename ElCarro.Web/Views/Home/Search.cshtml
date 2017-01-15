@@ -1,7 +1,7 @@
 ﻿@using ElCarro.Web.Models
 @model SearchViewModel
 
-@Styles.Render("~/Content/Home/Search")
+@Styles.Render("~/Content/Home_Search")
 @Html.Hidden("link_to_store_icon", Url.Content("~/static/sportutilityvehicle.png"))
 
 <div class="container">
@@ -132,7 +132,7 @@
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBr1uQbYB27-9TXYvVAjRYqPou1QkcTdgk&callback=initMap">
 </script>
-@section Scripts {
+@section ScriptSearch {
     <script type="text/javascript">
         $(function () {
             function goToPage(page) {
