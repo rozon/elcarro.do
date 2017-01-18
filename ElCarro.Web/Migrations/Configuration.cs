@@ -12,7 +12,7 @@ namespace ElCarro.Web.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
-#if Debug
+#if DEBUG
             AutomaticMigrationDataLossAllowed = true;
 #endif
 
