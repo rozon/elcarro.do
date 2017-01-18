@@ -30,7 +30,7 @@
             <div class="form-group">
                 <div>
                     <input type="submit" class="btn btn-default" value="Registrarse" />
-                    @if (ViewBag.showButton)
+                    @if (null != ViewBag.showButton && ViewBag.showButton)
                     {
                         @Html.ActionLink("Volver al login", "Login", "Account", routeValues: new { returnUrl = ViewBag.ReturnUrl }, htmlAttributes: null)
                     }
