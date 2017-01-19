@@ -54,11 +54,7 @@
                                             <div class="row">
                                                 <div class="col">
                                                     <h5>
-                                                        @*@Html.ActionLink(row.Name, "PublicDetails", "VehicleParts", routeValues: new { id = row.Id }, htmlAttributes: null)*@
                                                         <a href="#maps_search" class="modal-trigger" onclick="return setModal('@row.Store.latitude', '@row.Store.longitude', '@row.Name');">@row.Name</a>
-                                                        @*<a href="#upload_excel" class="btn-floating green tooltipped modal-trigger" data-position="left" data-delay="50" data-tooltip="Subir excel">
-                                                                <i class="material-icons">publish</i>
-                                                            </a>*@
                                                     </h5>
                                                 </div>
                                             </div>

@@ -31,7 +31,7 @@ namespace ElCarro.Web.Models
         public double Price { get; set; }
 
         [Required(ErrorMessage = "Este campo es requerido")]
-        [Display(Name = "Repuesto")]
+        [Display(Name = "Sucursal")]
         public virtual Store Store { get; set; }
 
         [Range(1000, 9999, ErrorMessage = "Por favor entre un numero valido.")]

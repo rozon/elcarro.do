@@ -54,7 +54,7 @@ namespace ElCarro.Web.Models
             {
                 new SelectListItem
                 {
-                    Text="Seleccionar año",
+                    Text="Año",
                     Value = 0.ToString(),
                     Selected = Year == 0,
                 }
@@ -83,7 +83,7 @@ namespace ElCarro.Web.Models
             {
                 new SelectListItem
                 {
-                    Text="Seleccionar una Marca",
+                    Text="Marca",
                     Value = 0.ToString(),
                     Selected = Make == 0,
                 }
@@ -105,7 +105,7 @@ namespace ElCarro.Web.Models
                 //The default option, no selectable.
                 new SelectListItem
                 {
-                    Text = "Seleccionar un Modelo",
+                    Text = "Modelo",
                     Value = 0.ToString(),
                     Selected = Model == 0,
                 }
