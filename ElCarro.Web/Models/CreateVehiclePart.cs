@@ -119,7 +119,7 @@ namespace ElCarro.Web.Models
                 //The default option, no selectable.
                 new SelectListItem
                 {
-                    Text="Seleccionar repuesto",
+                    Text="Seleccionar sucursal",
                     Value = null,
                     Selected = Store == 0,
                 }

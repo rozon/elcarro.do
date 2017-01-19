@@ -16,6 +16,9 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Model)
                 </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Store)
+                </th>
                 <th></th>
             </tr>
         </thead>
@@ -28,6 +31,9 @@
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Model.Make.Name) @Html.DisplayFor(modelItem => item.Model.Name) @Html.DisplayFor(modelItem => item.Year)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Store.Name)
                     </td>
                     <td>
                         <a href="@Url.Action("Edit","VehicleParts", new { id = item.Id })"><i class="small material-icons">mode_edit</i></a>
