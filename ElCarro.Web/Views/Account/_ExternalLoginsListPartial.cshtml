@@ -29,14 +29,14 @@
                         {
                             _class = "loginBtn--facebook";
                         }
-                        
-                        <div class="input-field col s12 center">
+
+                        <div class="input-field col s6 center">
                             <button type="submit"
                                     class="loginBtn @_class @p.AuthenticationType.ToLower()"
                                     id="@p.AuthenticationType" name="provider"
                                     value="@p.AuthenticationType"
                                     title="Loguearse con @p.Caption">
-                                Loguearse con @p.AuthenticationType
+                                @p.AuthenticationType
                             </button>
                         </div>
                     }
