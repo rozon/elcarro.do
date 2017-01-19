@@ -35,69 +35,72 @@
     </div>
 </div>
 
+@if (Model.NoResult)
+            {
+    <div class="row">
+        <div class="col s12 text-error-cross-all center">
+            <button type="button" class="close-msg" aria-label="Close">
+                <span aria-hidden="true" onclick="closeMsg('text-error-cross-all')">&times;</span>
+            </button>
+            <p>No fueron encontradas piezas con el criterio de búsqueda provisto.</p>
+        </div>
+    </div>
+}
 <div class="container">
     <div class="row">
-        <div class="col s12">
-            @if (Model.NoResult)
+        @foreach (var row in Model.Results)
             {
-                <p>No fueron encontradas piezas con el criterio de búsqueda provisto.</p>
-            }
-            <div class="row">
-                @foreach (var row in Model.Results)
-            {
-                    <div class="col s12 l6">
-                        <div class="card horizontal">
-                            <div class="card-stacked">
-                                <div class="card-content" onclick="return setModal('@row.Store.latitude', '@row.Store.longitude', '@row.Name');">
+            <div class="col s12 l6">
+                <div class="card horizontal">
+                    <div class="card-stacked">
+                        <div class="card-content" onclick="return setModal('@row.Store.latitude', '@row.Store.longitude', '@row.Name');">
+                            <div class="row">
+                                <div class="col s12 center">
+                                    <h3>@row.Name</h3>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col s12 m8">
+                                    @if (string.IsNullOrWhiteSpace(row.Photo))
+                                    {
+                                        <img class="responsive-img" src="~/static/logo_elcarro.png">
+                                    }
+                                    else
+                                    {
+                                        <img class="responsive-img" src="@Url.Content(row.Photo)">
+                                    }
+                                </div>
+                                <div class="col m4 hide-on-small-only">
                                     <div class="row">
-                                        <div class="col s12 center">
-                                            <h3>@row.Name</h3>
+                                        <div class="col m12">
+                                            <p><strong>Repuesto:</strong></p>
                                         </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col s12 m8">
-                                            @if (string.IsNullOrWhiteSpace(row.Photo))
-                                            {
-                                                <img class="responsive-img" src="~/static/logo_elcarro.png">
-                                            }
-                                            else
-                                            {
-                                                <img class="responsive-img" src="@Url.Content(row.Photo)">
-                                            }
-                                        </div>
-                                        <div class="col m4 hide-on-small-only">
-                                            <div class="row">
-                                                <div class="col m12">
-                                                    <p><strong>Repuesto:</strong></p>
-                                                </div>
-                                                <div class="col m12">
-                                                    <p>@row.Store.Company.Name</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col s12 hide-on-med-and-up">
-                                            <div class="row">
-                                                <div class="col s5">
-                                                    <p><strong>Repuesto:</strong></p>
-                                                </div>
-                                                <div class="col s7">
-                                                    <p>@row.Store.Company.Name</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col s12">
-                                            <p><strong>Descripción: </strong> @row.Description</p>
+                                        <div class="col m12">
+                                            <p>@row.Store.Company.Name</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col s12 hide-on-med-and-up">
+                                    <div class="row">
+                                        <div class="col s5">
+                                            <p><strong>Repuesto:</strong></p>
+                                        </div>
+                                        <div class="col s7">
+                                            <p>@row.Store.Company.Name</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col s12">
+                                    <p><strong>Descripción: </strong> @row.Description</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                }
+                </div>
             </div>
-        </div>
+        }
     </div>
 </div>
 
