@@ -50,7 +50,7 @@ namespace ElCarro.Web
                 "~/Content/account_style.css"));
             #endregion
 
-            BundleTable.EnableOptimizations = true;
+            BundleTable.EnableOptimizations = false;
         }
     }
 }

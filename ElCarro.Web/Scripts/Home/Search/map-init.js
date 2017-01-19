@@ -142,5 +142,6 @@ function setModal(_lat, _lng, _name) {
         }
     });
 
+    $('#maps_search').openModal('open');
     return true;
 }
