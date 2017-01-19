@@ -1,0 +1,14 @@
+﻿#map-create {
+    width: 100%;
+    height: 100%;
+}
+
+#maps_search.modal {
+    height: 100%;
+}
+
+.responsive-img.search-image {
+    height: 170px !important;
+    width: auto;
+    max-width: 300px;
+}
