@@ -6,8 +6,26 @@
 #maps_search.modal {
     height: 100%;
 }
+ 
+.card-action {
+    padding-top: 0.5em !important;
+    padding-bottom: 0.5em !important;
+}
 
-.responsive-img.search-image {
-    width: auto;
-    max-height: 95% !important;
+.card .card-title {
+    font-size: 34px;
+    font-weight: 500;
+}
+
+.card p {
+    font-size: 20px;
+    font-weight: 300;
+    margin: 0.3em 0;
+}
+
+@media (min-width: 993px) {
+    .card-stacked.search-card {
+        width: auto;
+        height: 300px !important;
+    }
 }
