@@ -46,7 +46,7 @@
                 </div>
             </div>
 
-            <div class="row center">
+            <div class="row">
                 <div class="file-field input-field col s6">
                     <div class="btn">
                         <span>@Html.DisplayNameFor(model => model.Photo)</span>
@@ -60,8 +60,10 @@
             </div>
 
             <div class="row">
-                <div class="input-field col s12">
+                <div class="input-field col s6 m4 offset-m2 l3 offset-l3 center">
                     <button class="btn waves-effect waves-light" type="submit">Añadir</button>
+                </div>
+                <div class="input-field col s6 m4 l3 center">
                     <a class="btn waves-effect pink lighten-3" href="@Url.Action("Index", "VehicleParts")">Cancelar</a>
                 </div>
             </div>

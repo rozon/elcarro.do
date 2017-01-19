@@ -35,65 +35,71 @@
     </div>
 </div>
 
-<div class="row">
-    <div class="col s12 m9 l10">
-        @if (Model.NoResult)
-        {
-            <p>No fueron encontradas piezas con el criterio de búsqueda provisto.</p>
-        }
-        <table class="container">
-            <tbody>
+<div class="container">
+    <div class="row">
+        <div class="col s12">
+            @if (Model.NoResult)
+            {
+                <p>No fueron encontradas piezas con el criterio de búsqueda provisto.</p>
+            }
+            <div class="row">
                 @foreach (var row in Model.Results)
-                {
-                    <tr>
-                        <td>
-                            <div class="col">
-                                <div class="card horizontal">
-                                    <div class="card-stacked">
-                                        <div class="card-content">
+            {
+                    <div class="col s12 l6">
+                        <div class="card horizontal">
+                            <div class="card-stacked">
+                                <div class="card-content" onclick="return setModal('@row.Store.latitude', '@row.Store.longitude', '@row.Name');">
+                                    <div class="row">
+                                        <div class="col s12 center">
+                                            <h3>@row.Name</h3>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col s12 m8">
+                                            @if (string.IsNullOrWhiteSpace(row.Photo))
+                                            {
+                                                <img class="responsive-img" src="~/static/logo_elcarro.png">
+                                            }
+                                            else
+                                            {
+                                                <img class="responsive-img" src="@Url.Content(row.Photo)">
+                                            }
+                                        </div>
+                                        <div class="col m4 hide-on-small-only">
                                             <div class="row">
-                                                <div class="col">
-                                                    <h5>
-                                                        <a href="#maps_search" class="modal-trigger" onclick="return setModal('@row.Store.latitude', '@row.Store.longitude', '@row.Name');">@row.Name</a>
-                                                    </h5>
+                                                <div class="col m12">
+                                                    <p><strong>Repuesto:</strong></p>
                                                 </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col s4 m4 l4">
-                                                    @if (string.IsNullOrWhiteSpace(row.Photo))
-                                                    {
-                                                        <img class="responsive-img" src="~/static/logo_elcarro.png">
-                                                    }
-                                                    else
-                                                    {
-                                                        <img class="responsive-img" src="@Url.Content(row.Photo)">
-                                                    }
-                                                </div>
-                                                <div class="col s8">
-                                                    <div class="row">
-                                                        <div class="col s12 m12 l12">
-                                                            <p><strong>Descripción: </strong> @row.Description</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col s12 m12 l12">
-                                                            <p><p><strong>Repuesto: </strong>@row.Store.Company.Name</p>
-                                                        </div>
-                                                    </div>
+                                                <div class="col m12">
+                                                    <p>@row.Store.Company.Name</p>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="row">
+                                        <div class="col s12 hide-on-med-and-up">
+                                            <div class="row">
+                                                <div class="col s5">
+                                                    <p><strong>Repuesto:</strong></p>
+                                                </div>
+                                                <div class="col s7">
+                                                    <p>@row.Store.Company.Name</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col s12">
+                                            <p><strong>Descripción: </strong> @row.Description</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </td>
-                    </tr>
+                        </div>
+                    </div>
                 }
-            </tbody>
-        </table>
+            </div>
+        </div>
     </div>
 </div>
-
 
 <ul class="pagination center">
     <li class="@(Model.ActualPage==1||Model.NoResult ?"disabled":"waves-effect")">
