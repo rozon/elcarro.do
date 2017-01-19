@@ -63,11 +63,11 @@
                                 <div class="col s12 m8">
                                     @if (string.IsNullOrWhiteSpace(row.Photo))
                                     {
-                                        <img class="responsive-img" src="~/static/logo_elcarro.png">
+                                        <img class="responsive-img search-image" src="~/static/logo_elcarro.png">
                                     }
                                     else
                                     {
-                                        <img class="responsive-img" src="@Url.Content(row.Photo)">
+                                        <img class="responsive-img search-image" src="@Url.Content(row.Photo)">
                                     }
                                 </div>
                                 <div class="col m4 hide-on-small-only">
