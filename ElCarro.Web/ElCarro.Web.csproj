@@ -319,7 +319,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\account_style.css" />
-    <Content Include="Content\Home\Search\map-search.css" />
+    <Content Include="Content\Home\search.css" />
     <Content Include="Content\Store\map-store.css" />
     <Content Include="Content\materialize.css" />
     <Content Include="Content\materialize.min.css" />
