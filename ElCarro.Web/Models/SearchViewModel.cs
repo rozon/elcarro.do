@@ -39,7 +39,7 @@ namespace ElCarro.Web.Models
 
         public int ActualPage { get; set; }
 
-        public const int ResultsPerPages = 5;
+        public const int ResultsPerPages = 6;
 
         public void ConfigPaginator()
         {
