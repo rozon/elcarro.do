@@ -8,7 +8,6 @@
 }
 
 .responsive-img.search-image {
-    height: 170px !important;
     width: auto;
-    max-width: 300px;
+    max-height: 95% !important;
 }
