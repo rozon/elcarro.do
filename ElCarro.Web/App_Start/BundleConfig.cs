@@ -43,7 +43,7 @@ namespace ElCarro.Web
                 "~/Content/Store/map-store.css"));
 
             bundles.Add(new StyleBundle("~/Content/Home_Search").Include(
-                "~/Content/Home/Search/map-search.css"));
+                "~/Content/Home/search.css"));
 
             bundles.Add(new StyleBundle("~/Content/account").Include(
                 "~/Content/materialize.css",
