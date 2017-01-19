@@ -51,7 +51,7 @@
         @foreach (var row in Model.Results)
             {
             <div class="col s12 l6">
-                <div class="card medium" onclick="return setModal('@row.Store.latitude', '@row.Store.longitude', '@row.Name');">
+                <div class="card large" onclick="return setModal('@row.Store.latitude', '@row.Store.longitude', '@row.Name');">
                     <div class="card-image">
                         @if (string.IsNullOrWhiteSpace(row.Photo))
                         {
