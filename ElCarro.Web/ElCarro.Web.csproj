@@ -323,7 +323,6 @@
     <Content Include="Content\Store\map-store.css" />
     <Content Include="Content\materialize.css" />
     <Content Include="Content\materialize.min.css" />
-    <Content Include="Content\Store\store.css" />
     <Content Include="Content\style.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -355,6 +354,7 @@
     <Content Include="fonts\roboto\Roboto-Thin.woff" />
     <Content Include="fonts\roboto\Roboto-Thin.woff2" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
+    <Content Include="Scripts\common_functions.js" />
     <Content Include="static\sportutilityvehicle.png" />
     <Content Include="Scripts\Home\Search\map-init.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
