@@ -42,7 +42,7 @@
             <button type="button" class="close-msg" aria-label="Close">
                 <span aria-hidden="true" onclick="closeMsg('text-error-cross-all')">&times;</span>
             </button>
-            <p>No fueron encontradas piezas con el criterio de búsqueda provisto.</p>
+            <p>No fueron encontradas piezas con el criterio de b&uacute;squeda previsto.</p>
         </div>
     </div>
 }
@@ -144,10 +144,18 @@
 <div id="maps_search" class="modal modal-fixed-footer">
     <div class="modal-content">
         <input type="hidden" id="no-drageble" value="true" />
+        <div class="row hidden" id="not-geolocation-map-msg">
+            <div class="col s12 text-error-cross-all center">
+                <p>Favor activar su ubicaci&oacute;n, d&eacute;spues recargue la p&aacute;gina.</p>
+            </div>
+            <div class="row center">
+                <a target="_blank" href="https://support.google.com/chrome/answer/142065?hl=en"><p class="active-ubication">&iquest;Como activar tu ubicación&#63;</p></a>
+            </div>
+        </div>
         <div id="map-create"></div>
     </div>
     <div class="modal-footer">
-        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cerrar</a>
+        <a href="#" class="modal-action modal-close waves-effect waves-green btn-flat">Cerrar</a>
     </div>
 </div>
 
