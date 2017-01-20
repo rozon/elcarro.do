@@ -23,6 +23,10 @@
     margin: 0.2em 0;
 }
 
+.active-ubication {
+    font-size: 21px
+}
+
 @media (min-width: 993px) {
     .card-stacked.search-card {
         width: auto;

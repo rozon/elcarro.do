@@ -98,7 +98,7 @@ function initMap(showed) {
     directionsService = new google.maps.DirectionsService;
     directionsDisplay = new google.maps.DirectionsRenderer;
     map = new google.maps.Map(document.getElementById('map-create'));
-    directionsDisplay.setMap(map);
+    directionsDisplay.setMap(map);    
 
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) {
@@ -110,11 +110,20 @@ function initMap(showed) {
                 _initMap(13);
             return true;
         }, function () {
-            alert("debemos conocer tu ubicación, Seleccione 'Allow' ó 'Aceptar'");
-            //return initMap();
+            showErrorMsgMap(true);
         });
     } else {
-        //return initMap();
+        showErrorMsgMap(true);
+    }
+}
+
+function showErrorMsgMap(show) {
+    if (show) {
+        document.getElementById('not-geolocation-map-msg').className = 'row';
+        document.getElementById('map-create').className = 'hidden';
+    } else {
+        document.getElementById('not-geolocation-map-msg').className = 'row hidden';
+        document.getElementById('map-create').className = '';
     }
 }
 
