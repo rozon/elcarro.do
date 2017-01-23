@@ -49,4 +49,18 @@ namespace ElCarro.Web.Models
         [Required]
         public int Popularity { get; set; }
     }
+
+    public class VehiclePartView
+    {
+        public VehiclePartView()
+        {
+        }
+        
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public string Photo { get; set; }
+        public string CompanyName { get; set; }
+        public double lng { get; set; }
+        public double lat { get; set; }
+    }
 }

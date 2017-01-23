@@ -1,161 +1,113 @@
-﻿@using ElCarro.Web.Models
-@model SearchViewModel
-
-@Styles.Render("~/Content/Home_Search")
+﻿@Styles.Render("~/Content/Home_Search")
 @Html.Hidden("link_to_store_icon", Url.Content("~/static/sportutilityvehicle.png"))
 
-<div class="container">
-    <div class="row">
-        @using (Html.BeginForm("Search", "Home", FormMethod.Get, htmlAttributes: new { @class = "col s12", id = "searchForm" }))
-        {
-            @Html.HiddenFor(m => m.ActualPage)
-            <div class="row">
-                <div class="input-field col s12 m6">
-                    <i class="material-icons prefix">search</i>
-                    @Html.TextBoxFor(m => m.NameOrDescription, htmlAttributes: new { @class = "autocomplete", autocomplete = "off" })
-                    @Html.LabelFor(m => m.NameOrDescription)
-                </div>
-                <div class="input-field col s12 m2">
-                    @Html.DropDownListFor(m => m.Year, Model.Years)
-                </div>
-                <div class="input-field col s12 m2">
-                    @Html.DropDownListFor(m => m.Make, Model.Makes)
-                </div>
-                <div class="input-field col s12 m2">
-                    @Html.DropDownListFor(m => m.Model, Model.Models)
-                </div>
-                <div class="col s12 m12 center">
-                    <button class="btn waves-effect waves-light" type="submit" name="action" id="btnBuscar">
-                        Buscar
-                        <i class="material-icons right">send</i>
-                    </button>
+<div ng-controller="HomeSearchCtrl">
+    <div class="container">
+        <div class="row" id="part-{{$index}}" ng-repeat="part in listSearchParts">
+            <div class="input-field col s12 m6">
+                <i class="material-icons prefix">search</i>
+                <input autocomplete="off" class="autocomplete" id="part-{{$index}}-name" name="part-{{$index}}-name" type="text" value="">
+                <label for="part-{{$index}}-name" class="">Nombre o Descripción</label>
+            </div>
+            <div class="input-field col s12 m2">
+                <select id="part-{{$index}}-year">
+                    <option value="" disabled selected>Año</option>
+                    <option value="{{_year}}" ng-repeat="_year in part.years" ng-click="addMake(_year, part, $event)">{{_year}}</option>
+                </select>
+                <label>Seleccione el año</label>
+            </div>
+            <div class="input-field col s12 m2">
+                <select id="part-{{$index}}-make">
+                    <option value="" disabled selected>Marca</option>
+                    <option value="{{_make.id}}" ng-repeat="_make in part.makes" ng-click="addMake(_make, part, $event)">{{_make.name}}</option>
+                </select>
+                <label>Seleccione la marca</label>
+            </div>
+            <div class="input-field col s12 m2">
+                <select id="part-{{$index}}-model">
+                    <option value="" disabled selected>Modelo</option>
+                    <option value="{{_model.id}}" ng-repeat="_model in part.models" ng-click="addModel(_model, part, $event)">{{_model.name}}</option>
+                </select>
+                <label>Seleccione el modelo</label>
+            </div>
+            <i class="material-icons">delete_forever</i>
+        </div>
+
+        <div class="row">
+            <div class="col s12 m12 center">
+                <button class="btn waves-effect waves-light" type="button" name="action" ng-click="searchParts()">
+                    Buscar
+                    <i class="material-icons right">send</i>
+                </button>
+                <button class="btn waves-effect waves-light" type="button" name="action" ng-click="addSearch()">
+                    Agregar busqueda
+                    <i class="material-icons right">add</i>
+                </button>
+            </div>
+        </div>
+
+        <div class="row preloader-model-form" id="loader-main-row">
+            <div class="col s11 offset-s1">
+                <div class="progress preloader-form active">
+                    <div class="indeterminate"></div>
                 </div>
             </div>
-        }
-    </div>
-</div>
+        </div>
 
-@if (Model.NoResult)
-            {
-    <div class="row">
+        <div class="row hidden" id="main-list-row">
+            <div class="col s12 l6" ng-repeat="_result in singleResults">
+                <div class="card large" ng-click="setModal('single', _result)">
+                    <div class="card-image">
+                        <img class="responsive-img" src="{{_result.Photo}}">
+                    </div>
+                    <div class="card-content"></div>
+                    <div class="card-action">
+                        <span class="card-title center">{{_result.Name}}</span>
+                        <p><strong>Repuesto:</strong> {{_result.CompanyName}}</p>
+                        <p><strong>Descripción:</strong> {{_result.Description}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <ul class="pagination center hidden" id="main-pagination-row">
+            <li ng-class="{'disabled' : (actualPage == 1), 'waves-effect' : (actualPage > 1)}">
+                <a href="#!" ng-click="changeThePage(actualPage - 1)"><i class="material-icons">chevron_left</i></a>
+            </li>
+            <li ng-repeat="_page in numPages" ng-class="{'active' : (_page == actualPage)}">
+                <a href="#!" class="pageNumber" ng-click="changeThePage(2)">{{_page}}</a>
+            </li>
+            <li ng-class="{'disabled' : (actualPage == numPages[(numPages.length - 1)]), 'waves-effect' : (actualPage < numPages[(numPages.length - 1)])}">
+                <a href="#!" ng-click="changeThePage(actualPage + 1)"><i class="material-icons">chevron_right</i></a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="row hidden" ng-if="showResultMsgError" id="error-msg-row">
         <div class="col s12 text-error-cross-all center">
             <button type="button" class="close-msg" aria-label="Close">
-                <span aria-hidden="true" onclick="closeMsg('text-error-cross-all')">&times;</span>
+                <span aria-hidden="true" ng-click="closeMsgError()">&times;</span>
             </button>
             <p>No fueron encontradas piezas con el criterio de b&uacute;squeda previsto.</p>
         </div>
     </div>
-}
-<div class="container">
-    <div class="row">
-        @foreach (var row in Model.Results)
-            {
-            <div class="col s12 l6">
-                <div class="card large" onclick="return setModal('@row.Store.latitude', '@row.Store.longitude', '@row.Name');">
-                    <div class="card-image">
-                        @if (string.IsNullOrWhiteSpace(row.Photo))
-                        {
-                            <img class="responsive-img" src="~/static/logo_elcarro.png">
-                        }
-                        else
-                        {
-                            <img class="responsive-img" src="@Url.Content(row.Photo)">
-                        }
-                    </div>
-                    <div class="card-content"></div>
-                    <div class="card-action">
-                        <span class="card-title center">@row.Name</span>
-                        <p><strong>Repuesto:</strong> @row.Store.Company.Name</p>
-                        <p><strong>Descripción:</strong> @row.Description</p>
-                    </div>
+
+    <div id="maps_search" class="modal modal-fixed-footer">
+        <div class="modal-content">
+            <input type="hidden" id="no-drageble" value="true" />
+            <div class="row hidden" id="not-geolocation-map-msg">
+                <div class="col s12 text-error-cross-all center">
+                    <p>Favor activar su ubicaci&oacute;n, d&eacute;spues recargue la p&aacute;gina.</p>
                 </div>
-                @*<div class="card horizontal">
-                    <div class="card-stacked search-card">
-                        <div class="card-content" onclick="return setModal('@row.Store.latitude', '@row.Store.longitude', '@row.Name');">
-                            <div class="row">
-                                <div class="col s12 center">
-                                    <h3>@row.Name</h3>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col s12 m8">
-                                    @if (string.IsNullOrWhiteSpace(row.Photo))
-                                    {
-                                        <img class="responsive-img" src="~/static/logo_elcarro.png">
-                                    }
-                                    else
-                                    {
-                                        <img class="responsive-img" src="@Url.Content(row.Photo)">
-                                    }
-                                </div>
-                                <div class="col m4 hide-on-small-only">
-                                    <div class="row">
-                                        <div class="col m12">
-                                            <p><strong>Repuesto:</strong></p>
-                                        </div>
-                                        <div class="col m12">
-                                            <p>@row.Store.Company.Name</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col s12 hide-on-med-and-up">
-                                    <div class="row">
-                                        <div class="col s4">
-                                            <p><strong>Repuesto:</strong></p>
-                                        </div>
-                                        <div class="col s8">
-                                            <p>@row.Store.Company.Name</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col s12">
-                                    <p><strong>Descripción: </strong> @row.Description</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>*@
+                <div class="row center">
+                    <a target="_blank" href="https://support.google.com/chrome/answer/142065?hl=en"><p class="active-ubication">&iquest;Como activar tu ubicación&#63;</p></a>
+                </div>
             </div>
-        }
-    </div>
-</div>
-
-<ul class="pagination center">
-    <li class="@(Model.ActualPage==1||Model.NoResult ?"disabled":"waves-effect")">
-        <a href="#!" id="backPageBtn">
-            <i class="material-icons">chevron_left</i>
-        </a>
-    </li>
-    @for (var page = Model.FromPage; !Model.NoResult && page <= Model.ToPage; page++)
-    {
-        <li class="@(page==Model.ActualPage?"active":"")">
-            <a href="#!" class="pageNumber">@page</a>
-        </li>
-    }
-    <li class="@(Model.ActualPage==(Model.Total/SearchViewModel.ResultsPerPages)+ 1||Model.NoResult ?"disabled":"waves-effect")">
-        <a href="#!" id="nextPageBtn">
-            <i class="material-icons">chevron_right</i>
-        </a>
-    </li>
-</ul>
-
-<div id="maps_search" class="modal modal-fixed-footer">
-    <div class="modal-content">
-        <input type="hidden" id="no-drageble" value="true" />
-        <div class="row hidden" id="not-geolocation-map-msg">
-            <div class="col s12 text-error-cross-all center">
-                <p>Favor activar su ubicaci&oacute;n, d&eacute;spues recargue la p&aacute;gina.</p>
-            </div>
-            <div class="row center">
-                <a target="_blank" href="https://support.google.com/chrome/answer/142065?hl=en"><p class="active-ubication">&iquest;Como activar tu ubicación&#63;</p></a>
-            </div>
+            <div id="map-create"></div>
         </div>
-        <div id="map-create"></div>
-    </div>
-    <div class="modal-footer">
-        <a href="#" class="modal-action modal-close waves-effect waves-green btn-flat">Cerrar</a>
+        <div class="modal-footer">
+            <a href="#" class="modal-action modal-close waves-effect waves-green btn-flat">Cerrar</a>
+        </div>
     </div>
 </div>
 
@@ -163,67 +115,7 @@
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdJy9m60pKeyt31XGVTsYaxhqCFe65URk&callback=initMap">
 </script>
-@section ScriptSearch {
-    <script type="text/javascript">
-        $(function () {
-            function goToPage(page) {
-                var total = @(Model.Total/SearchViewModel.ResultsPerPages);
-                if (page < 1)
-                    page = 1
-                else if(page>total+1)
-                    page = total;
 
-                $("#@Html.IdFor(m=>m.ActualPage)").val(page);
-                $("#searchForm").submit();
-            }
-            $(".pageNumber").click(function (evt) {
-                evt.preventDefault();
-                goToPage($(this).html());
-            });
-            $("li #backPageBtn").click(function (evt) {
-                evt.preventDefault();
-                goToPage(parseInt($(".pageNumber").html()) - 1);
-            });
-            $("li #nextPageBtn").click(function (evt) {
-                evt.preventDefault();
-                goToPage(parseInt($(".pageNumber").html()) + 1);
-            });
-
-            $("#btnBuscar").click(function () {
-                $("#@Html.IdFor(m=>m.ActualPage)").val(1);
-            });
-            $("#@Html.IdFor(m=>m.Make)").change(function (e, obj) {
-                $.get('@Url.Action("ByMake", "Model", new { make=""})?makeId=' + $(this).val(), function (data) {
-                    var select = $('#@Html.IdFor(m=>m.Model)');
-                    select.find('option').each(function (i, o) {
-                        if (o.value === '') return;
-                        $(o).remove();
-                    });
-                    $.each(data, function (e, d) {
-                        var option = new Option(d.Name, d.Id);
-                        select.append($(option));
-                    });
-                    $('select').material_select();
-                }).fail(function () {
-                    //TODO: Add the submit error form here.
-                    alert("Error fetching the models. ");
-                });
-            });
-
-            $.get('@Url.Action("All","VehicleParts")',
-                function (data) {
-                    var result = {};
-
-                    $(data).each(function (i, d) {
-                        result[d.Name] = d.Photo;
-                    });
-                    $('#@Html.IdFor(m=>m.NameOrDescription)').autocomplete({
-                        data: result
-                    });
-                })
-                .fail(function (data) {
-                    alert("Error fetching the names of parts");
-                });
-        });
-    </script>
+@section ScriptHomeSearch {
+    @Scripts.Render("~/bundles/HomeSearchCtrl")
 }

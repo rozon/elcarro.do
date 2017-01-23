@@ -30,6 +30,9 @@ namespace ElCarro.Web
             bundles.Add(new ScriptBundle("~/bundles/map-search").Include(
                 "~/Scripts/Home/Search/map-init.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/HomeSearchCtrl").Include(
+                "~/Scripts/Home/Search/home.search.controller.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/common_functions").Include(
                 "~/Scripts/common_functions.js"));
             #endregion
@@ -50,7 +53,7 @@ namespace ElCarro.Web
                 "~/Content/account_style.css"));
             #endregion
 
-            BundleTable.EnableOptimizations = true;
+            BundleTable.EnableOptimizations = false;
         }
     }
 }

@@ -13,27 +13,13 @@ namespace ElCarro.Web.Models
             ActualPage = ActualPage <= 0 ? 1 : ActualPage;
         }
 
-        [Display(Name="Nombre o Descripción")]
-        public string NameOrDescription { get; set; }
-
-        [Display(Name = "Modelo")]
-        public int Model { get; set; }
-
-        [Display(Name = "Marca")]
-        public int Make { get; set; }
-
-        [Display(Name = "Año")]
-        public int Year { get; set; }
+        public List<SearchPart> parts { get; set; }
 
         public int FromPage { get; set; }
 
         public int ToPage { get; set; }
 
         public bool NoResult => Total == 0;
-
-        public IEnumerable<SelectListItem> Makes { get; set; }
-
-        public IEnumerable<SelectListItem> Models { get; set; }
 
         public int Total { get; set; }
 
@@ -48,6 +34,27 @@ namespace ElCarro.Web.Models
                 (ActualPage + 2) > (Total / ResultsPerPages) ? (Total / ResultsPerPages) + 1 :
                 ActualPage + 2 <= ResultsPerPages ? ResultsPerPages : ResultsPerPages + 2;
         }
+
+        public IEnumerable<VehiclePart> Results { get; set; }
+    }
+
+    public class SearchPart
+    {
+        [Display(Name = "Nombre o Descripción")]
+        public string NameOrDescription { get; set; }
+
+        [Display(Name = "Modelo")]
+        public int Model { get; set; }
+
+        [Display(Name = "Marca")]
+        public int Make { get; set; }
+
+        [Display(Name = "Año")]
+        public int Year { get; set; }
+
+        public IEnumerable<SelectListItem> Makes { get; set; }
+
+        public IEnumerable<SelectListItem> Models { get; set; }
 
         public IEnumerable<SelectListItem> Years =>
             new List<SelectListItem>()
@@ -68,10 +75,7 @@ namespace ElCarro.Web.Models
                         Selected = y == Year,
                     }));
 
-        public IEnumerable<VehiclePart> Results { get; set; }
-
-        public void FillDropDowns(IEnumerable<Make> makes,
-           IQueryable<Model> models)
+        public void FillDropDowns(IEnumerable<Make> makes, IQueryable<Model> models)
         {
             FillMakes(makes);
             FillModels(models);

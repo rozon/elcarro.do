@@ -6,6 +6,10 @@
 #maps_search.modal {
     height: 100%;
 }
+
+#loader-main-row {
+    padding: 10em 0;
+}
  
 .card-action {
     padding-top: 0.4em !important;
